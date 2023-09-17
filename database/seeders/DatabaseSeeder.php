@@ -14,12 +14,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(10)->create();
 
-        Status::create(['title' => 'admin']);
-        Status::create(['title' => 'dosen']);
-        Status::create(['title' => 'pegawai']);
-        Status::create(['title' => 'mahasiswa']);
-        Status::create(['title' => 'umum']);
+        User::factory(10)->create();
     }
 }

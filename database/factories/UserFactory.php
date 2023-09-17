@@ -17,6 +17,9 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $role = ['admin', 'dosen', 'pegawai', 'mahasiswa', 'umum'];
+
+        $roleID = array_rand($role);
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
@@ -24,7 +27,7 @@ class UserFactory extends Factory
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
             'no_tlp' => fake()->e164PhoneNumber(),
-            'status_id' => rand(1, 5)
+            'role' => $role[$roleID]
         ];
     }
 

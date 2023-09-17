@@ -1,7 +1,9 @@
 <?php
 
+use App\Models\Lab;
 use App\Models\User;
-use App\Models\Status;
+use App\Models\LabsBooking;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,11 +24,23 @@ Route::get('/', function () {
 
 
 // route testing below
-Route::get('/test_user_status', function () {
-    $user = User::find(4);
-    return $user->status->title;
+Route::get('/test_booking', function () {
+    $user = User::find(3);
+    $lab = Lab::find(4);
+
+
+    $user->labs()->attach($lab->id, ['booking_date' => today(), 'start_time' => 'G', 'end_time' => 'I']);
+    return "success";
 });
-Route::get('/test_status_users', function () {
-    $status = Status::find(1);
-    return $status->users;
+
+Route::get('/lab', function () {
+
+    $labId = 1; // Ganti dengan ID lab yang Anda inginkan
+
+    $labBookings = LabsBooking::where('user_id', $labId)->get();
+
+
+    foreach ($labBookings as $key => $value) {
+        echo $value->lab->name;
+    }
 });

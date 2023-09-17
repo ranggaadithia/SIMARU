@@ -22,6 +22,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role'
     ];
 
     /**
@@ -44,8 +45,8 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function status()
+    public function labs()
     {
-        return $this->belongsTo(Status::class);
+        return $this->belongsToMany(Lab::class, 'labs_booking', 'user_id', 'lab_id')->withTimestamps();
     }
 }
