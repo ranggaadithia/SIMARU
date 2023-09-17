@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\User;
+use App\Models\Status;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +19,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/test', function () {
-    return view('test');
+
+
+// route testing below
+Route::get('/test_user_status', function () {
+    $user = User::find(4);
+    return $user->status->title;
+});
+Route::get('/test_status_users', function () {
+    $status = Status::find(1);
+    return $status->users;
 });
