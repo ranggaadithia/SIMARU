@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('no_tlp');
-            $table->foreignId('status_id');
+            $table->enum('role', ['admin', 'dosen', 'pegawai', 'mahasiswa', 'umum'])->default('umum');
             $table->rememberToken();
             $table->timestamps();
         });
