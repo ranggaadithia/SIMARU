@@ -1,9 +1,10 @@
 <?php
 
+use App\Models\ClassSchedule;
 use App\Models\Lab;
 use App\Models\User;
 use App\Models\LabsBooking;
-use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('test');
 });
 
 
@@ -34,13 +35,21 @@ Route::get('/test_booking', function () {
 });
 
 Route::get('/lab', function () {
+    $labBookings = LabsBooking::all();
 
-    $labId = 1; // Ganti dengan ID lab yang Anda inginkan
+    $days = [];
 
-    $labBookings = LabsBooking::where('user_id', $labId)->get();
-
-
-    foreach ($labBookings as $key => $value) {
-        echo $value->lab->name;
+    foreach ($labBookings as $booking) {
+        $carbonDate = Carbon::parse($booking->booking_date);
+        $day = $carbonDate->format('l');
+        $days[] = $day;
     }
+
+
+    return view('test', compact('labBookings', 'days'));
+});
+
+Route::get('/class_schedule', function () {
+    $class_schedule = ClassSchedule::all();
+    return $class_schedule[0]->lab->name;
 });
