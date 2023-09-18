@@ -13,4 +13,9 @@ class Lab extends Model
     {
         return $this->belongsToMany(User::class, 'labs_booking', 'lab_id', 'user_id')->withTimestamps();
     }
+
+    public function classSchedules()
+    {
+        return $this->hasMany(ClassSchedule::class);
+    }
 }
