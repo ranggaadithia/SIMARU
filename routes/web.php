@@ -19,8 +19,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('test');
+    return view('welcome');
 });
+
+
 
 
 
@@ -32,6 +34,10 @@ Route::get('/test_booking', function () {
 
     $user->labs()->attach($lab->id, ['booking_date' => today(), 'start_time' => 'G', 'end_time' => 'I']);
     return "success";
+});
+
+Route::get('/test', function () {
+    return view('test');
 });
 
 Route::get('/lab', function () {
