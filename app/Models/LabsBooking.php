@@ -20,4 +20,9 @@ class LabsBooking extends Model
     {
         return $this->belongsTo(Lab::class, 'lab_id');
     }
+
+    public function rescheduleRequests()
+    {
+        return $this->hasMany(RescheduleRequest::class, 'lab_booking_id');
+    }
 }
