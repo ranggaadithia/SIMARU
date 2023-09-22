@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RegisterController;
 use App\Models\ClassSchedule;
 use App\Models\Lab;
 use App\Models\User;
@@ -7,6 +8,7 @@ use App\Models\LabsBooking;
 use App\Models\RescheduleRequest;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
+use Monolog\Registry;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +25,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
+Route::get('/register', [RegisterController::class, 'index']);
+Route::post('/register', [RegisterController::class, 'register'])->name('register');
 
 
 
@@ -41,11 +44,11 @@ Route::get('/test_booking', function () {
 Route::get('/test_reschedule', function () {
 
     RescheduleRequest::create([
-        'lab_booking_id' => 3,
-        'user_id' => 3,
+        'lab_booking_id' => 2,
+        'user_id' => 1,
         'new_booking_date' => Carbon::tomorrow(),
-        'new_start_time' => 'A',
-        'new_end_time' => 'C',
+        'new_start_time' => 'D',
+        'new_end_time' => 'F',
         'reason_for_request' => 'Maintenece',
         'status' => 'requested'
     ]);
@@ -74,13 +77,13 @@ Route::get('/lab', function () {
 
 // if user auth
 Route::get('/user/{id}', function (string $id) {
-    $reschduleRequest = RescheduleRequest::where('user_id', $id)->where('status', 'requested')->get();
+    return $reschduleRequest = RescheduleRequest::where('user_id', $id)->where('status', 'requested')->get();
 
-    if (!empty($reschduleRequest)) {
-        return "Jadwal Anda di Reschdule";
-    } else {
-        return "aman";
-    }
+    // if (!empty($reschduleRequest)) {
+    //     return "Jadwal Anda di Reschdule";
+    // } else {
+    //     return "aman";
+    // }
 });
 
 
