@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('reschedule_requests', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('lab_booking_id')->constrained();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('lab_booking_id');
+            $table->foreignId('user_id');
             $table->date('new_booking_date');
             $table->string('new_start_time');
             $table->string('new_end_time');

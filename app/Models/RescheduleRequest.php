@@ -9,6 +9,9 @@ class RescheduleRequest extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id'];
+
+
     public function labBooking()
     {
         return $this->belongsTo(LabBooking::class, 'lab_booking_id');

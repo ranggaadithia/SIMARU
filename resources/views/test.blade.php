@@ -26,6 +26,9 @@
               <th scope="col" class="px-6 py-3">
                   Hari / Tanggal
               </th>
+              <th scope="col" class="px-6 py-3">
+                  Status Reschedule
+              </th>
           </tr>
       </thead>
       <tbody>
@@ -47,6 +50,12 @@
               <td class="px-6 py-4">
                 {{ $days[$loop->index] }} / 
                 {{ $booking->booking_date }}
+              </td>
+              <td class="px-6 py-4">
+                {{-- @if ()
+                    requested
+                @endif
+                free --}}
               </td>
           </tr>
           @endforeach
