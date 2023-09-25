@@ -7,24 +7,27 @@ style="width: 300px"
   class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"
 >
   <div class="dropdown">
+    <h5>
     <a
       href="#"
       class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle"
       data-bs-toggle="dropdown"
       aria-expanded="false"
     >
-      <img
-        src="https://github.com/mdo.png"
-        alt=""
-        width="32"
-        height="32"
-        class="rounded-circle me-2"
-      />
-      <strong>mdo</strong>
+
+    <i class="bi bi-person-circle me-2"></i>
+      {{ auth()->user()->name }}
     </a>
-    <ul class="dropdown-menu text-small shadow">
-      <li><a class="dropdown-item" href="#">Sign out</a></li>
+    <ul class="dropdown-menu text-small shadow mt-2">
+      <form action="{{ route('logout') }}" method="POST">
+        @csrf
+        <li>
+          <button class="dropdown-item">Sign out</button>
+        </li>
+      </form>
     </ul>
+  </h5>
+    
   </div>
 </a>
 <hr />

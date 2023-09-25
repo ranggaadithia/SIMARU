@@ -3,8 +3,16 @@
 @section('container')
 <div class="d-flex justify-content-between">
  <h1>Lab</h1>
- <a href="add_room.html" class="btn btn-primary" style="height: 40px">Add Lab</a>
+ 
+ <a href="{{ route('labs.create') }}" class="btn btn-primary" style="height: 40px">Add Lab</a>
 </div>
+
+@if (session()->has('success'))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>Success</strong> {{ session('success') }}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+@endif
 
 <table class="table">
  <thead>
@@ -17,62 +25,23 @@
    </tr>
  </thead>
  <tbody>
+  @foreach ($labs as $lab)
    <tr>
-     <th scope="row">1</th>
-     <td>A</td>
+     <th scope="row">{{ $loop->iteration }}</th>
+     <td>{{ $lab->name }}</td>
      <td>
-      100 orang
+      {{ $lab->capacity }}
      </td>
      <td>
-       3x3
+       {{ $lab->size }}
       </td>
      <td>
-       <a href="" class="btn btn-warning">Edit</a>
-       <a href="" class="btn mt-1 btn-danger">Delette</a>
+       <a href="{{ route('labs.edit', ['lab' => $lab->slug]) }}" class="btn btn-warning">Edit</a>
+       <a href="" class="btn btn-danger">Delete</a>
      </td>
    </tr>
-   <tr>
-     <th scope="row">1</th>
-     <td>A</td>
-     <td>
-      100 orang
-     </td>
-     <td>
-       3x3
-      </td>
-     <td>
-       <a href="" class="btn btn-warning">Edit</a>
-       <a href="" class="btn mt-1 btn-danger">Delette</a>
-     </td>
-   </tr>
-   <tr>
-     <th scope="row">1</th>
-     <td>A</td>
-     <td>
-      100 orang
-     </td>
-     <td>
-       3x3
-      </td>
-     <td>
-       <a href="" class="btn btn-warning">Edit</a>
-       <a href="" class="btn mt-1 btn-danger">Delette</a>
-     </td>
-   </tr>
-   <tr>
-     <th scope="row">1</th>
-     <td>A</td>
-     <td>
-      100 orang
-     </td>
-     <td>
-       3x3
-      </td>
-     <td>
-       <a href="" class="btn btn-warning">Edit</a>
-       <a href="" class="btn mt-1 btn-danger">Delette</a>
-     </td>
-   </tr>
+  @endforeach
+
  </tbody>
 </table>
 @endsection
