@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('labs_booking', function (Blueprint $table) {
-            $table->text('reason_to_booking')->after('end_time')->nullable();
+        Schema::table('labs', function (Blueprint $table) {
+            $table->string('slug')->after('name');
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('labs_booking', function (Blueprint $table) {
-            $table->dropColumn('reason_to_booking');
+        Schema::table('labs', function (Blueprint $table) {
+            $table->dropColumn('slug');
         });
     }
 };
