@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('labs_booking', function (Blueprint $table) {
-            $table->text('reason_to_booking')->after('end_time')->nullable();
+            $table->enum('day', ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'])->after('booking_date');
         });
     }
 
@@ -22,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('labs_booking', function (Blueprint $table) {
-            $table->dropColumn('reason_to_booking');
+            $table->dropColumn('day');
         });
     }
 };
