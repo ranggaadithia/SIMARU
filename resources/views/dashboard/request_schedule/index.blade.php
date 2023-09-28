@@ -1,3 +1,8 @@
+@extends('layouts.dashboard')
+
+
+@section('container')
+
 <table class="table">
   <thead>
     <tr>
@@ -30,3 +35,6 @@
     </tr>
   </tbody>
 </table>
+
+
+@endsection

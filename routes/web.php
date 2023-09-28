@@ -103,3 +103,10 @@ Route::get('/class_schedule', function () {
     $class_schedule = ClassSchedule::all();
     return $class_schedule[0]->lab->name;
 });
+
+
+Route::get('/table', function () {
+    return view('request_schedule.moveschadule');
+});
+
+
