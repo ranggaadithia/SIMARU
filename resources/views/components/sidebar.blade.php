@@ -33,15 +33,23 @@ style="width: 300px"
 <hr />
 <ul class="nav nav-pills flex-column mb-auto">
   <li class="nav-item ">
-    <a href="index.html" class="nav-link link-body-emphasis">
+    <a href="/" class="nav-link link-body-emphasis">
       <i class="bi bi-speedometer2 me-1"></i>
       Dashboard
     </a>
   </li>
   <li>
-    <a href="manage.html" class="nav-link active" aria-current="page">
+    <a href="{{ route('labs.index') }}" class="nav-link @if (route('labs.index'))
+        active
+    @endif" aria-current="page">
       <i class="bi bi-building-gear me-1"></i>
       Manage Room
+    </a>
+  </li>
+  <li>
+    <a href="{{ route('class-schedule.index') }}" class="nav-link link-body-emphasis">
+      <i class="bi bi-calendar3"></i>
+      Class Schedule
     </a>
   </li>
   <li>
