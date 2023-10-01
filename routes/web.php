@@ -13,6 +13,7 @@ use App\Http\Controllers\LabController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ClassScheduleController;
+use App\Http\Controllers\LabBookingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,9 +26,8 @@ use App\Http\Controllers\ClassScheduleController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+Route::get('/', [LabBookingController::class, 'index'])->name('home');
+Route::post('/', [LabBookingController::class, 'store'])->name('booking');
 
 
 Route::middleware('guest')->group(function () {
@@ -41,16 +41,14 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::middleware(['auth', 'is.admin'])->prefix('dashboard')->group(function () {
     Route::resource('labs', LabController::class)->except('show');
-    Route::resource('class-schedule', ClassScheduleController::class);
+    Route::resource('class-schedule', ClassScheduleController::class)->except(('show'));
 });
 
 
 
 // route testing below
 Route::get('/time', function () {
-    $time = '16:30:00'; // Gantilah dengan waktu yang ingin Anda konversi
-    $letter = TimeMappings::convertToLetter($time);
-    echo "Waktu $time sesuai dengan huruf $letter";
+    return TimeMappings::$timeMappings;
 });
 
 
