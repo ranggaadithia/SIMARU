@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Lab;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\ClassSchedule;
+use App\Utilities\TimeMappings;
 
 class ClassScheduleController extends Controller
 {
@@ -23,7 +25,9 @@ class ClassScheduleController extends Controller
     {
         $lecturers = User::where('role', 'dosen')->pluck('name')->toArray();
 
-        return view('dashboard.class_schedule.create', compact('lecturers'));
+        $labs = Lab::all();
+
+        return view('dashboard.class_schedule.create', compact('lecturers', 'labs'));
     }
 
     /**
@@ -31,7 +35,28 @@ class ClassScheduleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, ClassSchedule::$rules);
+
+        $isAvaliable = ClassSchedule::isTimeSlotAvailable($request->lab_id, $request->day, $request->start_time, $request->end_time)->count() == 0;
+
+        if ($isAvaliable) {
+            $data = [
+                "lab_id" => $request->lab_id,
+                "day" => $request->day,
+                "start_time" => TimeMappings::getMapping($request->start_time)[0],
+                "end_time" => TimeMappings::getMapping($request->end_time)[1],
+                "subject" => $request->subject,
+                "lecturer" => $request->lecturer,
+                "class" => $request->class
+            ];
+
+            ClassSchedule::create($data);
+            return redirect()->route('class-schedule.index')->with('success', 'Data berhasil ditambahkan.');
+        } else {
+            return back()->withErrors([
+                'subject' => 'Slot waktu sudah digunakan',
+            ])->onlyInput('subject');
+        }
     }
 
     /**

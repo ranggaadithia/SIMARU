@@ -1,17 +1,18 @@
 <?php
 
-use App\Http\Controllers\ClassScheduleController;
-use App\Http\Controllers\LabController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\RegisterController;
-use App\Models\ClassSchedule;
+use Carbon\Carbon;
 use App\Models\Lab;
 use App\Models\User;
 use App\Models\LabsBooking;
-use App\Models\RescheduleRequest;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use App\Models\ClassSchedule;
+use App\Utilities\TimeMappings;
+use App\Models\RescheduleRequest;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LabController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\ClassScheduleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +47,13 @@ Route::middleware(['auth', 'is.admin'])->prefix('dashboard')->group(function () 
 
 
 // route testing below
+Route::get('/time', function () {
+    $jamMulaiA = TimeMappings::getMapping('A')[0];
+    $jamSelesaiB = TimeMappings::getMapping('C')[1];
+
+    return "Jam Mulai: $jamMulaiA, Jam Selesai: $jamSelesaiB";
+});
+
 
 Route::get('/test_booking', function () {
     $user = User::find(9);
