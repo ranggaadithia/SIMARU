@@ -17,8 +17,8 @@ class ClassSchedulesSeeder extends Seeder
             [
                 'lab_id' => 2,
                 'day' => 'monday',
-                'start_time' => 'D',
-                'end_time' => 'F',
+                'start_time' => '10:30:00',
+                'end_time' => '13:00:00',
                 'subject' => 'OOP',
                 'lecturer' => 'A.A Yudhi Ambara M.Kom',
                 'class' => 'ilkom A'
@@ -26,8 +26,8 @@ class ClassSchedulesSeeder extends Seeder
             [
                 'lab_id' => 4,
                 'day' => 'wednesday',
-                'start_time' => 'A',
-                'end_time' => 'C',
+                'start_time' => '07:30:00',
+                'end_time' => '10:00:00',
                 'subject' => 'HCI',
                 'lecturer' => 'Resika Arthana S.T, M.Kom',
                 'class' => 'ilkom IKI'
