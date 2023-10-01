@@ -27,7 +27,7 @@ class ClassSchedule extends Model
         'class' => 'required',
     ];
 
-    public function scopeIsTimeSlotAvailable($query, $lab_id, $day, $start_time_latter, $end_time_latter)
+    public function scopeIsLabAvailable($query, $lab_id, $day, $start_time_latter, $end_time_latter)
     {
         $start_time = TimeMappings::getMapping($start_time_latter)[0];
         $end_time = TimeMappings::getMapping($end_time_latter)[1];

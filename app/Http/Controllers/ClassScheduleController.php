@@ -37,9 +37,9 @@ class ClassScheduleController extends Controller
     {
         $this->validate($request, ClassSchedule::$rules);
 
-        $isAvaliable = ClassSchedule::isTimeSlotAvailable($request->lab_id, $request->day, $request->start_time, $request->end_time)->count() == 0;
+        $isLabAvailable = ClassSchedule::isLabAvailable($request->lab_id, $request->day, $request->start_time, $request->end_time)->count() == 0;
 
-        if ($isAvaliable) {
+        if ($isLabAvailable) {
             $data = [
                 "lab_id" => $request->lab_id,
                 "day" => $request->day,
@@ -97,8 +97,8 @@ class ClassScheduleController extends Controller
             $newStartTime != $classSchedule->start_time ||
             $newEndTime != $classSchedule->end_time
         ) {
-            $isAvailable = ClassSchedule::isTimeSlotAvailable($newLab, $newDay, $request->start_time, $request->end_time)->count() == 0;
-            if ($isAvailable) {
+            $isLabAvailable = ClassSchedule::isLabAvailable($newLab, $newDay, $request->start_time, $request->end_time)->count() == 0;
+            if ($isLabAvailable) {
                 $data = [
                     "lab_id" => $newLab,
                     "day" => $newDay,
