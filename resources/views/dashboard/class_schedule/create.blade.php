@@ -4,12 +4,12 @@
 
 <h2>Add Class Schedule</h2>
 
-@error('subject')
+@if (session()->has('error'))
 <div class="alert alert-danger alert-dismissible fade show" role="alert">
-  <strong>Failed</strong> {{ $message }}
+  <strong>Failed</strong> {{ session('error') }}
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
-@enderror
+@endif
 
 <form action="{{ route('class-schedule.store') }}" method="POST" class="mt-3" style="width: 80%">
   @csrf
@@ -21,9 +21,14 @@
     id="subject"
     name="subject"
     autocomplete="off"
-    value="{{ old('name') }}"
+    value="{{ old('subject') }}"
     autofocus
   />
+  @error('subject')
+  <div >
+    {{ $message }}
+  </div>
+  @enderror
 </div>
 <div class="mb-3">
  <label for="lecturer" class="form-label">Dosen Pengampu</label>

@@ -53,9 +53,9 @@ class ClassScheduleController extends Controller
             ClassSchedule::create($data);
             return redirect()->route('class-schedule.index')->with('success', 'Data berhasil ditambahkan.');
         } else {
-            return back()->withErrors([
-                'subject' => 'Slot waktu sudah digunakan',
-            ])->onlyInput('subject');
+            return back()->with([
+                'error' => 'Slot waktu sudah digunakan',
+            ])->withInput();
         }
     }
 
@@ -72,7 +72,11 @@ class ClassScheduleController extends Controller
      */
     public function edit(ClassSchedule $classSchedule)
     {
-        //
+        $time_format = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M'];
+        $lecturers = User::where('role', 'dosen')->pluck('name')->toArray();
+
+        $labs = Lab::all();
+        return view('dashboard.class_schedule.edit', compact('classSchedule', 'labs', 'lecturers', 'time_format'));
     }
 
     /**
@@ -80,7 +84,42 @@ class ClassScheduleController extends Controller
      */
     public function update(Request $request, ClassSchedule $classSchedule)
     {
-        //
+        $this->validate($request, ClassSchedule::$rules);
+
+        $newLab = $request->lab_id;
+        $newDay = $request->day;
+        $newStartTime = TimeMappings::getMapping($request->start_time)[0];
+        $newEndTime = TimeMappings::getMapping($request->end_time)[1];
+
+        if (
+            $newLab != $classSchedule->lab_id ||
+            $newDay != $classSchedule->day ||
+            $newStartTime != $classSchedule->start_time ||
+            $newEndTime != $classSchedule->end_time
+        ) {
+            $isAvailable = ClassSchedule::isTimeSlotAvailable($newLab, $newDay, $request->start_time, $request->end_time)->count() == 0;
+            if ($isAvailable) {
+                $data = [
+                    "lab_id" => $newLab,
+                    "day" => $newDay,
+                    "start_time" => $newStartTime,
+                    "end_time" => $newEndTime,
+                    "subject" => $request->subject,
+                    "lecturer" => $request->lecturer,
+                    "class" => $request->class
+                ];
+
+                $classSchedule->update($data);
+                return redirect()->route('class-schedule.index')->with('success', 'Data berhasil di update.');
+            } else {
+                return back()->with([
+                    'error' => 'Slot waktu sudah digunakan',
+                ])->withInput();
+            }
+        } else {
+            $classSchedule->update($request->only(['subject', 'lecturer', 'class']));
+            return redirect()->route('class-schedule.index')->with('success', 'Data berhasil di update.');
+        }
     }
 
     /**

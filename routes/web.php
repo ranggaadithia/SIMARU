@@ -48,10 +48,9 @@ Route::middleware(['auth', 'is.admin'])->prefix('dashboard')->group(function () 
 
 // route testing below
 Route::get('/time', function () {
-    $jamMulaiA = TimeMappings::getMapping('A')[0];
-    $jamSelesaiB = TimeMappings::getMapping('C')[1];
-
-    return "Jam Mulai: $jamMulaiA, Jam Selesai: $jamSelesaiB";
+    $time = '16:30:00'; // Gantilah dengan waktu yang ingin Anda konversi
+    $letter = TimeMappings::convertToLetter($time);
+    echo "Waktu $time sesuai dengan huruf $letter";
 });
 
 

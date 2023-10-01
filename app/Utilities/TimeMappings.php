@@ -24,4 +24,16 @@ class TimeMappings
  {
   return self::$timeMappings[$letter] ?? null;
  }
+
+ public static function convertToLetter($time)
+ {
+  foreach (self::$timeMappings as $letter => $timeRange) {
+   $startTime = $timeRange[0];
+   $endTime = $timeRange[1];
+   if ($time >= $startTime && $time <= $endTime) {
+    return $letter;
+   }
+  }
+  return null; // Jika tidak ada kecocokan.
+ }
 }
