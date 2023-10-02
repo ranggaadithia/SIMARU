@@ -105,8 +105,5 @@ Route::get('/class_schedule', function () {
 });
 
 
-Route::get('/table', function () {
-    return view('request_schedule.moveschadule');
-});
 
 
