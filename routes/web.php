@@ -1,15 +1,19 @@
 <?php
 
-use App\Http\Controllers\LabController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\RegisterController;
-use App\Models\ClassSchedule;
+use Carbon\Carbon;
 use App\Models\Lab;
 use App\Models\User;
 use App\Models\LabsBooking;
+use Illuminate\Http\Request;
+use App\Models\ClassSchedule;
+use App\Utilities\TimeMappings;
 use App\Models\RescheduleRequest;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LabController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\ClassScheduleController;
+use App\Http\Controllers\LabBookingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,9 +26,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+Route::get('/', [LabBookingController::class, 'index'])->name('home');
+Route::post('/', [LabBookingController::class, 'store'])->name('booking');
 
 
 Route::middleware('guest')->group(function () {
@@ -38,11 +41,17 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::middleware(['auth', 'is.admin'])->prefix('dashboard')->group(function () {
     Route::resource('labs', LabController::class)->except('show');
+    Route::resource('class-schedule', ClassScheduleController::class)->except(('show'));
 });
 
 
 
 // route testing below
+Route::get('/time', function () {
+    return TimeMappings::$timeMappings;
+});
+
+
 Route::get('/test_booking', function () {
     $user = User::find(9);
     $lab = Lab::find(1);
@@ -105,5 +114,6 @@ Route::get('/class_schedule', function () {
 });
 
 
-
-
+Route::get('/table', function () {
+    return view('request_schedule.moveschadule');
+});

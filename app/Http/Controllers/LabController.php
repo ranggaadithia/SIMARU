@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Lab;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Database\QueryException;
 
 class LabController extends Controller
 {
@@ -41,7 +42,7 @@ class LabController extends Controller
 
         Lab::create($validated);
 
-        return redirect(route('labs.index'))->with('success', 'Lab berhasil ditambahkan');
+        return redirect(route('labs.index'))->with('status', 'Lab berhasil ditambahkan');
     }
 
     /**
@@ -57,22 +58,40 @@ class LabController extends Controller
      */
     public function edit(Lab $lab)
     {
-        return $lab;
+        return view('dashboard.lab.edit', compact('lab'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Lab $lab)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string',
+            'size' => 'required',
+            'capacity' => 'required',
+        ]);
+
+        $validated['slug'] = Str::of($request->name)->slug('-');
+
+        Lab::where('id', $lab->id)->update($validated);
+
+        return redirect(route('labs.index'))->with('status', $lab->name . ' berhasil di edit');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Lab $lab)
     {
-        //
+        try {
+            Lab::destroy($lab->id);
+            return redirect(route('labs.index'))->with('status', 'lab berhasil di hapus');
+        } catch (QueryException $e) {
+            if ($e->errorInfo[1] == 1451) {
+                return redirect()->back()->with('error', 'lab tidak dapat dihapus karena memiliki relasi dengan entitas lain.');
+            }
+            return redirect()->back()->with('error', 'Terjadi kesalahan saat menghapus lab.');
+        }
     }
 }

@@ -16,8 +16,8 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained();
             $table->foreignId('lab_id')->constrained();
             $table->date('booking_date');
-            $table->enum('start_time', ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O']);
-            $table->enum('end_time', ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O']);
+            $table->time('start_time');
+            $table->time('end_time');
             $table->timestamps();
         });
     }

@@ -1,8 +1,10 @@
 @extends('layouts.dashboard')
 
 @section('container')
-<form action="{{ route('labs.store') }}" method="POST">
+<h2>Edit {{ $lab->name }}</h2>
+<form action="{{ route('labs.update', $lab->slug) }}" method="POST">
   @csrf
+  @method('PUT')
  <div class="mb-3">
    <label for="name" class="form-label">Lab Name</label>
    <input
@@ -10,10 +12,15 @@
      class="form-control"
      id="name"
      name="name"
-     value="{{ old('name') }}"
+     value="{{ $lab->name }}"
      autocomplete="off"
      autofocus
    />
+   @error('name')
+  <div >
+    {{ $message }}
+  </div>
+  @enderror
  </div>
  <div class="mb-3">
    <label for="capacity" class="form-label"
@@ -24,9 +31,14 @@
      class="form-control"
      id="capacity"
      name="capacity"
-     value="{{ old('capacity') }}"
+     value="{{ $lab->capacity }}"
      autocomplete="off"
    />
+   @error('capacity')
+  <div >
+    {{ $message }}
+  </div>
+  @enderror
  </div>
 
  <div class="mb-3">
@@ -36,9 +48,14 @@
      class="form-control"
      id="size"
      name="size"
-     value="{{ old('size') }}"
+     value="{{ $lab->size }}"
      autocomplete="off"
    />
+   @error('size')
+  <div >
+    {{ $message }}
+  </div>
+  @enderror
  </div>
  <div class="mb-3">
    <label for="description" class="form-label"
@@ -49,9 +66,14 @@
      class="form-control"
      id="description"
      name="description"
-     value="{{ old('description') }}"
+     value="{{ $lab->description }}"
      autocomplete="off"
    />
+   @error('description')
+  <div >
+    {{ $message }}
+  </div>
+  @enderror
  </div>
  <button type="submit" class="btn btn-primary">Save</button>
 </form>
