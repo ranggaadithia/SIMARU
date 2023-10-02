@@ -1,6 +1,5 @@
 @extends('layouts.dashboard')
 
-
 @section('container')
 
 <table class="table">
@@ -13,7 +12,6 @@
       <th scope="col">Tanggal</th>
       <th scope="col">Jam Mulai</th>
       <th scope="col">Jam selesai</th>
-      <th scope="col">Status</th>
       <th scope="col">Action</th>
     </tr>
   </thead>
@@ -26,9 +24,6 @@
       <td>26/09/2023</td>
       <td>09.00</td>
       <td>12.00</td>
-      <td>
-        <span class="badge text-bg-warning">Requested</span>
-      </td>
       <td>
         <a href="" class="btn btn-warning">Request Reschadule</a>
       </td>

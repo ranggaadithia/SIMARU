@@ -14,6 +14,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ClassScheduleController;
 use App\Http\Controllers\LabBookingController;
+use App\Http\Controllers\RescheduleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +43,9 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::middleware(['auth', 'is.admin'])->prefix('dashboard')->group(function () {
     Route::resource('labs', LabController::class)->except('show');
     Route::resource('class-schedule', ClassScheduleController::class)->except(('show'));
+
+    Route::get('reschedule/{labs_booking}', [RescheduleController::class, 'create']);
+    Route::post('reschedule/{labs_booking}', [RescheduleController::class, 'store'])->name('reschedule.store');
 });
 
 
@@ -49,6 +53,10 @@ Route::middleware(['auth', 'is.admin'])->prefix('dashboard')->group(function () 
 // route testing below
 Route::get('/time', function () {
     return TimeMappings::$timeMappings;
+});
+
+Route::get('/test', function () {
+    return view('test');
 });
 
 
