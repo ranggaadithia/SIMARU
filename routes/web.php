@@ -28,7 +28,11 @@ use App\Http\Controllers\RescheduleController;
 */
 
 Route::get('/', [LabBookingController::class, 'index'])->name('home');
-Route::post('/', [LabBookingController::class, 'store'])->name('booking');
+
+Route::middleware('auth')->group(function () {
+    Route::post('/', [LabBookingController::class, 'store'])->name('booking');
+    Route::get('accept/{request_reschedule}', [RescheduleController::class, 'acceptReschedule']);
+});
 
 
 Route::middleware('guest')->group(function () {
@@ -47,6 +51,8 @@ Route::middleware(['auth', 'is.admin'])->prefix('dashboard')->group(function () 
     Route::get('reschedule/{labs_booking}', [RescheduleController::class, 'create']);
     Route::post('reschedule/{labs_booking}', [RescheduleController::class, 'store'])->name('reschedule.store');
 });
+
+
 
 
 

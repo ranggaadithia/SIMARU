@@ -12,18 +12,25 @@
  <label for="name" class="form-label">Tujuan Peminjam</label>
   <input class="form-control" type="text" value="{{ $booking->reason_to_booking }}" aria-label="Disabled input example" disabled readonly>
 </div>
-<div class="mb-3">
- <label for="name" class="form-label">No HP Peminjam</label>
- <br>
-  <a href="https://wa.me/{{ $booking->user->phone_number ?? '' }}">{{ $booking->user->phone_number ?? '-' }}</a>
- </div>
-<div class="mb-3" >
- <label for="name" class="form-label">Email Peminjam</label>
- <br>
-  <a href="mailto:{{ $booking->user->email ?? '' }}">{{ $booking->user->email ?? '-' }}</a>
- </div>
+<div class="row">
+  <div class="mb-3 col-6">
+    <label for="name" class="form-label">No HP Peminjam</label>
+    <br>
+     <a href="https://wa.me/{{ $booking->user->phone_number ?? '' }}">{{ $booking->user->phone_number ?? '-' }}</a>
+    </div>
+   <div class="mb-3 col-6">
+    <label for="name" class="form-label">Email Peminjam</label>
+    <br>
+     <a href="mailto:{{ $booking->user->email ?? '' }}">{{ $booking->user->email ?? '-' }}</a>
+  </div>
+</div>
+
 <form method="POST" action="{{ route('reschedule.store', $id) }}">
  @csrf
+ <div class="mb-3">
+  <label for="name" class="form-label">Alasan Penjadwalan Ulang</label>
+   <input class="form-control" type="text" name="reason_for_request">
+ </div>
   <div class="mb-3">
    <label for="lab">Lab</label>
    <select class="form-select" name="new_lab_id">
