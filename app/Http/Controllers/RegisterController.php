@@ -16,6 +16,12 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
 
+        if ($request->password !== $request->confirm_pass) {
+            return back()->withErrors([
+                "password" => "password doesn't match",
+            ])->onlyInput('password');
+        }
+
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
@@ -27,7 +33,6 @@ class RegisterController extends Controller
 
         User::create($validated);
 
-        // redirect to login send status.
-        return Redirect('/');
+        return redirect('/login')->with('success', 'Akun anda berhasil dibuat, silahkan login untuk melanjutkan');
     }
 }
