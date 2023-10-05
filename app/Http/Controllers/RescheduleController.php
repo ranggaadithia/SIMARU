@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Models\Lab;
 use App\Models\LabsBooking;
 use Illuminate\Http\Request;
+use App\Models\ClassSchedule;
 use App\Utilities\TimeMappings;
 use App\Models\RescheduleRequest;
 use Illuminate\Support\Facades\Auth;
@@ -37,6 +38,7 @@ class RescheduleController extends Controller
      */
     public function store(Request $request, string $labsBookingId)
     {
+
         $booking = LabsBooking::find($labsBookingId);
         $data = [
             'lab_booking_id' => $booking->id,
@@ -48,6 +50,18 @@ class RescheduleController extends Controller
             'reason_for_request' => $request->reason_for_request,
             'status' => 'requested'
         ];
+
+        $day = Carbon::createFromFormat('Y-m-d', $data['new_booking_date'])->format('l');
+
+        $isBookingConflict = LabsBooking::isBookingConflict($data['new_lab_id'], $data['new_booking_date'], TimeMappings::convertToLetter($data['new_start_time']), TimeMappings::convertToLetter($data['new_end_time']))->count() == 0;
+
+        $isLabAvailable = ClassSchedule::isLabAvailable($data['new_lab_id'], $day, TimeMappings::convertToLetter($data['new_start_time']), TimeMappings::convertToLetter($data['new_end_time']))->count() == 0;
+
+        if (!$isBookingConflict) {
+            return back()->with('error', 'Pada tanggal & jam tersebut lab sudah di booking');
+        } else if (!$isLabAvailable) {
+            return back()->with('error', 'Pada hari & jam tersebut sedang ada perkuliahan di lab');
+        }
         RescheduleRequest::create($data);
     }
 
