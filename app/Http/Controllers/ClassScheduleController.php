@@ -15,7 +15,12 @@ class ClassScheduleController extends Controller
      */
     public function index()
     {
-        return view('dashboard.class_schedule.index');
+        $labs = Lab::all();
+        $days = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
+        $classSchedules = ClassSchedule::all();
+
+
+        return view('dashboard.class_schedule.index', compact('labs', 'days', 'classSchedules'));
     }
 
     /**
