@@ -187,4 +187,13 @@
     
 @endauth
 
+@push('scripts')
+<script>
+  const datepickerDisablePast = document.getElementById('datepicker-disable-past');
+  new te.Datepicker(datepickerDisablePast, {
+    disablePast: true
+  });
+</script>
+@endpush
+
 @endsection

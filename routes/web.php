@@ -14,6 +14,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ClassScheduleController;
 use App\Http\Controllers\LabBookingController;
+use App\Http\Controllers\LabScheduleController;
 use App\Http\Controllers\RescheduleController;
 
 /*
@@ -28,6 +29,8 @@ use App\Http\Controllers\RescheduleController;
 */
 
 Route::get('/', [LabBookingController::class, 'index'])->name('home');
+Route::get('/labs', LabScheduleController::class);
+Route::get('/labs/{lab:slug}', [LabController::class, 'show']);
 
 Route::middleware('auth')->group(function () {
     Route::post('/', [LabBookingController::class, 'store'])->name('booking');
@@ -45,9 +48,8 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
 Route::middleware(['auth', 'is.admin'])->prefix('dashboard')->group(function () {
-    Route::resource('labs', LabController::class)->except('show');
+    Route::resource('labs', LabController::class);
     Route::resource('class-schedule', ClassScheduleController::class)->except(('show'));
-
     Route::get('reschedule/{labs_booking}', [RescheduleController::class, 'create']);
     Route::post('reschedule/{labs_booking}', [RescheduleController::class, 'store'])->name('reschedule.store');
 });

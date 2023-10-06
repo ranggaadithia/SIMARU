@@ -4,6 +4,13 @@
 
 <h2>Penjadwalan Ulang</h2>
 
+@if (session()->has('error'))
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  <strong>Error!</strong> {{ session('error') }}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+@endif
+
 <div class="mb-3">
  <label for="name" class="form-label">Nama Peminjam</label>
   <input class="form-control" type="text" value="{{ $booking->user->name }}" aria-label="Disabled input example" disabled readonly>
