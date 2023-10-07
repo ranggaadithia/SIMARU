@@ -161,7 +161,6 @@
                                 {{ $schedule->subject }}
                               </strong>
                              ({{ $schedule->lecturer }})
-                            
                         </div>
                         <button type="button" class="badge bg-primary border-0 position-absolute bottom-0 end-0 mb-1 me-1" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-three-dots" ></i></button>
                         @endif
@@ -174,7 +173,7 @@
       </table>
   </div>
 
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
