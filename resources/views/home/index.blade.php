@@ -8,7 +8,6 @@
       {{ Auth::user()->name }}
           <a href="{{ url('/home') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Home</a>
 
-          
           <form action="{{ route('logout') }}" method="post">
               @csrf
               <button type="submit" class="dark:text-white ">Logout</button>
@@ -25,167 +24,97 @@
  </div>
  
 <!-- Button trigger modal -->
-<button
-  type="button"
-  class="inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
-  data-te-toggle="modal"
-  data-te-target="#exampleModal"
-  data-te-ripple-init
-  data-te-ripple-color="light">
-  booking lab
-</button>
 
-<!-- Modal -->
 @auth
-<div
-  data-te-modal-init
-  class="fixed left-0 top-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
-  id="exampleModal"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div
-    data-te-modal-dialog-ref
-    class="pointer-events-none relative w-auto translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:max-w-[700px]">
-    <div
-      class="min-[576px]:shadow-[0_0.5rem_1rem_rgba(#000, 0.15)] pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-lg outline-none dark:bg-neutral-600">
-      <div
-        class="flex flex-shrink-0 items-center justify-between rounded-t-md border-b-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">
-        <!--Modal title-->
-        <h5
-          class="text-xl font-medium leading-normal text-neutral-800 dark:text-neutral-200"
-          id="exampleModalLabel">
-          Booking Lab
-        </h5>
-        <!--Close button-->
-        <button
-          type="button"
-          class="box-content rounded-none border-none hover:no-underline hover:opacity-75 focus:opacity-100 focus:shadow-none focus:outline-none"
-          data-te-modal-dismiss
-          aria-label="Close">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="h-6 w-6">
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
-      </div>
+<x-modal-booking :user="Auth::user()" :labs="$labs" :timeMappings="$timeMappings" />
+@endauth
+<!-- Modal -->
 
-      <!--Modal body-->
-      <div class="relative flex-auto p-4" data-te-modal-body-ref>
-        <form action="{{ route('booking') }}" method="POST">
-          @csrf
-        <div class="">
-          <label for="">Nama Peminjam</label>
-          <div class="relative mb-3" data-te-input-wrapper-init>
-            <input
-              type="text"
-              class="peer block min-h-[auto] w-full rounded border-0 bg-neutral-100 px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:bg-neutral-700 dark:text-neutral-500 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-              id="exampleFormControlInput5"
-              placeholder="Disabled input"
-              aria-label="Disabled input example"
-              value="{{ $user->name }} ({{ $user->role }})"
-              disabled />
-            </div>
-          </div>
-       <div class="mb-3">
-        <label for="lab">Pilih Lab</label>
-        <select data-te-select-init data-te-select-filter="true" data-te-select-option-height="52" name="lab_id" id="lab">
-         <option selected>Pilih Lab</option>
-         @foreach ($labs as $lab)
-          <option value="{{ $lab->id }}" data-te-select-secondary-text="kapasitas: {{ $lab->capacity }}">{{ $lab->name }}</option>
-         @endforeach
-        </select>
-       </div>
-       
-        <div class="mb-3">
-         <label for="keperluan">keperluan</label>
-         <div class="relative mb-3" data-te-input-wrapper-init>
-          <textarea
-            class="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-            id="tujuan peminjaman"
-            rows="3"
-            name="reason_to_booking"
-            placeholder="tuliskan keperluan anda disini"></textarea>
-        </div>
-        <div class="mb-3">
-          <label for="keperluan">Pilih Tanggal</label>
-         <div
-           class="relative mb-3"
-           id="datepicker-disable-past"
-           data-te-input-wrapper-init
-           data-te-datepicker-init>
-           <input
-             type="text"
-             class="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none"
-             placeholder="pilih tanggal peminjaman"
-             name="booking_date"
-             data-te-datepicker-toggle-ref
-             data-te-datepicker-toggle-button-ref />
-         </div>
-         <div class="mb-3">
-          <div class="flex gap-x-5">
-            <div class="">
-              <label for="">Jam Mulai</label>
-              <select data-te-select-init data-te-select-option-height="52" name="start_time">
-                <option selected>pilih jam</option>
-                @foreach ($timeMappings as $key => $value)
-                <option value="{{ $key }}" data-te-select-secondary-text="{{ $value[0] }} - {{ $value[1] }}">
-                  {{ $key }}
-                </option>
-                @endforeach
-              </select>
-            </div>
-            <div class="">
-              <label for="">Jam Selesai</label>
-              <select data-te-select-init data-te-select-option-height="52" name="end_time">
-                <option selected>pilih jam</option>
-                @foreach ($timeMappings as $key => $value)
-                <option value="{{ $key }}" data-te-select-secondary-text="{{ $value[0] }} - {{ $value[1] }}">
-                  {{ $key }}
-                </option>
-                @endforeach
-              </select>
-            </div>
-          </div>
-         </div>
-        </div>
-       </div>
-      </div>
-
-
-      <!--Modal footer-->
-      <div
-        class="flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md border-t-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">
-        <button
-          type="button"
-          class="inline-block rounded bg-primary-100 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-primary-700 transition duration-150 ease-in-out hover:bg-primary-accent-100 focus:bg-primary-accent-100 focus:outline-none focus:ring-0 active:bg-primary-accent-200"
-          data-te-modal-dismiss
-          data-te-ripple-init
-          data-te-ripple-color="light">
-          Close
+<div class="mx-auto overflow-x-scroll w-[800px]  xl:w-full lg:overflow-x-hidden lg:mt-5">
+  <div class="wrapper bg-white rounded shadow ">
+    <div class="header flex justify-between border-b p-2">
+      <span class="text-lg font-bold p-2">
+        September 2023
+      </span>
+      <div class="buttons flex items-center lg:mr-3">
+        <button class="p-1">
+            <svg width="1em" fill="gray" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-left-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+              <path fill-rule="evenodd" d="M8.354 11.354a.5.5 0 0 0 0-.708L5.707 8l2.647-2.646a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708 0z"/>
+              <path fill-rule="evenodd" d="M11.5 8a.5.5 0 0 0-.5-.5H6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 .5-.5z"/>
+            </svg>
         </button>
-        <button
-          type="submit"
-          class="ml-1 inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
-          data-te-ripple-init
-          data-te-ripple-color="light">
-          Booking Lab
+        <button class="p-1">
+            <svg width="1em" fill="gray" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+              <path fill-rule="evenodd" d="M7.646 11.354a.5.5 0 0 1 0-.708L10.293 8 7.646 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0z"/>
+              <path fill-rule="evenodd" d="M4.5 8a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5z"/>
+            </svg>
         </button>
-      </form>
       </div>
     </div>
+    <table class="overflow-x-scroll w-[800px] xl:w-full lg:overflow-x-hidden">
+      <thead>
+          <tr>
+              <th class="py-2 border-r h-10 md:w-30 sm:w-20 w-10 xl:text-sm text-xs bg-blue-500 text-white lg:w-50">
+                  <span class="xl:block lg:block md:block sm:block hidden">Ruangan<br>Hari</span>
+                  <span class="xl:hidden lg:hidden md:hidden sm:hidden block bg-blue-500 text-white">Ruangan<br>Hari</span>
+              </th>
+              @foreach ($weekDates as $week)
+                  <th class="p-2 border-r h-10 lg:w-50 md:w-30 sm:w-20 w-10 xl:text-sm text-sm bg-blue-400 text-white">
+                      <span class="xl:block lg:block md:block sm:block hidden">{{ $week['day'] }}, {{ $week['date'] }}</span>
+                      <span class="xl:hidden lg:hidden md:hidden sm:hidden block bg-blue-400 text-white">{{ $week['day'] }}, {{ $week['date'] }}</span>
+                  </th>
+              @endforeach
+          </tr>
+      </thead>
+      <tbody>
+          @foreach ($labs as $lab)
+              <tr class="text-center h-20">
+                  <td class="border lg:px-3 h-40 md:w-30 sm:w-20 items-center bg-blue-300 overflow-hidden">
+                      <div class="h-40 md:w-30 sm:w-full w-10 mx-auto flex justify-center items-center">
+                          <div class="top h-5 p-0 -mx-4">
+                              <span class="font-bold text-white">{{ $lab->name }}</span>
+                          </div>
+                      </div>
+                  </td>
+                  @foreach ($weekDates as $week)
+                      <td class="border h-40 xl:w-20 lg:w-20 md:w-30 sm:w-20 w-10 transition cursor-pointer duration-500 ease hover:bg-gray-300">
+                          <div class="flex flex-col h-40 mx-auto sm:w-full">
+                              <div class="bottom flex-grow w-full cursor-pointer">
+                                  <div class="overflow-hidden pl-4 box-border">
+                                      @foreach ($lab->users as $user)
+                                          @if ($user->pivot->booking_date === $week['date'])
+                                              <div class="flex w-fit">
+                                                  <span>|</span>
+                                                  <p class="text-left ml-1">
+                                                      {{ $user->pivot->reason_to_booking }}
+                                                  </p>
+                                              </div>
+                                          @endif
+                                      @endforeach
+                                      @foreach ($lab->classSchedules as $classSchedule)
+                                          @if ($classSchedule->day == $week['day'])
+                                              <div class="flex w-fit">
+                                                  <span>|</span>
+                                                  <p class="text-left ml-1">
+                                                      (Kuliah) {{ $classSchedule->subject }}
+                                                  </p>
+                                              </div>
+                                          @endif
+                                      @endforeach
+                                  </div>
+                              </div>
+                          </div>
+                      </td>
+                  @endforeach
+              </tr>
+          @endforeach
+      </tbody>
+  </table>
+  
   </div>
 </div>
-    
-@endauth
 
 @push('scripts')
 <script>
