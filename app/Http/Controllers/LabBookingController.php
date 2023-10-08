@@ -25,7 +25,7 @@ class LabBookingController extends Controller
         $timeMappings = TimeMappings::$timeMappings;
 
         // Mendapatkan tanggal hari ini
-        $today = Carbon::today();
+        $today = Carbon::today()->addWeeks(1);
 
         // Mendapatkan tanggal awal minggu ini (hari Senin)
         $startOfWeek = $today->startOfWeek();
@@ -36,10 +36,9 @@ class LabBookingController extends Controller
         // Looping untuk mengisi array dengan tanggal dan hari
         for ($i = 0; $i < 7; $i++) {
             $date = $startOfWeek->copy()->addDays($i);
-            $formattedDate = $date->format('d/m');
             $weekDates[] = [
-                'date' => $formattedDate,
-                'day' => $date->format('l'), // Format hari (e.g., Monday)
+                'date' => $date->toDateString(),
+                'day' => strtolower($date->format('l')), // Format hari (e.g., Monday)
             ];
         }
 
