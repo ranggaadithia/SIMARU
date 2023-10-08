@@ -17,10 +17,34 @@ class LabBookingController extends Controller
      */
     public function index()
     {
+
         $user = Auth::check() ? Auth::user() : null;
-        $labs = Lab::all();
+        $labs = Lab::with(['users', 'classSchedules'])->get();
+
+        // return $labs[1];
         $timeMappings = TimeMappings::$timeMappings;
-        return view('home.index', compact('labs', 'user', 'timeMappings'));
+
+        // Mendapatkan tanggal hari ini
+        $today = Carbon::today();
+
+        // Mendapatkan tanggal awal minggu ini (hari Senin)
+        $startOfWeek = $today->startOfWeek();
+
+        // Membuat array untuk menyimpan tanggal dan hari dalam seminggu
+        $weekDates = [];
+
+        // Looping untuk mengisi array dengan tanggal dan hari
+        for ($i = 0; $i < 7; $i++) {
+            $date = $startOfWeek->copy()->addDays($i);
+            $formattedDate = $date->format('d/m');
+            $weekDates[] = [
+                'date' => $formattedDate,
+                'day' => $date->format('l'), // Format hari (e.g., Monday)
+            ];
+        }
+
+
+        return view('home.index', compact('labs', 'user', 'timeMappings', 'weekDates'));
     }
 
     /**

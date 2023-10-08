@@ -13,7 +13,9 @@ class Lab extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'labs_booking', 'lab_id', 'user_id')->withTimestamps();
+        return $this->belongsToMany(User::class, 'labs_booking', 'lab_id', 'user_id')
+        ->withTimestamps()
+        ->withPivot('reason_to_booking', 'booking_date', 'start_time', 'end_time');
     }
 
     public function classSchedules()
