@@ -12,38 +12,31 @@ use Illuminate\Support\Facades\Auth;
 
 class LabBookingController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    private function generateWeekDates(Carbon $startDate, Carbon $endDate)
+    {
+        $weekDates = [];
+
+        for ($date = $startDate; $date <= $endDate; $date->addDay()) {
+            $weekDates[] = [
+                'date' => $date->toDateString(),
+                'day' => strtolower($date->format('l')),
+            ];
+        }
+
+        return $weekDates;
+    }
+
     public function index()
     {
 
         $user = Auth::check() ? Auth::user() : null;
         $labs = Lab::with(['users', 'classSchedules'])->get();
-
-        // return $labs[1];
         $timeMappings = TimeMappings::$timeMappings;
-
-        // Mendapatkan tanggal hari ini
-        $today = Carbon::today()->addWeeks(1);
-
-        // Mendapatkan tanggal awal minggu ini (hari Senin)
+        $today = Carbon::today();
         $startOfWeek = $today->startOfWeek();
+        $weekDates = $this->generateWeekDates($startOfWeek, $startOfWeek->copy()->addDays(6));
 
-        // Membuat array untuk menyimpan tanggal dan hari dalam seminggu
-        $weekDates = [];
-
-        // Looping untuk mengisi array dengan tanggal dan hari
-        for ($i = 0; $i < 7; $i++) {
-            $date = $startOfWeek->copy()->addDays($i);
-            $weekDates[] = [
-                'date' => $date->toDateString(),
-                'day' => strtolower($date->format('l')), // Format hari (e.g., Monday)
-            ];
-        }
-
-
-        return view('home.index', compact('labs', 'user', 'timeMappings', 'weekDates'));
+        return view('home.index', compact('labs', 'user', 'timeMappings'));
     }
 
     /**

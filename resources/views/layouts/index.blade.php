@@ -8,6 +8,8 @@
   <link
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/tw-elements.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <livewire:styles />
 </head>
 <body>
  @yield('container')
@@ -20,5 +22,6 @@
 
 @stack('scripts')
 
+<livewire:scripts />
 </body>
 </html>
