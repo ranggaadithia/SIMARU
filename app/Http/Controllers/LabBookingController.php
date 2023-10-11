@@ -12,19 +12,6 @@ use Illuminate\Support\Facades\Auth;
 
 class LabBookingController extends Controller
 {
-    private function generateWeekDates(Carbon $startDate, Carbon $endDate)
-    {
-        $weekDates = [];
-
-        for ($date = $startDate; $date <= $endDate; $date->addDay()) {
-            $weekDates[] = [
-                'date' => $date->toDateString(),
-                'day' => strtolower($date->format('l')),
-            ];
-        }
-
-        return $weekDates;
-    }
 
     public function index()
     {
@@ -32,9 +19,7 @@ class LabBookingController extends Controller
         $user = Auth::check() ? Auth::user() : null;
         $labs = Lab::with(['users', 'classSchedules'])->get();
         $timeMappings = TimeMappings::$timeMappings;
-        $today = Carbon::today();
-        $startOfWeek = $today->startOfWeek();
-        $weekDates = $this->generateWeekDates($startOfWeek, $startOfWeek->copy()->addDays(6));
+
 
         return view('home.index', compact('labs', 'user', 'timeMappings'));
     }
@@ -63,7 +48,7 @@ class LabBookingController extends Controller
         $isLabAvailable = ClassSchedule::isLabAvailable($request->lab_id, $day, $request->start_time, $request->end_time)->count() == 0;
 
         if (!$isBookingConflict) {
-            return "ada booking";
+            return redirect('/')->with('error', 'ada booking');
         } else if (!$isLabAvailable) {
             return "ada kuliah";
         }
