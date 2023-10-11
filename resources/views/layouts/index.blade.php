@@ -20,8 +20,8 @@
   localStorage.theme = 'light'
  </script>
 
+<livewire:scripts />
 @stack('scripts')
 
-<livewire:scripts />
 </body>
 </html>
