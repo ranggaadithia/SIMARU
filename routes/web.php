@@ -64,7 +64,7 @@ Route::get('/time', function () {
 });
 
 Route::get('/test', function () {
-    return view('test');
+    return Lab::with(['users', 'classSchedules'])->get();
 });
 
 
