@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Livewire\WithAttributes;
 use App\Models\Lab;
 use Livewire\Component;
+use Livewire\Attributes\On;
 
 class ScheduleCalendar extends Component
 {
@@ -46,6 +47,11 @@ class ScheduleCalendar extends Component
     {
         $this->startDate = Carbon::now()->startOfWeek()->addWeeks($this->currentWeek - 1);
         $this->weekDates = $this->generateWeekDates($this->startDate, $this->startDate->copy()->addDays(6));
+    }
+
+    #[On('success-booking')]
+    public function updateSchedule($schedule)
+    {
     }
 
     public function render()

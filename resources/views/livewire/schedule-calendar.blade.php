@@ -31,7 +31,7 @@
             </thead>
             <tbody>
                 @foreach ($labs as $lab)
-                    <tr class="text-center h-20">
+                    <tr class="text-center h-20" wire:key="{{ $lab->id }}">
                         <td class="border lg:px-3 h-40 md:w-30 sm:w-20 items-center bg-blue-300 overflow-hidden">
                             <div class="h-40 md:w-30 sm:w-full w-10 mx-auto flex justify-center items-center">
                                 <div class="top h-5 p-0 -mx-4">
@@ -46,7 +46,7 @@
                                         <div class="overflow-hidden pl-4 box-border">
                                             @foreach ($lab->users as $user)
                                                 @if ($user->pivot->booking_date === $week['date'])
-                                                    <div class="flex w-fit">
+                                                    <div class="flex w-fit" wire:key="{{ $user->id }}">
                                                         <span>|</span>
                                                         <p class="text-left ml-1">
                                                             {{ $user->pivot->reason_to_booking }}
@@ -56,7 +56,7 @@
                                             @endforeach
                                             @foreach ($lab->classSchedules as $classSchedule)
                                                 @if ($classSchedule->day == $week['day'])
-                                                    <div class="flex w-fit">
+                                                    <div class="flex w-fit" wire:key="{{ $classSchedule->id }}">
                                                         <span>|</span>
                                                         <p class="text-left ml-1">
                                                             (Kuliah) {{ $classSchedule->subject }}

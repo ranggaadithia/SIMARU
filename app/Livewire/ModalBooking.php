@@ -76,8 +76,9 @@ class ModalBooking extends Component
 
             LabsBooking::create($data);
 
+
             $this->dispatch('close-modal');
-            session()->flash('success', 'Lab booking was successful');
+            $this->dispatch('success-booking', schedule: $data['user_id']);
             $this->resetForm();
         }
     }
