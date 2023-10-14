@@ -86,12 +86,12 @@
             @endif
             <form  wire:submit="bookingLab">
             <div class="">
-                <label for="">Nama Peminjam</label>
+                <label for="name">Nama Peminjam</label>
                 <div class="relative mb-3" data-te-input-wrapper-init>
                     <input
                     type="text"
                     class="peer block min-h-[auto] w-full rounded border-0 bg-neutral-100 px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:bg-neutral-700 dark:text-neutral-500 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                    id="exampleFormControlInput5"
+                    id="name"
                     placeholder="Disabled input"
                     aria-label="Disabled input example"
                     value="{{ $user->name }} ({{ $user->role }})"
@@ -99,7 +99,7 @@
                 </div>
             </div>
             <div class="mb-3">
-                <label for="lab">Pilih Lab<span class="text-red-500">*</span></label>
+                <label for="lab_id">Pilih Lab<span class="text-red-500">*</span></label>
                 <select name="lab_id" id="lab_id" wire:model="lab_id" class="w-full py-2 px-1 rounded-md border @error('lab_id') border-red-600 @enderror">
 
                 <option selected>Pilih Lab</option>
@@ -117,7 +117,7 @@
                 <div class="relative mb-3">
                 <textarea
                     class="border @error('reason_to_booking') border-red-600 @enderror w-full p-2 rounded-md"
-                    id="tujuan peminjaman"
+                    id="keperluan"
                     rows="3"
                     name="reason_to_booking"
                     placeholder="tuliskan keperluan anda disini" wire:model="reason_to_booking"
@@ -127,7 +127,7 @@
                     </div>
             </div>
             <div class="mb-3">
-                <label for="keperluan">Pilih Tanggal<span class="text-red-500">*</span></label>
+                <label for="tanggal_peminjaman">Pilih Tanggal<span class="text-red-500">*</span></label>
                 <div
                 class="mb-3 relative border @error('booking_date') border-red-600 @enderror w-full rounded-md"
                 id="datepicker-disable-past"
@@ -137,8 +137,10 @@
                     type="text"
                     class="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none"
                     placeholder="pilih tanggal peminjaman"
+                    id="tanggal_peminjaman"
                     name="booking_date"
                     wire:model="booking_date"
+                    autocomplete="off"
                     data-te-datepicker-toggle-ref
                     data-te-datepicker-toggle-button-ref />
                 </div>
@@ -149,8 +151,8 @@
             <div class="mb-3">
                 <div class="flex gap-x-5">
                     <div class="">
-                        <label for="">Jam Mulai<span class="text-red-500">*</span></label>
-                        <select class="w-full py-2 border @error('end_time') border-red-600 @enderror rounded-md px-1" wire:model="start_time">
+                        <label for="jam_mulai">Jam Mulai<span class="text-red-500">*</span></label>
+                        <select id="jam_mulai" class="w-full py-2 border @error('end_time') border-red-600 @enderror rounded-md px-1" wire:model="start_time">
                             <option selected>pilih jam</option>
                             @foreach ($timeMappings as $letter => $time)
                             <option value="{{ $letter }}">
@@ -164,8 +166,8 @@
                         </div>
                     </div>
                     <div class="">
-                        <label for="">Jam Selesai<span class="text-red-500">*</span></label>
-                        <select class="w-full py-2 border @error('end_time') border-red-600 @enderror rounded-md px-1" wire:model="end_time">
+                        <label for="jam_selesai">Jam Selesai<span class="text-red-500">*</span></label>
+                        <select id="jam_selesai" class="w-full py-2 border @error('end_time') border-red-600 @enderror rounded-md px-1" wire:model="end_time">
                             <option selected>pilih jam</option>
                             @foreach ($timeMappings as $letter => $time)
                             <option value="{{ $letter }}">
@@ -207,3 +209,12 @@
     </div>
 
 </div>
+
+@push('scripts')
+<script>
+    const datepickerDisablePast = document.getElementById('datepicker-disable-past');
+    new te.Datepicker(datepickerDisablePast, {
+    disablePast: true
+    });
+</script>
+@endpush

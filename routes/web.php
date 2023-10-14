@@ -16,6 +16,7 @@ use App\Http\Controllers\ClassScheduleController;
 use App\Http\Controllers\LabBookingController;
 use App\Http\Controllers\LabScheduleController;
 use App\Http\Controllers\RescheduleController;
+use App\Livewire\Report;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,6 +53,7 @@ Route::middleware(['auth', 'is.admin'])->prefix('dashboard')->group(function () 
     Route::resource('class-schedule', ClassScheduleController::class)->except(('show'));
     Route::get('reschedule/{labs_booking}', [RescheduleController::class, 'create']);
     Route::post('reschedule/{labs_booking}', [RescheduleController::class, 'store'])->name('reschedule.store');
+    Route::get('report', Report::class)->name('report');
 });
 
 
