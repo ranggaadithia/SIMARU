@@ -36,10 +36,6 @@
 
 @push('scripts')
 <script>
-const datepickerDisablePast = document.getElementById('datepicker-disable-past');
-  new te.Datepicker(datepickerDisablePast, {
-    disablePast: true
-  });
 
 Livewire.on('close-modal', function () {
     // Menutup modal dengan data-te-modal-dismiss
