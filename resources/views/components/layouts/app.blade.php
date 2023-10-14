@@ -15,6 +15,7 @@
         <main class="d-flex flex-nowrap">
             @include('components.sidebar')
             <div class="container mt-5 overflow-hidden">
+                <livewire:export-report />
                 {{ $slot }}
             </div>
         </main>
