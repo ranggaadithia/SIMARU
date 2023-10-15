@@ -7,7 +7,6 @@
   <ul class="dropdown-menu">
     <li><button class="dropdown-item" wire:click="exportExcel">Excel</button></li>
     <li><button class="dropdown-item" wire:click="exportCSV">CSV</button></li>
-    <li><button class="dropdown-item" wire:click="exportExcel">PDF</button></li>
   </ul>
 </div>
 
