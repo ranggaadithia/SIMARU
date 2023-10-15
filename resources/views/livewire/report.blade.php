@@ -1,19 +1,19 @@
 <div>
-    <table class="table">
+    <table id="myTable" class="display">
         <thead>
           <tr>
-            <th scope="col">#</th>
-            <th scope="col">Lab</th>
-            <th scope="col">Peminjam</th>
-            <th scope="col">Tujuan</th>
-            <th scope="col">Tanggal</th>
-            <th scope="col">Jam Mulai</th>
-            <th scope="col">Jam Selesai</th>
+            <th>#</th>
+            <th>Lab</th>
+            <th>Peminjam</th>
+            <th>Tujuan</th>
+            <th>Tanggal</th>
+            <th>Jam Mulai</th>
+            <th>Jam Selesai</th>
           </tr>
         </thead>
         <tbody>
         @foreach ($bookings as $booking)
-          <tr>
+          <tr wire:key="{{ $booking->id }}">
             <th scope="row">{{ $loop->iteration }}</th>
             <td>{{ $booking->lab->name }}</td>
             <td>{{ $booking->user->name }}</td>
@@ -25,5 +25,5 @@
         @endforeach
         </tbody>
       </table>
-      {!! $bookings->links() !!}
+      {{-- {!! $bookings->links() !!} --}}
 </div>

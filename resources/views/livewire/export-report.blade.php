@@ -1,6 +1,6 @@
-<div>
-
- <div class="dropdown">
+<div class="d-flex justify-content-between">
+  <h3>Laporan Peminjaman Lab</h3>
+ <div class="dropdown mb-3">
   <button class="btn btn-outline-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
     Download Report
   </button>
