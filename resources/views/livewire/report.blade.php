@@ -19,8 +19,8 @@
             <td>{{ $booking->user->name }}</td>
             <td>{{ $booking->reason_to_booking }}</td>
             <td>{{ $booking->booking_date }}</td>
-            <td>{{ $booking->start_time }}</td>
-            <td>{{ $booking->end_time }}</td>
+            <td>{{ App\Utilities\TimeMappings::convertToLetter($booking->start_time) }}</td>
+            <td>{{ App\Utilities\TimeMappings::convertToLetter($booking->end_time) }}</td>
         </tr>
         @endforeach
         </tbody>

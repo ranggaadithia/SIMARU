@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\LabsBooking;
+use App\Utilities\TimeMappings;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -12,6 +13,7 @@ class Report extends Component
     use WithPagination;
 
     protected $paginationTheme = 'bootstrap';
+
 
     public function render()
     {
