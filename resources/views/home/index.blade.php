@@ -32,7 +32,7 @@
     <livewire:modal-booking :user="Auth::user()" :labs="$labs" :timeMappings="$timeMappings"  />
 @endauth
 
-<livewire:schedule-calendar :labs="$labs" />
+<livewire:schedule-calendar :labs="$labs" lazy />
 
 @push('scripts')
 <script>

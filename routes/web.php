@@ -72,7 +72,7 @@ Route::get('/export', function () {
 });
 
 Route::get('/test', function () {
-    return Lab::with(['users', 'classSchedules'])->get();
+    return view('test');
 });
 
 
