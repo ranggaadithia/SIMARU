@@ -3,7 +3,6 @@
 namespace App\Livewire;
 
 use App\Models\ClassSchedule;
-use App\Models\Lab;
 use App\Models\LabsBooking;
 use Livewire\Component;
 use Livewire\Attributes\On;
