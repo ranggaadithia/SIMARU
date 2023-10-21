@@ -42,6 +42,6 @@ class User extends Authenticatable
 
     public function labs()
     {
-        return $this->belongsToMany(Lab::class, 'labs_booking', 'user_id', 'lab_id')->withTimestamps();
+        return $this->belongsToMany(Lab::class, 'labs_booking', 'user_id', 'lab_id')->withPivot('booking_date', 'start_time', 'end_time', 'reason_to_booking')->withTimestamps();
     }
 }
