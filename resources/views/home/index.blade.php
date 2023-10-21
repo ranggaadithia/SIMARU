@@ -43,6 +43,12 @@ Livewire.on('close-modal', function () {
     modal.click();
 });
 
+Livewire.on('showModalDetail', function () {
+    // Menampilkan modal dengan data-te-modal-init
+    const modal = document.getElementById('modalScheduleDetail');
+    modal.classList.add('block');
+});
+
 Livewire.on('success-booking', function () {
   const toasty = document.getElementById('static-example');    
     toasty.classList.replace('data-[te-toast-show]:hidden', 'data-[te-toast-show]:block')

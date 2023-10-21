@@ -54,6 +54,17 @@ class ScheduleCalendar extends Component
     {
     }
 
+    // public $week;
+
+    public function getLabScheduleDetail($labId, $date, $day)
+    {
+
+        $data = Lab::with(['users', 'classSchedules'])->where('id', $labId)->get();
+
+
+        $this->dispatch('show-detail-schedule', $labId, $date, $day, $data);
+    }
+
     public function render()
     {
         return view('livewire.schedule-calendar');
