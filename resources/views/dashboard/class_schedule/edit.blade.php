@@ -61,7 +61,7 @@
   <label for="lab">Lab</label>
   <select class="form-select" name="lab_id">
     @foreach ($labs as $lab)
-      <option value="{{ $lab->id }}" @if ($lab->id) selected @endif>{{ $lab->name }}</option>
+      <option value="{{ $lab->id }}" @if ($lab->id == $classSchedule->lab_id) selected @endif>{{ $lab->name }}</option>
     @endforeach
   </select>
   @error('lab_id')
