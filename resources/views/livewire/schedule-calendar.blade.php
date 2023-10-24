@@ -83,7 +83,7 @@
 
 
         @teleport('body')
-            <livewire:detail-schedule />
+            <livewire:detail-schedule lazy />
         @endteleport
     </div>        
 

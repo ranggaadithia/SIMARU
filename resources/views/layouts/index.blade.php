@@ -13,7 +13,7 @@
   <livewire:styles />
 
 </head>
-<body x-data="{ open: false }">
+<body x-data="{ open: false }" class="font-poppins">
   @yield('container')
   
  <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/tw-elements.umd.min.js" ></script>

@@ -50,10 +50,13 @@ Route::middleware('guest')->group(function () {
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
+Route::get('/dashboard', function () {
+    return redirect('/dashboard/labs');
+});
 Route::middleware(['auth', 'is.admin'])->prefix('dashboard')->group(function () {
     Route::resource('labs', LabController::class);
     Route::resource('class-schedule', ClassScheduleController::class)->except(('show'));
-    Route::get('reschedule/{labs_booking}', [RescheduleController::class, 'create']);
+    Route::get('reschedule/{labs_booking}', [RescheduleController::class, 'create'])->name('reschedule.create');
     Route::post('reschedule/{labs_booking}', [RescheduleController::class, 'store'])->name('reschedule.store');
     Route::get('report', Report::class)->name('report');
 });
