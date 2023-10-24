@@ -28,7 +28,21 @@
                                                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                         {{ $key }}
                                                     </th>
-                                                    <td class="w-full bg-red-400" rowspan="{{ $totalRowspan }}">
+                                                    <td class="w-full bg-pink-600 rounded-lg p-3 text-white align-top" rowspan="{{ $totalRowspan }}">
+                                                        <div class="flex justify-between">
+                                                            <div class="">
+                                                                <h1 class="text-2xl font-semibold">{{ $booking->reason_to_booking }}</h1>
+                                                                <p class="text-sm font-light mt-1">{{ $booking->user->name }} ({{ $booking->user->role }})</p>
+                                                                <p class="mt-3">{{ $booking->start_time }} - {{ $booking->end_time }}</p>
+                                                            </div>
+                                                            @auth
+                                                                @if (Auth::user()->role === 'admin')
+                                                                    <div class="align-middle">
+                                                                        <a href="{{ route('reschedule.create', $booking->id) }}" class="py-3 px-5 rounded-full bg-white text-black block">Reschedule</a>
+                                                                    </div>
+                                                                @endif
+                                                            @endauth
+                                                        </div>
                                                     </td>
                                                 </tr>
                                                 @php
@@ -45,8 +59,25 @@
                                                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                         {{ $key }}
                                                     </th>
-                                                    <td class="w-full bg-blue-400" rowspan="{{ $totalRowspan }}">
-                                                        <!-- Isi yang sesuai -->
+                                                    <td class="w-full bg-yellow-600 rounded-lg p-3 text-white align-top" rowspan="{{ $totalRowspan }}">
+                                                        <div class="flex justify-between">
+                                                            <div class="">
+                                                                <span
+                                                                    class="inline-block whitespace-nowrap rounded-[0.27rem] bg-neutral-50 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-neutral-600">
+                                                                    Kuliah
+                                                                </span>
+                                                                <h1 class="text-2xl font-semibold">{{ $class->subject }}</h1>
+                                                                <p class="text-sm font-light mt-1">{{ $class->lecturer }}</p>
+                                                                <p class="mt-3">{{ $class->start_time }} - {{ $class->end_time }}</p>
+                                                            </div>
+                                                            @auth
+                                                                @if (Auth::user()->role === 'admin')
+                                                                    <div class="align-middle">
+                                                                        <a href="" class="py-3 px-5 rounded-full bg-white text-black block">Edit Jadwal</a>
+                                                                    </div>
+                                                                @endif
+                                                            @endauth
+                                                        </div>
                                                     </td>
                                                 </tr>
                                                 @php
