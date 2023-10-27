@@ -67,7 +67,7 @@
             <button class="hover:bg-blue-500 bg-[#60A5FA] text-white text-md font-bold py-2 px-4 rounded-md w-full mt-4 mb-2" type="submit">Sign In </button>
         </form>
         <p class="text-[13px] max-w-[250px]">Untuk pengguna dari luar Undiksha, silakan membuat akun di  bawah ini</p>
-        <a href="/register" class="text-[13px] text-b1 underline text-[#60A5FA]" type="submit"><p class="mt-1">Sign Up</p></a>
+        <a href="/register" class="text-[13px] text-b1 underline text-[#60A5FA]" wire:navigate><p class="mt-1">Sign Up</p></a>
     </div>
   </div>
 </div>

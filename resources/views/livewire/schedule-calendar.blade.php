@@ -1,4 +1,3 @@
-
     <div class="wrapper bg-white rounded shadow  ">
 
             <div class="header flex justify-between border-b p-2 fixed -mt-16 bg-blue-500 w-full h-16 text-white">
@@ -22,7 +21,7 @@
                 <tr>
                     <th class="py-2 border-r h-10 md:w-30 sm:w-20  xl:text-sm text-xs bg-blue-500 text-white lg:w-50 ">
                         <span class="xl:block lg:block md:block sm:block hidden">Ruangan<br>Hari</span>
-                        <span class="xl:hidden lg:hidden md:hidden sm:hidden block bg-blue-500 text-white">Ruangan<br>Hari</span>
+                        <span class="xl:hidden lg:hidden md:hidden sm:hidden block bg-blue-400 text-white">Ruangan<br>Hari</span>
                     </th>
                     @foreach ($weekDates as $week)
                         <th class="p-2 border-r h-20 lg:w-50 md:w-30 sm:w-20 xl:text-sm text-sm bg-blue-400 text-white  ">
