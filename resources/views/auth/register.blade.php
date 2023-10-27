@@ -89,7 +89,7 @@
           <button class="bg-blue-400 hover:bg-blue-500 bg-b1 text-white text-[15px] font-bold py-2 px-4 rounded-md w-full mt-4 mb-2 " type="submit">Sign Up</button>
       </form>
       <p class="text-[13px] ">Sudah punya akun? Sign In dibawah ini</p>
-      <a class="text-[13px] text-b1 underline text-blue-500 " href="/login"><p>Sign In</p></a>
+      <a class="text-[13px] text-b1 underline text-blue-500 " href="/login" wire:navigate><p>Sign In</p></a>
   </div>
   
 </div>
