@@ -77,7 +77,11 @@ Route::get('/export', function () {
 });
 
 Route::get('/test', function () {
-    return view('test');
+    return view('test', [
+        'labs' => Lab::all(),
+        'days' => ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+        'alphabet' => ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M']
+    ]);
 });
 
 
