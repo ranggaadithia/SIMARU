@@ -1,3 +1,4 @@
+
 <div class="wrapper">
     <table class="overflow-x-scroll xl:w-full mt-16 mx-auto">
         <thead class="sticky top-16 transition-shadow ease-in-out duration-300 bg-white" id="thead">

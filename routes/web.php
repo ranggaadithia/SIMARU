@@ -19,6 +19,7 @@ use App\Http\Controllers\LabBookingController;
 use App\Http\Controllers\RescheduleController;
 use App\Http\Controllers\LabScheduleController;
 use App\Http\Controllers\ClassScheduleController;
+use App\Http\Controllers\HistoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,7 @@ use App\Http\Controllers\ClassScheduleController;
 */
 
 Route::get('/', [LabBookingController::class, 'index'])->name('home');
+Route::get('/history', [HistoryController::class, 'history'])->name('history');
 Route::get('/labs', LabScheduleController::class);
 Route::get('/labs/{lab:slug}', [LabController::class, 'show']);
 
