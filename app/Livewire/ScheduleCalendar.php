@@ -31,12 +31,15 @@ class ScheduleCalendar extends Component
 
     public $currentWeek = 1;
 
+    #[On('nextWeek')]
     public function nextWeek()
     {
         $this->currentWeek++;
+        $this->dispatch('updateDate', $this->startDate->format('F Y'));
         $this->mount();
     }
 
+    #[On('prevWeek')]
     public function previousWeek()
     {
         $this->currentWeek--;
