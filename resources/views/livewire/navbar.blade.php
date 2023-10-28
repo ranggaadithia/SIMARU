@@ -1,16 +1,16 @@
 <div> 
     <nav
-    class="fixed top-0 flex-no-wrap flex w-full items-center justify-between bg-white py-4 lg:flex-wrap">
-        <div class="flex w-full flex-wrap items-center justify-between px-5">
+    class="fixed top-0 z-10 flex-no-wrap flex w-full items-center justify-between bg-white py-4 lg:flex-wrap border-b">
+        <div class="flex w-full flex-wrap items-center justify-between px-10">
             <div class="">
                 <h1 class="text-2xl font-bold">SIMARU</h1>
             </div>
-            <div class="text-xl flex items-center  text-center">
-                <button class="hover:bg-gray-200  rounded-full transition-all ease-in-out duration-300" wire:click="prevWeek"><i class="bi bi-chevron-left text-2xl"></i></button>
+            <div class="text-xl flex items-center justify-between text-center w-80">
+                <button class="hover:bg-gray-200 px-1 rounded-full transition-all ease-in-out duration-300" wire:click="prevWeek"><i class="bi bi-chevron-left text-2xl"></i></button>
                 <h3 class="mx-5 font-semibold text-2xl">
                     {{ $startDate->format('F Y') }}
                 </h3>
-                <button class="hover:bg-gray-200  rounded-full transition-all ease-in-out duration-300" wire:click="nextWeek"><i class="bi bi-chevron-right text-2xl"></i></button>
+                <button class="hover:bg-gray-200 px-1 rounded-full transition-all ease-in-out duration-300" wire:click="nextWeek"><i class="bi bi-chevron-right text-2xl"></i></button>
             </div>
             <div class="">
                 @auth
@@ -23,8 +23,8 @@
                       aria-expanded="false"
                       data-te-ripple-init
                       data-te-ripple-color="light">
-                      Hi, {{  Illuminate\Support\Str::limit(auth()->user()->name, 10, ' ...'); }}
-                      <span class="ml-2 w-2">
+                      <i class="bi bi-person-circle text-3xl"></i>
+                      <span class="w-2 text-blue-400">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 20 20"
@@ -38,7 +38,7 @@
                       </span>
                     </button>
                     <ul
-                      class="absolute -z-30 float-left m-0 hidden min-w-max list-none overflow-hidden rounded-lg border-none bg-white bg-clip-padding text-left text-base shadow-lg dark:bg-neutral-700 [&[data-te-dropdown-show]]:block"
+                      class="absolute z-[1000] float-left m-0 hidden min-w-max list-none overflow-hidden rounded-lg border-none bg-white bg-clip-padding text-left text-base shadow-lg dark:bg-neutral-700 [&[data-te-dropdown-show]]:block"
                       aria-labelledby="dropdownMenuButton1"
                       data-te-dropdown-menu-ref>
                       @if (auth()->user()->role === 'admin')
@@ -73,7 +73,7 @@
                     </ul>
                   </div>
                 @else
-                <a href="{{ route('login') }}" class="text-sm uppercase font-semibold">Login/Register</a>
+                  <a href="{{ route('login') }}" class="text-sm uppercase font-semibold">Login</a>
                 @endauth
                 
             </div>

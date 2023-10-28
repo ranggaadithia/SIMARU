@@ -1,6 +1,6 @@
 <div class="wrapper">
     <table class="overflow-x-scroll xl:w-full mt-16 mx-auto">
-        <thead class="sticky top-16 -z-10 transition-shadow ease-in-out duration-300" id="thead">
+        <thead class="sticky top-16 transition-shadow ease-in-out duration-300 bg-white" id="thead">
             <tr class="">
                 <th class="py-2 border-r h-10 md:w-30 sm:w-20  xl:text-sm text-xs bg-white text-white lg:w-50">
                     {{-- @auth
@@ -8,11 +8,12 @@
                     @endauth --}}
                 </th>
                 @foreach ($weekDates as $week)
-                    <th class="p-2 border-r h-20 lg:w-50 md:w-30 sm:w-20 xl:text-sm text-sm bg-white text-gray-600">
+                    <th class="p-2 border-r h-24 w-40 bg-white text-gray-600">
                         <span class="uppercase">
                             {{ Illuminate\Support\Str::limit($week['day'], 3, '') }} 
                         </span>
-                        <span>
+                        <br>
+                        <span class="text-3xl font-normal">
                             {{ \Carbon\Carbon::parse($week['date'])->format('d') }}
                         </span>
                         
@@ -20,10 +21,10 @@
                 @endforeach
             </tr>
         </thead>
-        <tbody class="overflow-y-scroll relative -z-20 bg-white">
+        <tbody class="overflow-y-scroll">
             @foreach ($labs as $lab)
                 <tr class="text-center h-20 w-10" wire:key="{{ $lab->id }} ">
-                    <td class="border lg:px-3 h-40 md:w-30 sm:w-20 items-center bg-blue-400 overflow-hidden w-10">
+                    <td class="border lg:px-3 h-40 w-32 items-center bg-blue-400 overflow-hidden">
                         <div class="h-40 md:w-30 sm:w-full w-10 mx-auto flex justify-center items-center">
                             <div class="top h-5 p-0 -mx-4">
                                 <span class="font-bold text-white">{{ $lab->name }}</span>
@@ -31,7 +32,7 @@
                         </div>
                     </td>
                     @foreach ($weekDates as $week)
-                        <td class="border h-40 xl:w-20 lg:w-20 md:w-30 sm:w-20 transition cursor-pointer duration-500 ease hover:bg-gray-300 w-10">
+                        <td class="border h-40 max-w-30  transition cursor-pointer duration-500 ease hover:bg-gray-300 ">
                         <button class="p-0 m-0 w-full h-full box-border"
                         @click="open = ! open" 
                         wire:click="getLabScheduleDetail({{ $lab->id }}, '{{ $week['date'] }}', '{{ $week['day'] }}')"
@@ -44,7 +45,7 @@
                                                 <div class="flex w-fit" wire:key="{{ $user->id }}">
                                                     <span>|</span>
                                                     <p class="text-left ml-1">
-                                                        {{ $user->pivot->reason_to_booking }}
+                                                        {{ Illuminate\Support\Str::limit($user->pivot->reason_to_booking, 10) }}
                                                     </p>
                                                 </div>
                                             @endif
@@ -54,7 +55,7 @@
                                                 <div class="flex w-fit" wire:key="{{ $classSchedule->id }}">
                                                     <span>|</span>
                                                     <p class="text-left ml-1">
-                                                        (Kuliah) {{ $classSchedule->subject }}
+                                                        {{ Illuminate\Support\Str::limit($classSchedule->subject, 10) }}
                                                     </p>
                                                 </div>
                                             @endif
