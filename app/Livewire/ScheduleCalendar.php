@@ -3,10 +3,10 @@
 namespace App\Livewire;
 
 use Carbon\Carbon;
-use Livewire\WithAttributes;
 use App\Models\Lab;
 use Livewire\Component;
 use Livewire\Attributes\On;
+use Livewire\WithAttributes;
 
 class ScheduleCalendar extends Component
 {
@@ -27,7 +27,7 @@ class ScheduleCalendar extends Component
         return $weekDates;
     }
 
-    public $weekDates, $startDate, $labs;
+    public $weekDates, $startDate, $labs, $timeMapping;
 
     public $currentWeek = 1;
 
@@ -35,7 +35,6 @@ class ScheduleCalendar extends Component
     public function nextWeek()
     {
         $this->currentWeek++;
-        $this->dispatch('updateDate', $this->startDate->format('F Y'));
         $this->mount();
     }
 
