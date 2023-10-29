@@ -1,6 +1,6 @@
 <div> 
     <nav
-    class="fixed top-0 z-10 flex-no-wrap flex w-full items-center justify-between bg-white py-4 lg:flex-wrap border-b">
+    class="fixed top-0 z-20 flex-no-wrap flex w-full items-center justify-between bg-white py-4 lg:flex-wrap border-b">
         <div class="flex w-full flex-wrap items-center justify-between px-10">
             <div class="">
                 <h1 class="text-2xl font-bold">SIMARU</h1>
