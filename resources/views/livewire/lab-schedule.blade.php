@@ -6,7 +6,13 @@
             $col = 2;
         @endphp
         @foreach ($weekDates as $week)
-            <div class="row-start-[1] col-start-[{{ $col }}] sticky top-16 z-10 bg-white dark:bg-gradient-to-b dark:from-slate-600 dark:to-slate-700 border-slate-100 dark:border-black/10 bg-clip-padding text-slate-900 dark:text-slate-200 border-b text-sm font-medium py-2 text-center">{{ $week['date'] }}</div>
+            <div class="row-start-[1] col-start-[{{ $col }}] sticky top-16 z-10 bg-white dark:bg-gradient-to-b dark:from-slate-600 dark:to-slate-700 border-slate-100 dark:border-black/10 bg-clip-padding text-slate-900 dark:text-slate-200 border-b text-sm font-medium py-2 text-center"><span class="uppercase font-light">
+                {{ Illuminate\Support\Str::limit($week['day'], 3, '') }} 
+            </span>
+            <br>
+            <span class="font-semibold">
+                {{ \Carbon\Carbon::parse($week['date'])->format('d') }}
+            </span></div>
         @php
             $col++;
         @endphp
@@ -32,16 +38,25 @@
         @endforeach
         
         <!-- Calendar contents -->
-        @foreach ($classSchedule as $item)
-            <div class="{{ $dayClass[$item['day']] }} {{ $timeMappings[$item['start_time']] }} row-span-3 bg-blue-400/20 dark:bg-sky-600/50 border border-blue-700/10 dark:border-sky-500 rounded-lg m-1 p-1 flex flex-col">
-            <span class="text-xs text-blue-600 dark:text-sky-100">{{ $item['start_time'] }}</span>
-            <span class="text-xs font-medium text-blue-600 dark:text-sky-100">{{ $item['subject'] }}</span>
-            <span class="text-xs text-blue-600 dark:text-sky-100">{{ $item['class'] }}</span>
+        @php
+            $totalRowspan = 1;
+        @endphp
+        @foreach ($classSchedule as $class)
+        @php
+            $totalRowspan = ceil((strtotime($class['end_time']) - strtotime($class['start_time'])) / 3600);
+        @endphp
+            <div class="{{ $dayClass[$class['day']] }} {{ $timeMappings[$class['start_time']] }} row-span-{{ $totalRowspan }} bg-blue-400/20 dark:bg-sky-600/50 border border-blue-700/10 dark:border-sky-500 rounded-lg m-1 p-1 flex flex-col">
+            <span class="text-xs text-blue-600 dark:text-sky-100">{{ $class['start_time'] }}</span>
+            <span class="text-xs font-medium text-blue-600 dark:text-sky-100">{{ $class['subject'] }}</span>
+            <span class="text-xs text-blue-600 dark:text-sky-100">{{ $class['class'] }}</span>
         </div>
         @endforeach
 
         @foreach ($labsBooking as $booking)
-        <div class="{{ $dayClass[$booking['day']] }} {{ $timeMappings[$booking['start_time']] }} row-span-3 bg-blue-400/20 dark:bg-sky-600/50 border border-blue-700/10 dark:border-sky-500 rounded-lg m-1 p-1 flex flex-col">
+        @php
+            $totalRowspan = ceil((strtotime($class['end_time']) - strtotime($class['start_time'])) / 3600);
+        @endphp
+        <div class="{{ $dayClass[$booking['day']] }} {{ $timeMappings[$booking['start_time']] }} row-span-{{ $totalRowspan }} bg-blue-400/20 dark:bg-sky-600/50 border border-blue-700/10 dark:border-sky-500 rounded-lg m-1 p-1 flex flex-col">
             <span class="text-xs text-blue-600 dark:text-sky-100">{{ $booking['start_time'] }}</span>
             <span class="text-xs font-medium text-blue-600 dark:text-sky-100">{{ $booking['reason_to_booking'] }}</span>
         </div>
