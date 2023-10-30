@@ -1,14 +1,4 @@
 <div>
-    <button
-    type="button"
-    class=" rounded bg-primary px-4 py-3 text-xs font-medium uppercase leading-normal text-white"
-    data-te-toggle="modal"
-    data-te-target="#exampleModal"
-    data-te-ripple-init
-    data-te-ripple-color="light">
-    
-    <i class="bi bi-archive-fill text-3xl"></i>
-    </button>
 
     <div
     wire:ignore.self

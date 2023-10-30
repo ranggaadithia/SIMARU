@@ -4,9 +4,9 @@
         <thead class="sticky top-16 transition-shadow ease-in-out duration-300 bg-white" id="thead">
             <tr class="">
                 <th class="py-2 border-r h-10 md:w-30 sm:w-20  xl:text-sm text-xs bg-white text-white lg:w-50">
-                    {{-- @auth
-                        <livewire:modal-booking :user="Auth::user()" :labs="$labs" :timeMappings="$timeMappings"  />
-                    @endauth --}}
+                    @auth
+                        @include('components.modal-button')
+                    @endauth
                 </th>
                 @foreach ($weekDates as $week)
                     <th class="p-2 border-r h-24 w-40 bg-white text-gray-600">
