@@ -35,7 +35,7 @@ use App\Http\Controllers\HistoryController;
 Route::get('/', [LabBookingController::class, 'index'])->name('home');
 Route::get('/history', [HistoryController::class, 'history'])->name('history');
 Route::get('/labs', LabScheduleController::class);
-Route::get('/labs/{lab:slug}', [LabController::class, 'show']);
+Route::get('/labs/{lab:slug}', [LabController::class, 'show'])->name('lab.view');
 
 Route::middleware('auth')->group(function () {
     Route::post('/', [LabBookingController::class, 'store'])->name('booking');
