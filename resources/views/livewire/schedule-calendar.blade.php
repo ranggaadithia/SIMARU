@@ -30,11 +30,13 @@
                 <tr class="text-center h-20" wire:key="{{ $lab->id }} ">
                     <td class="border px-3 lg:px-3 h-40 items-center bg-white" id="lab-name"
                     data-sticky="true">
+                    <a href="{{ route('lab.view', $lab->slug) }}">
                         <div class="h-40 mx-auto flex justify-center items-center">
                             <div class="">
                                 <span class="font-bold text-blue-400">{{ $lab->name }}</span>
                             </div>
                         </div>
+                    </a>
                     </td>
                     @foreach ($weekDates as $week)
                         <td class="border h-40 bg-white transition cursor-pointer duration-500 ease hover:bg-gray-300">

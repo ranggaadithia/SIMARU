@@ -1,6 +1,5 @@
-<div>
-    <div class="grid grid-cols-[70px,repeat(7,auto)] grid-rows-[repeat(14,50px)] mt-16">
-        {{-- {{ dd($labsBooking) }} --}}
+<div class="xl:flex xl:justify-center">
+    <div class="grid grid-cols-[70px,repeat(7,170px)] grid-rows-[repeat(14,50px)] mt-16">
         <div class="row-start-[1] col-start-[1] sticky top-16 z-10 bg-white dark:bg-gradient-to-b dark:from-slate-600 dark:to-slate-700 border-slate-100 dark:border-black/10 bg-clip-padding text-slate-900 dark:text-slate-200 border-b text-sm font-medium py-2"></div>
         @php
             $col = 2;
@@ -27,7 +26,7 @@
                 $col = 2;
             @endphp
             @foreach ($weekDates as $week)
-                <div class="row-start-[{{ $row }}] col-start-[{{ $col }}] border-slate-100 dark:border-slate-200/5 border-b border-r"></div>
+                <div class="row-start-[{{ $row }}] col-start-[{{ $col }}] border-slate-100 dark:border-slate-200/5 border-b border-r "></div>
             @php
                 $col++;
             @endphp
@@ -47,10 +46,13 @@
         @php
             $totalRowspan = ceil((strtotime($class['end_time']) - strtotime($class['start_time'])) / 3600);
         @endphp
-            <div class="{{ $dayClass[$class['day']] }} {{ $timeMappings[$class['start_time']] }} row-span-{{ $totalRowspan }} bg-blue-400/20 dark:bg-sky-600/50 border border-blue-700/10 dark:border-sky-500 rounded-lg m-1 p-1 flex flex-col">
-            <span class="text-xs text-blue-600 dark:text-sky-100">{{ $class['start_time'] }}</span>
-            <span class="text-xs font-medium text-blue-600 dark:text-sky-100">{{ $class['subject'] }}</span>
-            <span class="text-xs text-blue-600 dark:text-sky-100">{{ $class['class'] }}</span>
+            <div class="{{ $dayClass[$class['day']] }} {{ $timeMappings[$class['start_time']] }} row-span-{{ $totalRowspan }} bg-purple-400/20 dark:bg-sky-600/50 border border-purple-700/10 dark:border-sky-500 rounded-lg m-1 p-2 flex flex-col">
+                <span
+                    class="inline-block whitespace-nowrap rounded-[0.27rem] bg-neutral-50 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-neutral-600 w-fit">
+                Kuliah
+                </span>
+                <span class="mt-1 font-medium text-purple-600 dark:text-sky-100">{{ $class['subject'] }}</span>
+                <span class="text-xs mt-1 text-purple-600 dark:text-sky-100">{{ $class['start_time'] }} - {{ $class['end_time'] }}</span>
         </div>
         @endforeach
 
@@ -58,9 +60,10 @@
         @php
             $totalRowspan = ceil((strtotime($booking['end_time']) - strtotime($booking['start_time'])) / 3600);
         @endphp
-        <div class="{{ $dayClass[$booking['day']] }} {{ $timeMappings[$booking['start_time']] }} row-span-{{ $totalRowspan }} bg-blue-400/20 dark:bg-sky-600/50 border border-blue-700/10 dark:border-sky-500 rounded-lg m-1 p-1 flex flex-col">
-            <span class="text-xs text-blue-600 dark:text-sky-100">{{ $booking['start_time'] }}</span>
-            <span class="text-xs font-medium text-blue-600 dark:text-sky-100">{{ $booking['reason_to_booking'] }}</span>
+        <div class="{{ $dayClass[$booking['day']] }} {{ $timeMappings[$booking['start_time']] }} row-span-{{ $totalRowspan }} bg-blue-400/20 dark:bg-sky-600/50 border border-blue-700/10 dark:border-sky-500 rounded-lg m-1 p-2 flex flex-col">
+            <span class="font-medium text-blue-600 dark:text-sky-100">{{ $booking['reason_to_booking'] }}</span>
+            <span class="text-xs mt-1 text-blue-600">{{ $booking['user']['name'] }} ({{ $booking['user']['role'] }})</span>
+            <span class="text-xs mt-1 text-blue-600 dark:text-sky-100">{{ $booking['start_time'] }} - {{ $booking['end_time'] }}</span>
         </div>
         @endforeach
 
