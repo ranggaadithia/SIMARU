@@ -38,9 +38,11 @@
         @endforeach
         
         <!-- Calendar contents -->
-        @php
+
+         @php
             $totalRowspan = 1;
         @endphp
+
         @foreach ($classSchedule as $class)
         @php
             $totalRowspan = ceil((strtotime($class['end_time']) - strtotime($class['start_time'])) / 3600);
@@ -54,7 +56,7 @@
 
         @foreach ($labsBooking as $booking)
         @php
-            $totalRowspan = ceil((strtotime($class['end_time']) - strtotime($class['start_time'])) / 3600);
+            $totalRowspan = ceil((strtotime($booking['end_time']) - strtotime($booking['start_time'])) / 3600);
         @endphp
         <div class="{{ $dayClass[$booking['day']] }} {{ $timeMappings[$booking['start_time']] }} row-span-{{ $totalRowspan }} bg-blue-400/20 dark:bg-sky-600/50 border border-blue-700/10 dark:border-sky-500 rounded-lg m-1 p-1 flex flex-col">
             <span class="text-xs text-blue-600 dark:text-sky-100">{{ $booking['start_time'] }}</span>

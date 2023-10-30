@@ -11,7 +11,7 @@
 
 
 @auth
-    {{-- <livewire:modal-booking :user="Auth::user()" :labs="$labs" :timeMappings="$timeMappings"  /> --}}
+    <livewire:modal-booking :user="Auth::user()" :labs="$labs" :timeMappings="$timeMappings"  />
 @endauth
 
 <livewire:schedule-calendar :labs="$labs" />

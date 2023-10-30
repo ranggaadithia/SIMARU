@@ -1,16 +1,16 @@
 <div> 
     <nav
     class="fixed top-0 z-20 flex-no-wrap flex w-full items-center justify-between bg-white py-4 lg:flex-wrap border-b">
-        <div class="flex w-full flex-wrap items-center justify-between px-10">
-            <div class="">
-                <h1 class="text-2xl font-bold">SIMARU</h1>
+        <div class="flex w-full flex-wrap items-center justify-between px-4 md:px-10">
+            <div class="hidden md:block">
+                <a href="/" class="text-2xl font-bold">SIMARU</a>
             </div>
-            <div class="text-xl flex items-center justify-between text-center w-80">
-                <button class="hover:bg-gray-200 px-1 rounded-full transition-all ease-in-out duration-300" wire:click="prevWeek"><i class="bi bi-chevron-left text-2xl"></i></button>
-                <h3 class="mx-5 font-semibold text-2xl">
+            <div class="text-xl flex items-center justify-between text-center md:w-80">
+                <button class="hover:bg-gray-200 px-1 rounded-full transition-all ease-in-out duration-300 md:order-1" wire:click="prevWeek"><i class="bi bi-chevron-left text-md md:text-2xl"></i></button>
+                <h3 class="md:mx-5 mx-0 ml-2 md:ml-0 font-semibold text-2xl order-3 md:order-2">
                     {{ $startDate->format('F Y') }}
                 </h3>
-                <button class="hover:bg-gray-200 px-1 rounded-full transition-all ease-in-out duration-300" wire:click="nextWeek"><i class="bi bi-chevron-right text-2xl"></i></button>
+                <button class="hover:bg-gray-200 px-1 rounded-full transition-all ease-in-out duration-300 order-2 md:order-3 ml-1 md:ml-0" wire:click="nextWeek"><i class="bi bi-chevron-right text-md md:text-2xl"></i></button>
             </div>
             <div class="">
                 @auth
@@ -24,7 +24,7 @@
                       data-te-ripple-init
                       data-te-ripple-color="light">
                       <i class="bi bi-person-circle text-3xl"></i>
-                      <span class="w-2 text-blue-400">
+                      <span class="w-2 text-blue-400 hidden md:block">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 20 20"
