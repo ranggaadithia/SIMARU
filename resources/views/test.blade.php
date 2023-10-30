@@ -146,7 +146,7 @@
       <span class="text-xs font-medium text-blue-600 dark:text-sky-100">Flight to vancouver</span>
       <span class="text-xs text-blue-600 dark:text-sky-100">Toronto YYZ</span>
     </div>
-    <div class="row-start-[3] col-start-[4] row-span-4 bg-purple-400/20 dark:bg-fuchsia-600/50 border border-purple-700/10 dark:border-fuchsia-500 rounded-lg m-1 p-1 flex flex-col">
+    <div class="row-start-[3] col-start-[4] row-span-3 bg-purple-400/20 dark:bg-fuchsia-600/50 border border-purple-700/10 dark:border-fuchsia-500 rounded-lg m-1 p-1 flex flex-col">
       <span class="text-xs text-purple-600 dark:text-fuchsia-100">6 AM</span>
       <span class="text-xs font-medium text-purple-600 dark:text-fuchsia-100">Breakfast</span>
       <span class="text-xs text-purple-600 dark:text-fuchsia-100">Mel's Diner</span>
