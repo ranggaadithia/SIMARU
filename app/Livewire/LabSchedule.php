@@ -26,7 +26,7 @@ class LabSchedule extends Component
         return $weekDates;
     }
 
-    public $weekDates, $startDate, $lab, $timeMappings, $dayClass;
+    public $weekDates, $startDate, $lab, $timeMappings, $dayClass, $today;
 
     public $currentWeek = 1;
 
@@ -73,6 +73,8 @@ class LabSchedule extends Component
             '18:30:00' => 'row-start-[13]',
             '19:30:00' => 'row-start-[14]',
         ];
+
+        $this->today = Carbon::now()->toDateString();
     }
     public function render()
     {

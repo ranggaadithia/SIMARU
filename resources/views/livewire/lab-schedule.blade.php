@@ -5,13 +5,28 @@
             $col = 2;
         @endphp
         @foreach ($weekDates as $week)
-            <div class="row-start-[1] col-start-[{{ $col }}] sticky top-16 z-10 bg-white dark:bg-gradient-to-b dark:from-slate-600 dark:to-slate-700 border-slate-100 dark:border-black/10 bg-clip-padding text-slate-900 dark:text-slate-200 border-b text-sm font-medium py-2 text-center"><span class="uppercase font-light">
+        @if ($week['date'] == $today)
+        <div class="row-start-[1] col-start-[{{ $col }}] sticky top-16 z-10 bg-white dark:bg-gradient-to-b dark:from-slate-600 dark:to-slate-700 border-slate-100 dark:border-black/10 bg-clip-padding text-slate-900 dark:text-slate-200 border-b text-sm font-medium py-2 text-center">
+            <span class="uppercase font-light text-blue-600">
+                {{ Illuminate\Support\Str::limit($week['day'], 3, '') }} 
+            </span>
+            <br>
+            <span class="font-semibold text-blue-600">
+                {{ \Carbon\Carbon::parse($week['date'])->format('d') }}
+            </span>
+        </div>
+        @else
+        <div class="row-start-[1] col-start-[{{ $col }}] sticky top-16 z-10 bg-white dark:bg-gradient-to-b dark:from-slate-600 dark:to-slate-700 border-slate-100 dark:border-black/10 bg-clip-padding text-slate-900 dark:text-slate-200 border-b text-sm font-medium py-2 text-center">
+            <span class="uppercase font-light">
                 {{ Illuminate\Support\Str::limit($week['day'], 3, '') }} 
             </span>
             <br>
             <span class="font-semibold">
                 {{ \Carbon\Carbon::parse($week['date'])->format('d') }}
-            </span></div>
+            </span>
+        </div>
+        @endif
+            
         @php
             $col++;
         @endphp
