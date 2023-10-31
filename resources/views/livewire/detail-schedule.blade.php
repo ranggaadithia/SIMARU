@@ -36,7 +36,7 @@
                                                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                         {{ $key }}
                                                     </th>
-                                                    <td class="w-full bg-pink-600 rounded-lg p-3 text-white align-top" rowspan="{{ $totalRowspan }}">
+                                                    <td class="w-full bg-blue-600  rounded-lg p-3 text-white align-top" rowspan="{{ $totalRowspan }}">
                                                         <div class="flex justify-between">
                                                             <div class="">
                                                                 <h1 class="text-2xl font-semibold">{{ $booking->reason_to_booking }}</h1>
@@ -67,7 +67,7 @@
                                                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                         {{ $key }}
                                                     </th>
-                                                    <td class="w-full bg-yellow-600 rounded-lg p-3 text-white align-top" rowspan="{{ $totalRowspan }}">
+                                                    <td class="w-full bg-purple-600 rounded-lg p-3 text-white align-top" rowspan="{{ $totalRowspan }}">
                                                         <div class="flex justify-between">
                                                             <div class="">
                                                                 <span

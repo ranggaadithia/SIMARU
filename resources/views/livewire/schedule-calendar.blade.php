@@ -13,7 +13,16 @@
                     @endauth
                 </th>
                 @foreach ($weekDates as $week)
-                    <th class="md:p-2 border-r h-24 lg:w-40 px-16 bg-white text-gray-600">
+                    <th class="md:p-2 border-r h-24 lg:w-40 px-16 bg-white text-gray-600 box-border">
+                        @if ($week['date'] == $today)
+                        <span class="uppercase text-blue-600">
+                            {{ Illuminate\Support\Str::limit($week['day'], 3, '') }} 
+                        </span>
+                        <br>
+                        <span class="text-3xl font-normal text-blue-600">
+                            {{ \Carbon\Carbon::parse($week['date'])->format('d') }}
+                        </span>
+                        @else
                         <span class="uppercase">
                             {{ Illuminate\Support\Str::limit($week['day'], 3, '') }} 
                         </span>
@@ -21,6 +30,7 @@
                         <span class="text-3xl font-normal">
                             {{ \Carbon\Carbon::parse($week['date'])->format('d') }}
                         </span>
+                        @endif
                     </th>
                 @endforeach
             </tr>
@@ -28,7 +38,7 @@
         <tbody class="overflow-y-scroll">
             @foreach ($labs as $lab)
                 <tr class="text-center h-20" wire:key="{{ $lab->id }} ">
-                    <td class="border px-3 lg:px-3 h-40 items-center bg-white" id="lab-name"
+                    <td class="border px-3 lg:px-3 h-40 items-center bg-white lg:w-40" id="lab-name"
                     data-sticky="true">
                     <a href="{{ route('lab.view', $lab->slug) }}">
                         <div class="h-40 mx-auto flex justify-center items-center">
@@ -46,23 +56,21 @@
                             >
                                 <div class="flex flex-col h-40 mx-auto sm:w-full">
                                     <div class="bottom flex-grow w-full cursor-pointer">
-                                        <div class="overflow-hidden pl-4 box-border">
+                                        <div class="overflow-hidden px-1 box-border">
                                             @foreach ($lab->users as $user)
                                                 @if ($user->pivot->booking_date === $week['date'])
-                                                    <div class="flex w-full" wire:key="{{ $user->id }}">
-                                                        <span>|</span>
-                                                        <p class="text-left ml-1">
-                                                            {{ Illuminate\Support\Str::limit($user->pivot->reason_to_booking, 10) }}
+                                                    <div class="w-full rounded-md bg-blue-400/20 p-1 my-1 border-blue-700/10" wire:key="{{ $user->id }}">
+                                                        <p class="text-left text-blue-600">
+                                                            {{ Illuminate\Support\Str::limit($user->pivot->reason_to_booking, 13) }}
                                                         </p>
                                                     </div>
                                                 @endif
                                             @endforeach
                                             @foreach ($lab->classSchedules as $classSchedule)
                                                 @if ($classSchedule->day == $week['day'])
-                                                    <div class="flex w-full" wire:key="{{ $classSchedule->id }}">
-                                                        <span>|</span>
-                                                        <p class="text-left ml-1">
-                                                            {{ Illuminate\Support\Str::limit($classSchedule->subject, 10) }}
+                                                    <div class="w-full rounded-md bg-purple-400/20 p-1 my-1 border-purple-700/10" wire:key="{{ $classSchedule->id }}">
+                                                        <p class="text-left text-purple-600">
+                                                            {{ Illuminate\Support\Str::limit($classSchedule->subject, 13) }}
                                                         </p>
                                                     </div>
                                                 @endif
@@ -71,7 +79,6 @@
                                     </div>
                                 </div>
                             </button>
-                            <!--Extra large modal-->                           
                         </td>
                     @endforeach
                 </tr>

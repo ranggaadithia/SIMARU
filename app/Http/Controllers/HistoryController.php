@@ -15,6 +15,7 @@ class HistoryController extends Controller
         $upcomingHistories = LabsBooking::with('lab')
             ->where('user_id', auth()->user()->id)
             ->whereDate('booking_date', '=', $now->format('Y-m-d'))
+            ->orWhereDate('booking_date', '>', $now->format('Y-m-d'))
             ->whereTime('start_time', '>', $now->format('H:i:s'))
             ->orderBy('booking_date', 'desc')
             ->get();

@@ -27,7 +27,7 @@ class ScheduleCalendar extends Component
         return $weekDates;
     }
 
-    public $weekDates, $startDate, $labs, $timeMapping;
+    public $weekDates, $startDate, $labs, $timeMapping, $today;
 
     public $currentWeek = 1;
 
@@ -49,6 +49,7 @@ class ScheduleCalendar extends Component
     {
         $this->startDate = Carbon::now()->startOfWeek()->addWeeks($this->currentWeek - 1);
         $this->weekDates = $this->generateWeekDates($this->startDate, $this->startDate->copy()->addDays(6));
+        $this->today = Carbon::now()->toDateString();
     }
 
     #[On('success-booking')]
