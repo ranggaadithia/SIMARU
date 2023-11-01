@@ -136,8 +136,16 @@
 </div>
 @endif
 <a href="{{ route('class-schedule.create') }}" class="btn btn-primary">Add Class Schedule</a>
+  <ul class="nav nav-tabs mt-5">
+    <li class="nav-item">
+      <a class="nav-link active" aria-current="page" href="{{ route('class-schedule.index') }}">Calendar</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{ route('class-schedule.list') }}" wire:navigate>List</a>
+    </li>
+  </ul>
   <div class="table-responsive">
-      <table class="table table-bordered mt-4">
+      <table class="table table-bordered w-screen">
           <thead>
               <tr class="bg-light-gray text-center">
                   <th class="text-uppercase">Lab/Day<br /></th>
@@ -149,20 +157,23 @@
           <tbody>
             @foreach ($labs as $lab)
               <tr>
-                  <td class="align-middle">{{ $lab->name }}</td>
+                  <td class="align-middle" >{{ $lab->name }}</td>
                   @foreach ($days as $day)
                     <td class="position-relative">
                       @foreach ($classSchedules as $schedule)
                       @if ($schedule->lab_id == $lab->id && $schedule->day == strtolower($day))
                         <div class="margin-10px-top font-size14">
+                          <a href="{{ route('class-schedule.edit', $schedule->id) }}">
                             <span class="text-light-gray">| </span>
                               ({{ App\Utilities\TimeMappings::convertToLetter($schedule->start_time) }} - {{ App\Utilities\TimeMappings::convertToLetter($schedule->end_time) }})
                               <strong>
                                 {{ $schedule->subject }}
                               </strong>
                              ({{ $schedule->lecturer }})
+                          </a>
+                            
                         </div>
-                        <button type="button" class="badge bg-primary border-0 position-absolute bottom-0 end-0 mb-1 me-1" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-three-dots" ></i></button>
+                        
                         @endif
                       @endforeach
                     </td>
@@ -173,21 +184,5 @@
       </table>
   </div>
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>
+  
 @endsection

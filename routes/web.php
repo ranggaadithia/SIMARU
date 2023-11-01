@@ -20,6 +20,7 @@ use App\Http\Controllers\RescheduleController;
 use App\Http\Controllers\LabScheduleController;
 use App\Http\Controllers\ClassScheduleController;
 use App\Http\Controllers\HistoryController;
+use Database\Seeders\ClassSchedulesSeeder;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,6 +59,7 @@ Route::get('/dashboard', function () {
 Route::middleware(['auth', 'is.admin'])->prefix('dashboard')->group(function () {
     Route::resource('labs', LabController::class);
     Route::resource('class-schedule', ClassScheduleController::class)->except(('show'));
+    Route::get('class-schedule/list', [ClassScheduleController::class, 'list'])->name('class-schedule.list');
     Route::get('reschedule/{labs_booking}', [RescheduleController::class, 'create'])->name('reschedule.create');
     Route::post('reschedule/{labs_booking}', [RescheduleController::class, 'store'])->name('reschedule.store');
     Route::get('report', Report::class)->name('report');
