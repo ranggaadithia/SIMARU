@@ -2,7 +2,14 @@
 
 @section('container')
 
-<h2>Add Class Schedule</h2>
+<div class="d-flex item-center justify-content-between">
+  <h2>Add Class Schedule</h2>
+  <form action="{{ route('class-schedule.destroy', $classSchedule->id) }}" method="POST">
+    @csrf
+    @method('delete')
+    <button type="submit" class="btn btn-danger">Delete Jadwal Kuliah</button>
+  </form>
+</div>
 
 @if (session()->has('error'))
 <div class="alert alert-danger alert-dismissible fade show" role="alert">
