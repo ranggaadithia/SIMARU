@@ -1,6 +1,6 @@
 
-<div class="wrapper">
-    <table class="overflow-x-scroll lg:w-full mt-16 mx-auto">
+<div class="wrapper overflow-x-scroll">
+    <table class=" mt-16 mx-auto">
         <thead class="sticky top-16 transition-shadow ease-in-out duration-300 bg-white" id="thead">
             <tr class="">
                 <th class="py-2 border-r h-10 bg-white text-white sticky z-30 left-0 md:static">
