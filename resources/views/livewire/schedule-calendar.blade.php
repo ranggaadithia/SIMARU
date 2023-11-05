@@ -1,9 +1,9 @@
 
-<div class="wrapper">
-    <table class="overflow-x-scroll lg:w-full mt-16 mx-auto">
+<div class="wrapper overflow-x-scroll" id="scrollContainer">
+    <table class="mt-16 mx-auto">
         <thead class="sticky top-16 transition-shadow ease-in-out duration-300 bg-white" id="thead">
             <tr class="">
-                <th class="py-2 border-r h-10 bg-white text-white sticky z-30 left-0 md:static">
+                <th class="py-2 border-r h-10 bg-white text-white sticky top-16 left-0 md:static">
                     @auth
                         @include('components.modal-button')
                     @else 
@@ -35,7 +35,7 @@
                 @endforeach
             </tr>
         </thead>
-        <tbody class="overflow-y-scroll">
+        <tbody class="">
             @foreach ($labs as $lab)
                 <tr class="text-center h-20" wire:key="{{ $lab->id }} ">
                     <td class="border px-3 lg:px-3 h-40 items-center bg-white lg:w-40" id="lab-name"
@@ -102,26 +102,7 @@
         });
 
 
-    const labs = document.querySelectorAll('[data-sticky="true"]');
 
-    labs.forEach((lab) => {
-    let isSticky = false;
-
-    window.addEventListener('scroll', () => {
-        if (window.scrollX > 0) {
-    if (!isSticky) {
-        lab.classList.add('sticky', 'left-0');
-        isSticky = true;
-    }
-} else if (window.scrollY > 0) {
-    if (isSticky) {
-        lab.classList.remove('sticky', 'left-0');
-        isSticky = false;
-    }
-}
-
-    });
-});
     </script>
 @endpush
 </div>
