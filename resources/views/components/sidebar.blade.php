@@ -22,7 +22,7 @@ style="width: 300px"
       <form action="{{ route('logout') }}" method="POST">
         @csrf
         <li>
-          <button class="dropdown-item">Sign out</button>
+          <button class="dropdown-item">Logout</button>
         </li>
       </form>
     </ul>
@@ -39,27 +39,25 @@ style="width: 300px"
     </a>
   </li>
   <li>
-    <a href="{{ route('labs.index') }}" class="nav-link @if (route('labs.index'))
-        active
-    @endif" aria-current="page">
+    <a href="{{ route('labs.index') }}" class="nav-link {{ request()->routeIs('labs.*') ? 'active' : 'link-body-emphasis' }}">
       <i class="bi bi-building-gear me-1"></i>
       Manage Room
     </a>
   </li>
   <li>
-    <a href="{{ route('class-schedule.index') }}" class="nav-link link-body-emphasis">
+    <a href="{{ route('class-schedule.index') }}" class="nav-link {{ request()->routeIs('class-schedule.*') ? 'active' : 'link-body-emphasis' }}">
       <i class="bi bi-calendar3"></i>
       Class Schedule
     </a>
   </li>
   <li>
-    <a href="#" class="nav-link link-body-emphasis">
+    <a href="{{ route('reschedule.index') }}" class="nav-link {{ request()->routeIs('reschedule.*') ? 'active' : 'link-body-emphasis' }}">
       <i class="bi bi-calendar2-range me-1"></i>
-      Move Schadule
+      Move Schedule
     </a>
   </li>
   <li>
-    <a href="#" class="nav-link link-body-emphasis">
+    <a href="{{ route('report') }}" class="nav-link {{ request()->routeIs('report') ? 'active' : 'link-body-emphasis' }}">
       <i class="bi bi-file-earmark-arrow-down"></i>
       Report
     </a>

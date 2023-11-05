@@ -60,22 +60,11 @@ Route::middleware(['auth', 'is.admin'])->prefix('dashboard')->group(function () 
     Route::resource('labs', LabController::class);
     Route::resource('class-schedule', ClassScheduleController::class)->except(('show'));
     Route::get('class-schedule/list', [ClassScheduleController::class, 'list'])->name('class-schedule.list');
+    Route::get('reschedule/', [RescheduleController::class, 'index'])->name('reschedule.index');
     Route::get('reschedule/{labs_booking}', [RescheduleController::class, 'create'])->name('reschedule.create');
     Route::post('reschedule/{labs_booking}', [RescheduleController::class, 'store'])->name('reschedule.store');
+    Route::delete('labs-booking/{labs_booking}', [LabBookingController::class, 'destroy'])->name('labs.destroy');
     Route::get('report', Report::class)->name('report');
-});
-
-
-
-
-
-// route testing below
-Route::get('/time', function () {
-    return TimeMappings::$timeMappings;
-});
-
-Route::get('/export', function () {
-    return Excel::download(new ExportUser, 'users.xlsx');
 });
 
 Route::get('/test', function () {
@@ -84,71 +73,4 @@ Route::get('/test', function () {
         'days' => ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
         'alphabet' => ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M']
     ]);
-});
-
-
-Route::get('/test_booking', function () {
-    $user = User::find(9);
-    $lab = Lab::find(1);
-
-
-    $user->labs()->attach($lab->id, ['booking_date' => today(), 'start_time' => 'D', 'end_time' => 'F', 'reason' => 'penelitian']);
-    return "success";
-});
-
-
-Route::get('/test_reschedule', function () {
-
-    RescheduleRequest::create([
-        'lab_booking_id' => 2,
-        'user_id' => 1,
-        'new_booking_date' => Carbon::tomorrow(),
-        'new_start_time' => 'D',
-        'new_end_time' => 'F',
-        'reason_for_request' => 'Maintenece',
-        'status' => 'requested'
-    ]);
-
-    return "success";
-});
-
-// lab dashboard
-Route::get('/lab', function () {
-    $labBookings = LabsBooking::all();
-
-    $rescheduleRequest = RescheduleRequest::all();
-
-    $days = [];
-
-    foreach ($labBookings as $booking) {
-        $carbonDate = Carbon::parse($booking->booking_date);
-        $day = $carbonDate->format('l');
-        $days[] = $day;
-    }
-
-
-    return view('test', compact('labBookings', 'days', 'rescheduleRequest'));
-});
-
-
-// if user auth
-Route::get('/user/{id}', function (string $id) {
-    return $reschduleRequest = RescheduleRequest::where('user_id', $id)->where('status', 'requested')->get();
-
-    // if (!empty($reschduleRequest)) {
-    //     return "Jadwal Anda di Reschdule";
-    // } else {
-    //     return "aman";
-    // }
-});
-
-
-Route::get('/class_schedule', function () {
-    $class_schedule = ClassSchedule::all();
-    return $class_schedule[0]->lab->name;
-});
-
-
-Route::get('/table', function () {
-    return view('request_schedule.moveschadule');
 });

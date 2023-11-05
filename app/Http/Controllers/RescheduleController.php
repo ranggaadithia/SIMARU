@@ -18,7 +18,22 @@ class RescheduleController extends Controller
      */
     public function index()
     {
-        //
+
+        $now = Carbon::now();
+
+        $labsBooking = LabsBooking::with('lab', 'user')
+            ->where(function ($query) use ($now) {
+                $query->where('booking_date', '>=', $now->format('Y-m-d'))
+                    ->orWhere(function ($subquery) use ($now) {
+                        $subquery->where('booking_date', '=', $now->format('Y-m-d'))
+                            ->where('start_time', '>', $now->format('H:i:s'));
+                    });
+            })
+            ->orderBy('booking_date', 'desc')
+            ->get();
+
+
+        return view('dashboard.reschedule.index', compact('labsBooking'));
     }
 
     /**
@@ -83,7 +98,7 @@ class RescheduleController extends Controller
         }
         $reschedule = RescheduleRequest::create($data);
         $this->acceptReschedule($reschedule->id);
-        return redirect('/');
+        return redirect()->route('reschedule.index')->with('success', 'Jadwal berhasil di reschedule');
     }
 
 

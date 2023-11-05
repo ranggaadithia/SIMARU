@@ -12,11 +12,14 @@ class HistoryController extends Controller
     {
         $now = Carbon::now();
 
-        $upcomingHistories = LabsBooking::with('lab')
-            ->where('user_id', auth()->user()->id)
-            ->whereDate('booking_date', '=', $now->format('Y-m-d'))
-            ->orWhereDate('booking_date', '>', $now->format('Y-m-d'))
-            ->whereTime('start_time', '>', $now->format('H:i:s'))
+        $upcomingHistories = LabsBooking::with('lab', 'user')
+            ->where(function ($query) use ($now) {
+                $query->where('booking_date', '>=', $now->format('Y-m-d'))
+                    ->orWhere(function ($subquery) use ($now) {
+                        $subquery->where('booking_date', '=', $now->format('Y-m-d'))
+                            ->where('start_time', '>', $now->format('H:i:s'));
+                    });
+            })
             ->orderBy('booking_date', 'desc')
             ->get();
 
