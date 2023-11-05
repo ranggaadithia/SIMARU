@@ -11,7 +11,7 @@
         @stack('style')
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 
-        <title>{{ $title ?? 'Page Title' }}</title>
+        <title>Dashboard | {{ config('app.name')  }}</title>
     </head>
     <body>
         <main class="d-flex flex-nowrap">
