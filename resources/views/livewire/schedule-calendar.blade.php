@@ -1,90 +1,133 @@
 
-    <div class="wrapper bg-white rounded shadow mt-10">
-        <div class="header flex justify-between border-b p-2">
-            <span class="text-lg font-bold p-2">
-                {{ $startDate->format('F Y') }}
-            </span>
-
-        <div class="flex items-center lg:mr-3">
-          <button class="p-1" wire:click="previousWeek">
-            <i class="bi bi-arrow-left-circle"></i>
-          </button>
-          <button class="p-1" wire:click="nextWeek">
-            <i class="bi bi-arrow-right-circle"></i>
-          </button>
-        </div>
-      </div>
-        <table class="overflow-x-scroll xl:w-full lg:overflow-x-hidden">
-            <thead>
-                <tr>
-                    <th class="py-2 border-r h-10 md:w-30 sm:w-20 w-10 xl:text-sm text-xs bg-blue-500 text-white lg:w-50">
-                        <span class="xl:block lg:block md:block sm:block hidden">Ruangan<br>Hari</span>
-                        <span class="xl:hidden lg:hidden md:hidden sm:hidden block bg-blue-500 text-white">Ruangan<br>Hari</span>
+<div class="wrapper">
+    <table class="overflow-x-scroll lg:w-full mt-16 mx-auto">
+        <thead class="sticky top-16 transition-shadow ease-in-out duration-300 bg-white" id="thead">
+            <tr class="">
+                <th class="py-2 border-r h-10 bg-white text-white sticky z-30 left-0 md:static">
+                    @auth
+                        @include('components.modal-button')
+                    @else 
+                    <a href="{{ route('login') }}" type="button" class="rounded-full bg-white p-2 text-blue-600 drop-shadow-md text-4xl border border-blue-100"
+                    data-te-toggle="tooltip"
+                    title="Booking Lab"><i class="bi bi-plus-lg"></i></a>
+                    @endauth
+                </th>
+                @foreach ($weekDates as $week)
+                    <th class="md:p-2 border-r h-24 lg:w-40 px-16 bg-white text-gray-600 box-border">
+                        @if ($week['date'] == $today)
+                        <span class="uppercase text-blue-600">
+                            {{ Illuminate\Support\Str::limit($week['day'], 3, '') }} 
+                        </span>
+                        <br>
+                        <span class="text-3xl font-normal text-blue-600">
+                            {{ \Carbon\Carbon::parse($week['date'])->format('d') }}
+                        </span>
+                        @else
+                        <span class="uppercase">
+                            {{ Illuminate\Support\Str::limit($week['day'], 3, '') }} 
+                        </span>
+                        <br>
+                        <span class="text-3xl font-normal">
+                            {{ \Carbon\Carbon::parse($week['date'])->format('d') }}
+                        </span>
+                        @endif
                     </th>
+                @endforeach
+            </tr>
+        </thead>
+        <tbody class="overflow-y-scroll">
+            @foreach ($labs as $lab)
+                <tr class="text-center h-20" wire:key="{{ $lab->id }} ">
+                    <td class="border px-3 lg:px-3 h-40 items-center bg-white lg:w-40" id="lab-name"
+                    data-sticky="true">
+                    <a href="{{ route('lab.view', $lab->slug) }}">
+                        <div class="h-40 mx-auto flex justify-center items-center">
+                            <div class="">
+                                <span class="font-bold text-blue-400">{{ $lab->name }}</span>
+                            </div>
+                        </div>
+                    </a>
+                    </td>
                     @foreach ($weekDates as $week)
-                        <th class="p-2 border-r h-10 lg:w-50 md:w-30 sm:w-20 w-10 xl:text-sm text-sm bg-blue-400 text-white">
-                            <span class="xl:block lg:block md:block sm:block hidden">{{ $week['day'] }}, {{ $week['date'] }}</span>
-                            <span class="xl:hidden lg:hidden md:hidden sm:hidden block bg-blue-400 text-white">{{ $week['day'] }}, {{ $week['date'] }}</span>
-                        </th>
-                    @endforeach
-                </tr>
-            </thead>
-                <tbody>
-                    @foreach ($labs as $lab)
-                        <tr class="text-center h-20" wire:key="{{ $lab->id }}">
-                            <td class="border lg:px-3 h-40 md:w-30 sm:w-20 items-center bg-blue-300 overflow-hidden">
-                                <div class="h-40 md:w-30 sm:w-full w-10 mx-auto flex justify-center items-center">
-                                    <div class="top h-5 p-0 -mx-4">
-                                        <span class="font-bold text-white">{{ $lab->name }}</span>
-                                    </div>
-                                </div>
-                            </td>
-                            @foreach ($weekDates as $week)
-                                <td class="border h-40 xl:w-20 lg:w-20 md:w-30 sm:w-20 w-10 transition cursor-pointer duration-500 ease hover:bg-gray-300">
-                                <button class="p-0 m-0 w-full h-full box-border"
+                        <td class="border h-40 bg-white transition cursor-pointer duration-500 ease hover:bg-gray-300">
+                            <button class="p-0 m-0 w-full h-full box-border"
                                 @click="open = ! open" 
                                 wire:click="getLabScheduleDetail({{ $lab->id }}, '{{ $week['date'] }}', '{{ $week['day'] }}')"
-                                >
-                                    <div class="flex flex-col h-40 mx-auto sm:w-full">
-                                        <div class="bottom flex-grow w-full cursor-pointer">
-                                            <div class="overflow-hidden pl-4 box-border">
-                                                @foreach ($lab->users as $user)
-                                                    @if ($user->pivot->booking_date === $week['date'])
-                                                        <div class="flex w-fit" wire:key="{{ $user->id }}">
-                                                            <span>|</span>
-                                                            <p class="text-left ml-1">
-                                                                {{ $user->pivot->reason_to_booking }}
-                                                            </p>
-                                                        </div>
-                                                    @endif
-                                                @endforeach
-                                                @foreach ($lab->classSchedules as $classSchedule)
-                                                    @if ($classSchedule->day == $week['day'])
-                                                        <div class="flex w-fit" wire:key="{{ $classSchedule->id }}">
-                                                            <span>|</span>
-                                                            <p class="text-left ml-1">
-                                                                (Kuliah) {{ $classSchedule->subject }}
-                                                            </p>
-                                                        </div>
-                                                    @endif
-                                                @endforeach
-                                            </div>
+                            >
+                                <div class="flex flex-col h-40 mx-auto sm:w-full">
+                                    <div class="bottom flex-grow w-full cursor-pointer">
+                                        <div class="overflow-hidden px-1 box-border">
+                                            @foreach ($lab->users as $user)
+                                                @if ($user->pivot->booking_date === $week['date'])
+                                                    <div class="w-full rounded-md bg-blue-400/20 p-1 my-1 border-blue-700/10" wire:key="{{ $user->id }}">
+                                                        <p class="text-left text-blue-600">
+                                                            {{ Illuminate\Support\Str::limit($user->pivot->reason_to_booking, 13) }}
+                                                        </p>
+                                                    </div>
+                                                @endif
+                                            @endforeach
+                                            @foreach ($lab->classSchedules as $classSchedule)
+                                                @if ($classSchedule->day == $week['day'])
+                                                    <div class="w-full rounded-md bg-purple-400/20 p-1 my-1 border-purple-700/10" wire:key="{{ $classSchedule->id }}">
+                                                        <p class="text-left text-purple-600">
+                                                            {{ Illuminate\Support\Str::limit($classSchedule->subject, 13) }}
+                                                        </p>
+                                                    </div>
+                                                @endif
+                                            @endforeach
                                         </div>
                                     </div>
-                                </button>
-                                <!--Extra large modal-->                           
-                                </td>
-                                
-                            @endforeach
-                        </tr>
+                                </div>
+                            </button>
+                        </td>
                     @endforeach
-                </tbody>
-        </table>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+    
+@teleport('body')
+    <livewire:detail-schedule lazy />
+@endteleport
+
+@push('scripts')
+    <script>
+        window.addEventListener("scroll", function () {
+            const nav = document.getElementById("thead");
+            if (window.scrollY > 10) {
+                nav.classList.add("shadow-md");
+            } else {
+                nav.classList.remove("shadow-md");
+            }
+        });
 
 
-        @teleport('body')
-            <livewire:detail-schedule />
-        @endteleport
-    </div>        
+    const labs = document.querySelectorAll('[data-sticky="true"]');
+
+    labs.forEach((lab) => {
+    let isSticky = false;
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollX > 0) {
+    if (!isSticky) {
+        lab.classList.add('sticky', 'left-0');
+        isSticky = true;
+    }
+} else if (window.scrollY > 0) {
+    if (isSticky) {
+        lab.classList.remove('sticky', 'left-0');
+        isSticky = false;
+    }
+}
+
+    });
+});
+    </script>
+@endpush
+</div>
+
+
+
+
 
 

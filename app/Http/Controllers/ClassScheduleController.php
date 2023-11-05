@@ -23,6 +23,12 @@ class ClassScheduleController extends Controller
         return view('dashboard.class_schedule.index', compact('labs', 'days', 'classSchedules'));
     }
 
+    public function list()
+    {
+        $classSchedules = ClassSchedule::with('lab')->get();
+        return view('dashboard.class_schedule.list', compact('classSchedules'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -132,6 +138,7 @@ class ClassScheduleController extends Controller
      */
     public function destroy(ClassSchedule $classSchedule)
     {
-        //
+        $classSchedule->delete();
+        return redirect()->route('class-schedule.index')->with('success', 'Data berhasil dihapus.');
     }
 }

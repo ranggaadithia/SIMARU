@@ -19,6 +19,8 @@ use App\Http\Controllers\LabBookingController;
 use App\Http\Controllers\RescheduleController;
 use App\Http\Controllers\LabScheduleController;
 use App\Http\Controllers\ClassScheduleController;
+use App\Http\Controllers\HistoryController;
+use Database\Seeders\ClassSchedulesSeeder;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,8 +34,9 @@ use App\Http\Controllers\ClassScheduleController;
 */
 
 Route::get('/', [LabBookingController::class, 'index'])->name('home');
+Route::get('/history', [HistoryController::class, 'history'])->name('history');
 Route::get('/labs', LabScheduleController::class);
-Route::get('/labs/{lab:slug}', [LabController::class, 'show']);
+Route::get('/labs/{lab:slug}', [LabController::class, 'show'])->name('lab.view');
 
 Route::middleware('auth')->group(function () {
     Route::post('/', [LabBookingController::class, 'store'])->name('booking');
@@ -50,10 +53,14 @@ Route::middleware('guest')->group(function () {
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
+Route::get('/dashboard', function () {
+    return redirect('/dashboard/labs');
+});
 Route::middleware(['auth', 'is.admin'])->prefix('dashboard')->group(function () {
     Route::resource('labs', LabController::class);
     Route::resource('class-schedule', ClassScheduleController::class)->except(('show'));
-    Route::get('reschedule/{labs_booking}', [RescheduleController::class, 'create']);
+    Route::get('class-schedule/list', [ClassScheduleController::class, 'list'])->name('class-schedule.list');
+    Route::get('reschedule/{labs_booking}', [RescheduleController::class, 'create'])->name('reschedule.create');
     Route::post('reschedule/{labs_booking}', [RescheduleController::class, 'store'])->name('reschedule.store');
     Route::get('report', Report::class)->name('report');
 });
@@ -72,7 +79,11 @@ Route::get('/export', function () {
 });
 
 Route::get('/test', function () {
-    return view('test');
+    return view('test', [
+        'labs' => Lab::all(),
+        'days' => ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+        'alphabet' => ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M']
+    ]);
 });
 
 

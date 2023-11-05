@@ -11,6 +11,13 @@
 </div>
 @endif
 
+@if (session()->has('success'))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>success!</strong> {{ session('success') }}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+@endif
+
 <div class="mb-3">
  <label for="name" class="form-label">Nama Peminjam</label>
   <input class="form-control" type="text" value="{{ $booking->user->name }}" aria-label="Disabled input example" disabled readonly>

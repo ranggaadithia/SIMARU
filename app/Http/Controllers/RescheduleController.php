@@ -36,6 +36,25 @@ class RescheduleController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+
+    public function acceptReschedule(string $rescheduleId)
+    {
+        $reschedule = RescheduleRequest::find($rescheduleId);
+
+        $booking = LabsBooking::find($reschedule->lab_booking_id);
+        $booking->lab_id = $reschedule->new_lab_id;
+        $booking->booking_date = $reschedule->new_booking_date;
+        $booking->day = Carbon::createFromFormat('Y-m-d', $reschedule->new_booking_date)->format('l');
+        $booking->start_time = $reschedule->new_start_time;
+        $booking->end_time = $reschedule->new_end_time;
+        $booking->save();
+
+        $reschedule->status = 'accepted';
+        $reschedule->save();
+
+        return redirect('/')->with('success', 'Jadwal berhasil di reschedule');
+    }
+
     public function store(Request $request, string $labsBookingId)
     {
 
@@ -62,32 +81,12 @@ class RescheduleController extends Controller
         } else if (!$isLabAvailable) {
             return back()->with('error', 'Pada hari & jam tersebut sedang ada perkuliahan di lab');
         }
-        RescheduleRequest::create($data);
+        $reschedule = RescheduleRequest::create($data);
+        $this->acceptReschedule($reschedule->id);
+        return redirect('/');
     }
 
-    public function acceptReschedule(string $rescheduleId)
-    {
-        $reschedule = RescheduleRequest::find($rescheduleId);
 
-        if ($reschedule->status == 'accepted') {
-            return "link false";
-        } else if (Auth::user()->id != $reschedule->user_id) {
-            return "unauthorize";
-        }
-
-        $booking = LabsBooking::find($reschedule->lab_booking_id);
-        $booking->lab_id = $reschedule->new_lab_id;
-        $booking->booking_date = $reschedule->new_booking_date;
-        $booking->day = Carbon::createFromFormat('Y-m-d', $reschedule->new_booking_date)->format('l');
-        $booking->start_time = $reschedule->new_start_time;
-        $booking->end_time = $reschedule->new_end_time;
-        $booking->save();
-
-        $reschedule->status = 'accepted';
-        $reschedule->save();
-
-        return "suceess";
-    }
 
     /**
      * Display the specified resource.

@@ -3,10 +3,10 @@
 namespace App\Livewire;
 
 use Carbon\Carbon;
-use Livewire\WithAttributes;
 use App\Models\Lab;
 use Livewire\Component;
 use Livewire\Attributes\On;
+use Livewire\WithAttributes;
 
 class ScheduleCalendar extends Component
 {
@@ -27,16 +27,18 @@ class ScheduleCalendar extends Component
         return $weekDates;
     }
 
-    public $weekDates, $startDate, $labs;
+    public $weekDates, $startDate, $labs, $timeMapping, $today;
 
     public $currentWeek = 1;
 
+    #[On('nextWeek')]
     public function nextWeek()
     {
         $this->currentWeek++;
         $this->mount();
     }
 
+    #[On('prevWeek')]
     public function previousWeek()
     {
         $this->currentWeek--;
@@ -47,6 +49,7 @@ class ScheduleCalendar extends Component
     {
         $this->startDate = Carbon::now()->startOfWeek()->addWeeks($this->currentWeek - 1);
         $this->weekDates = $this->generateWeekDates($this->startDate, $this->startDate->copy()->addDays(6));
+        $this->today = Carbon::now()->toDateString();
     }
 
     #[On('success-booking')]
