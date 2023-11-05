@@ -96,6 +96,7 @@ class LabBookingController extends Controller
      */
     public function destroy(LabsBooking $labsBooking)
     {
-        //
+        $labsBooking->delete();
+        return redirect('/')->with('success', 'Booking berhasil dihapus');
     }
 }
