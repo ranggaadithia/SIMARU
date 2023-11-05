@@ -89,6 +89,7 @@ class LabSchedule extends Component
             'timeMapping' => TimeMappings::$timeMappings,
             'classSchedule' => ClassSchedule::where('lab_id', $this->lab->id)->get(),
             'labsBooking' => $filteredData,
+            'title' => $this->lab->name,
         ]);
     }
 

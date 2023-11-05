@@ -41,6 +41,7 @@ Route::get('/labs/{lab:slug}', [LabController::class, 'show'])->name('lab.view')
 Route::middleware('auth')->group(function () {
     Route::post('/', [LabBookingController::class, 'store'])->name('booking');
     Route::get('accept/{request_reschedule}', [RescheduleController::class, 'acceptReschedule']);
+    Route::delete('labs-booking/{labs_booking}', [LabBookingController::class, 'destroy'])->name('labs-booking.destroy');
 });
 
 
@@ -63,7 +64,6 @@ Route::middleware(['auth', 'is.admin'])->prefix('dashboard')->group(function () 
     Route::get('reschedule/', [RescheduleController::class, 'index'])->name('reschedule.index');
     Route::get('reschedule/{labs_booking}', [RescheduleController::class, 'create'])->name('reschedule.create');
     Route::post('reschedule/{labs_booking}', [RescheduleController::class, 'store'])->name('reschedule.store');
-    Route::delete('labs-booking/{labs_booking}', [LabBookingController::class, 'destroy'])->name('labs.destroy');
     Route::get('report', Report::class)->name('report');
 });
 

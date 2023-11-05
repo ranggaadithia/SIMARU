@@ -40,7 +40,7 @@
       <td>{{ $booking->end_time }}</td>
       <td class="d-flex">
         <a href="{{ route('reschedule.create', $booking->id) }}" class="btn btn-outline-warning me-1">Reschadule</a>
-        <form action="{{ route('labs.destroy', $booking->id) }}" method="post">
+        <form action="{{ route('labs-booking.destroy', $booking->id) }}" method="post">
           @csrf
           @method('delete')
           <button type="submit" class="btn btn-outline-danger">Hapus</button>

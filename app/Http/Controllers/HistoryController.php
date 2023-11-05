@@ -13,6 +13,7 @@ class HistoryController extends Controller
         $now = Carbon::now();
 
         $upcomingHistories = LabsBooking::with('lab', 'user')
+            ->where('user_id', auth()->user()->id)
             ->where(function ($query) use ($now) {
                 $query->where('booking_date', '>=', $now->format('Y-m-d'))
                     ->orWhere(function ($subquery) use ($now) {
