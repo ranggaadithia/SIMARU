@@ -9,7 +9,7 @@
                         <div class="mt-3 sm:ml-4 sm:mt-0 sm:text-left">
                             @if ($labName)
                                 <h1 class="text-2xl font-semibold">{{ $labName->name }}</h1>
-                                <h3 class="font-semibold" id="modal-title">{{ $day }}, {{ $date }}</h3>
+                                <h3 class="font-semibold capitalize" id="modal-title">{{ $day }}, {{ \Carbon\Carbon::parse($date)->format('d M Y') }}</h3>
                             @else
                             <div class="animate-pulse">
                                 <div class="h-7 bg-gray-400 w-32"></div>
