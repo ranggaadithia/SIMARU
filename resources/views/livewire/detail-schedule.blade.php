@@ -47,6 +47,11 @@
                                                                 @if (Auth::user()->role === 'admin')
                                                                     <div class="align-middle">
                                                                         <a href="{{ route('reschedule.create', $booking->id) }}" class="py-3 px-5 rounded-full bg-white text-black block">Reschedule</a>
+                                                                        <form action="{{ route('labs-booking.destroy', $booking->id) }}" method="POST">
+                                                                            @csrf
+                                                                            @method('delete')
+                                                                            <button type="submit" class="py-3 px-5 rounded-full bg-white text-black block mt-1">Batalkan</button>
+                                                                        </form>
                                                                     </div>
                                                                 @endif
                                                             @endauth
