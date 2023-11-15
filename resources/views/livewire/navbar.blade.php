@@ -2,9 +2,9 @@
     <nav
     class="fixed top-0 z-20 flex-no-wrap flex w-full items-center justify-between bg-white py-4 lg:flex-wrap border-b">
         <div class="flex w-full flex-wrap items-center justify-between px-4 md:px-10">
-            <div class="hidden md:block">
+            <div class="hidden md:flex item-center">
               <img class="h-10 ml-4" src="undiksha.png" alt="">
-                <a href="/" class="text-2xl font-bold absolute -mt-9 ml-[65px]">SIMARU</a>
+              <a href="/" class="text-2xl font-bold ml-1">SIMARU</a>
             </div>
             <div class="text-xl flex items-center justify-between text-center md:w-80">
                 <button class="hover:bg-gray-200 px-1 rounded-full transition-all ease-in-out duration-300 md:order-1" wire:click="prevWeek"><i class="bi bi-chevron-left text-md md:text-2xl"></i></button>
