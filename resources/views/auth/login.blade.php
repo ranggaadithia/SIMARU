@@ -12,7 +12,7 @@
   <div class="lg:flex">
     <div class="text-white hidden lg:block lg:mx-auto lg:mt-28 lg:ml-60 lg:-mr-20"> <!--Responsive-->
         <span><h1 class="text-4xl font-bold mb-3">Sistem</h1></span>
-        <span><h1 class="text-4xl font-bold mb-3">Peminjaman</h1></span>
+        <span><h1 class="text-4xl font-bold mb-3">Manajemen</h1></span>
         <span><h1 class="text-4xl font-bold mb-4">Ruangan</h1></span>
         <h3 class="text-lg mt-1 font-bold mb-4">Fakultas Teknik dan Kejuruan</h3>
         <p class="text-xs leading-5">Jika anda memiliki pertanyaan atau kendala <br> bisa menghubungi kontak dibawah</p>
@@ -44,16 +44,16 @@
 
     <div class="text-white ml-14 mb-6 pt-12 font-bold lg:hidden"> <!--Judul-->
         <span><h1 class="text-2xl">Sistem</h1></span>
-        <span><h1 class="text-2xl">Peminjaman</h1></span>
+        <span><h1 class="text-2xl">Manajemen</h1></span>
         <span><h1 class="text-2xl">Ruangan</h1></span>
         <h3 class="text-xs mt-1">Fakultas Teknik dan Kejuruan</h3>
     </div>
     <div class="bg-[#F2F1FA] w-80 mx-auto  rounded-lg p-5 lg:w-96 lg:mt-24 shadow-md lg:shadow-2xl lg:p-7"> <!--Form-->
-        <h2 class="text-[#60A5FA] font-bold text-2xl">Sign In</h2>
-        <p class="mt-1 text-[13px] max-w-[250px]">Gunakan akun Undiksha untuk login ke dalam Sistem Peminjaman Ruangan FTK</p>
+        <h2 class="text-blue-400 font-bold text-2xl">Masuk</h2>
+        <p class="my-2 text-[13px] max-w-[250px]">Gunakan akun Undiksha untuk masuk ke dalam Sistem Manajemen Ruangan FTK</p>
         <form action="{{ route('login') }}" method="POST">
           @csrf
-            <label class=" text-sm font-bold text-[#60A5FA]" for="email">Email</label><br>
+            <label class=" text-sm font-bold text-blue-400" for="email">Email</label><br>
             <input class="mb-3 mt-1 w-full  rounded-md p-2 text-[12px]" placeholder="email@undiksha.ac.id" type="email" id="email" name="email"><br>
             @error('email')
               <div class="text-sm text-red-500">
@@ -61,13 +61,13 @@
               </div>
             @enderror
 
-            <label class="text-sm font-bold text-[#60A5FA]" for="password">Password</label><br>
+            <label class="text-sm font-bold text-blue-400" for="password">Password</label><br>
             <input class="p-2 text-[12px]  mt-1 w-full  rounded-md" placeholder="*********" type="password" id="password" name="password"><br>
 
-            <button class="hover:bg-blue-500 bg-[#60A5FA] text-white text-md font-bold py-2 px-4 rounded-md w-full mt-4 mb-2" type="submit">Sign In </button>
+            <button class="hover:bg-blue-500 bg-blue-400 text-white text-md font-bold py-2 px-4 rounded-md w-full mt-4 mb-2" type="submit">Masuk </button>
         </form>
-        <p class="text-[13px] max-w-[250px]">Untuk pengguna dari luar Undiksha, silakan membuat akun di  bawah ini</p>
-        <a href="/register" class="text-[13px] text-b1 underline text-[#60A5FA]" wire:navigate><p class="mt-1">Sign Up</p></a>
+        <p class="text-[13px] max-w-[250px] my-2">Untuk pengguna dari luar Undiksha, silakan membuat akun di  bawah ini</p>
+        <a href="/register" class="text-[13px] text-b1 underline text-blue-400" wire:navigate><p class="mt-1">Daftar</p></a>
     </div>
   </div>
 </div>
