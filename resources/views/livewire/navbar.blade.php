@@ -2,7 +2,7 @@
     <nav
     class="fixed top-0 z-20 flex-no-wrap flex w-full items-center justify-between bg-white py-4 lg:flex-wrap border-b">
         <div class="flex w-full flex-wrap items-center justify-between px-4 md:px-10">
-            <div class="hidden md:flex item-center">
+            <div class="hidden md:flex items-center">
               <img class="h-10 ml-4" src="undiksha.png" alt="">
               <a href="/" class="text-2xl font-bold ml-1">SIMARU</a>
             </div>
