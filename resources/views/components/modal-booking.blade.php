@@ -7,7 +7,7 @@
     data-te-target="#exampleModal"
     data-te-ripple-init
     data-te-ripple-color="light">
-    booking lab
+    Pinjam Ruangan
     </button>
     <div
     data-te-modal-init
@@ -27,7 +27,7 @@
             <h5
             class="text-xl font-medium leading-normal text-neutral-800 dark:text-neutral-200"
             id="exampleModalLabel">
-            Booking Lab
+            Pinjam Ruangan
             </h5>
             <!--Close button-->
             <button
@@ -55,7 +55,7 @@
             <form action="{{ route('booking') }}" method="POST">
             @csrf
             <div class="">
-            <label for="">Nama Peminjam</label>
+            <label for="">Nama</label>
             <div class="relative mb-3" data-te-input-wrapper-init>
                 <input
                 type="text"
@@ -68,9 +68,9 @@
                 </div>
             </div>
         <div class="mb-3">
-            <label for="lab">Pilih Lab</label>
+            <label for="lab">Pilih Ruangan</label>
             <select data-te-select-init data-te-select-filter="true" data-te-select-option-height="52" name="lab_id" id="lab">
-            <option selected>Pilih Lab</option>
+            <option selected>Pilih Ruangan</option>
             @foreach ($labs as $lab)
             <option value="{{ $lab->id }}" data-te-select-secondary-text="kapasitas: {{ $lab->capacity }}">{{ $lab->name }}</option>
             @endforeach
@@ -78,7 +78,7 @@
         </div>
         
             <div class="mb-3">
-            <label for="keperluan">keperluan</label>
+            <label for="keperluan">Keperluan</label>
             <div class="relative mb-3" data-te-input-wrapper-init>
             <textarea
                 class="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
@@ -141,15 +141,16 @@
             class="inline-block rounded bg-primary-100 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-primary-700 transition duration-150 ease-in-out hover:bg-primary-accent-100 focus:bg-primary-accent-100 focus:outline-none focus:ring-0 active:bg-primary-accent-200"
             data-te-modal-dismiss
             data-te-ripple-init
-            data-te-ripple-color="light">
-            Close
+            data-te-ripple-color="light"
+            wire:click="resetForm">
+            Tutup
             </button>
             <button
             type="submit"
             class="ml-1 inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
             data-te-ripple-init
             data-te-ripple-color="light">
-            Booking Lab
+            Pinjam
             </button>
         </form>
         </div>

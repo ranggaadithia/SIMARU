@@ -11,16 +11,16 @@
     <div
     wire:ignore.self
         data-te-modal-dialog-ref
-        class="pointer-events-none relative w-auto translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:max-w-[700px]">
+        class="pointer-events-none relative w-[600px] translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:max-w-[700px]">
         <div
         class="min-[576px]:shadow-[0_0.5rem_1rem_rgba(#000, 0.15)] pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-lg outline-none dark:bg-neutral-600">
         <div
             class="flex flex-shrink-0 items-center justify-between rounded-t-md border-b-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">
             <!--Modal title-->
             <h5
-            class="text-xl font-medium leading-normal text-neutral-800 dark:text-neutral-200"
+            class="text-xl font-semibold leading-normal text-neutral-800 dark:text-neutral-200"
             id="exampleModalLabel">
-            Booking Lab
+            Pinjam Ruangan
             </h5>
             <!--Close button-->
             <button
@@ -77,11 +77,11 @@
             @endif
             <form  wire:submit="bookingLab">
             <div class="">
-                <label for="name">Nama Peminjam</label>
+                <label for="name" class="font-semibold">Nama Peminjam</label>
                 <div class="relative mb-3" data-te-input-wrapper-init>
                     <input
                     type="text"
-                    class="peer block min-h-[auto] w-full rounded border-0 bg-neutral-100 px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:bg-neutral-700 dark:text-neutral-500 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+                    class="peer block min-h-[auto] w-full rounded border-0 bg-neutral-100 px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:bg-neutral-700 dark:text-neutral-500 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0 text-sm"
                     id="name"
                     placeholder="Disabled input"
                     aria-label="Disabled input example"
@@ -90,10 +90,10 @@
                 </div>
             </div>
             <div class="mb-3">
-                <label for="lab_id">Pilih Lab<span class="text-red-500">*</span></label>
+                <label for="lab_id" class="font-semibold ">Pilih Ruangan<span class="text-red-500">*</span></label>
                 <select name="lab_id" id="lab_id" wire:model="lab_id" class="w-full py-2 px-1 rounded-md border @error('lab_id') border-red-600 @enderror">
 
-                <option selected>Pilih Lab</option>
+                <option selected ><span class="text-xs">Pilih Ruangan</span></option>
                 @foreach ($labs as $lab)
                 <option value="{{ $lab->id }}" class="py-4">{{ $lab->name }} ({{ $lab->capacity }})</option>
                 @endforeach
@@ -104,21 +104,21 @@
             </div>
         
             <div class="mb-3">
-                <label for="keperluan">Keperluan<span class="text-red-500">*</span></label>
+                <label for="keperluan" class="font-semibold">Keperluan<span class="text-red-500">*</span></label>
                 <div class="relative mb-3">
                 <textarea
-                    class="border @error('reason_to_booking') border-red-600 @enderror w-full p-2 rounded-md"
+                    class="border @error('reason_to_booking') border-red-600 @enderror w-full p-2 rounded-md text-sm"
                     id="keperluan"
                     rows="3"
                     name="reason_to_booking"
-                    placeholder="tuliskan keperluan anda disini" wire:model="reason_to_booking"
+                    placeholder="Tuliskan keperluan anda disini" wire:model="reason_to_booking"
                     ></textarea>
                     <div class="text-red-600 -mt-1">
                         @error('reason_to_booking') {{ $message }}@enderror
                     </div>
             </div>
             <div class="mb-3">
-                <label for="tanggal_peminjaman">Pilih Tanggal<span class="text-red-500">*</span></label>
+                <label for="tanggal_peminjaman" class="font-semibold">Pilih Tanggal<span class="text-red-500">*</span></label>
                 <div
                 class="mb-3 relative border @error('booking_date') border-red-600 @enderror w-full rounded-md"
                 id="datepicker-disable-past"
@@ -126,8 +126,8 @@
                 data-te-datepicker-init>
                 <input
                     type="text"
-                    class="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none"
-                    placeholder="pilih tanggal peminjaman"
+                    class="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none text-sm"
+                    placeholder="Pilih tanggal peminjaman"
                     id="tanggal_peminjaman"
                     name="booking_date"
                     wire:model="booking_date"
@@ -140,11 +140,11 @@
                 </div>
             </div>
             <div class="mb-3">
-                <div class="flex gap-x-5">
-                    <div class="">
-                        <label for="jam_mulai">Jam Mulai<span class="text-red-500">*</span></label>
-                        <select id="jam_mulai" class="w-full py-2 border @error('end_time') border-red-600 @enderror rounded-md px-1" wire:model="start_time">
-                            <option selected>pilih jam</option>
+                <div class="flex gap-x-5 ">
+                    <div class=" w-1/2">
+                        <label for="jam_mulai" class="font-semibold">Jam Mulai<span class="text-red-500">*</span></label>
+                        <select id="jam_mulai" class=" w-full py-2 border @error('end_time') border-red-600 @enderror rounded-md px-1" wire:model="start_time">
+                            <option selected ><p class="text-sm">Pilih Jam</p></option>
                             @foreach ($timeMappings as $letter => $time)
                             <option value="{{ $letter }}">
                             {{ $letter }}
@@ -156,10 +156,10 @@
                             @error('start_time') {{ $message }}@enderror
                         </div>
                     </div>
-                    <div class="">
-                        <label for="jam_selesai">Jam Selesai<span class="text-red-500">*</span></label>
+                    <div class="w-1/2">
+                        <label for="jam_selesai" class="font-semibold">Jam Selesai<span class="text-red-500">*</span></label>
                         <select id="jam_selesai" class="w-full py-2 border @error('end_time') border-red-600 @enderror rounded-md px-1" wire:model="end_time">
-                            <option selected>pilih jam</option>
+                            <option selected>Pilih Jam</option>
                             @foreach ($timeMappings as $letter => $time)
                             <option value="{{ $letter }}">
                             {{ $letter }}
@@ -179,20 +179,13 @@
         <div
             class="flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md border-t-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">
             <button
-            type="button"
-            class="inline-block rounded bg-primary-100 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-primary-700 transition duration-150 ease-in-out hover:bg-primary-accent-100 focus:bg-primary-accent-100 focus:outline-none focus:ring-0 active:bg-primary-accent-200"
-            data-te-modal-dismiss
-            data-te-ripple-init
-            data-te-ripple-color="light">
-            Close
-            </button>
-            <button
             type="submit"
-            class="ml-1 inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
+            class="ml-1 inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] font-semibold"
             data-te-ripple-init
             data-te-ripple-color="light">
-            Booking Lab
+            Pinjam
             </button>
+           
         </form>
         </div>
         </div>
