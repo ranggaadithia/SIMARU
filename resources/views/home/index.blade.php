@@ -37,7 +37,7 @@ Livewire.on('success-booking', function () {
     
     setTimeout(() => {
       toasty.classList.replace('data-[te-toast-show]:block', 'data-[te-toast-show]:hidden')
-    }, 2000);
+    }, 5000);
 });
 
 </script>
