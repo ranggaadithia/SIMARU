@@ -38,11 +38,11 @@ class ModalBooking extends Component
     ];
 
     protected $messages = [
-        'lab_id.required' => 'Please select a lab.',
-        'reason_to_booking.required' => 'Please provide a reason for booking.',
-        'booking_date.required' => 'Please select a booking date.',
-        'start_time.required' => 'Please select a start time.',
-        'end_time.required' => 'Please select an end time.',
+        'lab_id.required' => 'Silahkan pilih ruangan.',
+        'reason_to_booking.required' => 'Silahkan mengisi keperluan pesan.',
+        'booking_date.required' => 'Silahkan pilih tanggal pesan.',
+        'start_time.required' => 'Silahkan pilih waktu mulai.',
+        'end_time.required' => 'Silahkan pilih waktu selesai.',
     ];
 
     public function bookingLab()
@@ -62,6 +62,8 @@ class ModalBooking extends Component
             session()->flash('conflict', 'Pada tanggal & jam tersebut ruangan sedang digunakan');
         } else if (!$isLabAvailable) {
             session()->flash('conflict', 'Pada hari & jam tersebut sedang ada perkuliahan di ruangan');
+        } else if ($this->start_time == $this->end_time) {
+            session()->flash('conflict', 'Waktu mulai dan selesai tidak boleh sama');
         } else {
 
             $data = [
