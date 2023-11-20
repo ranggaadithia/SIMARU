@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\ClassSchedule;
 use App\Utilities\TimeMappings;
+use Illuminate\Support\Facades\DB;
 
 class ClassScheduleController extends Controller
 {
@@ -34,7 +35,7 @@ class ClassScheduleController extends Controller
      */
     public function create()
     {
-        $lecturers = User::where('role', 'dosen')->pluck('name')->toArray();
+        $lecturers = DB::table('tb_dosen')->pluck('nama_dosen')->toArray();
 
         $labs = Lab::all();
 
@@ -84,7 +85,7 @@ class ClassScheduleController extends Controller
     public function edit(ClassSchedule $classSchedule)
     {
         $time_format = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M'];
-        $lecturers = User::where('role', 'dosen')->pluck('name')->toArray();
+        $lecturers = DB::table('tb_dosen')->pluck('nama_dosen')->toArray();
 
         $labs = Lab::all();
         return view('dashboard.class_schedule.edit', compact('classSchedule', 'labs', 'lecturers', 'time_format'));
