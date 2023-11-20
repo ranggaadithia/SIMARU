@@ -5,7 +5,7 @@
  data-te-target="#exampleModal"
  data-te-ripple-init
  data-te-toggle="tooltip"
- title="Booking Lab"
+ title="Booking Ruangan"
  data-te-ripple-color="light">
  <i class="bi bi-plus-lg"></i>
  </button>

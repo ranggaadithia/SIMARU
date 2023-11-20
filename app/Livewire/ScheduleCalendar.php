@@ -15,6 +15,7 @@ class ScheduleCalendar extends Component
 
     private function generateWeekDates(Carbon $startDate, Carbon $endDate)
     {
+        Carbon::setLocale('id');
         $weekDates = [];
 
         for ($date = $startDate; $date <= $endDate; $date->addDay()) {

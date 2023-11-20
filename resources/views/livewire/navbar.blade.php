@@ -1,23 +1,28 @@
 <div> 
     <nav
-    class="fixed top-0 z-20 flex-no-wrap flex w-full items-center justify-between bg-white py-4 lg:flex-wrap border-b">
+    class="fixed top-0 z-20 flex-no-wrap flex w-full items-center justify-between bg-white/90 py-4 lg:flex-wrap border-b drop-shadow backdrop-blur-md">
         <div class="flex w-full flex-wrap items-center justify-between px-4 md:px-10">
-            <div class="hidden md:flex items-center">
-              <img class="h-10 ml-4" src="undiksha.png" alt="">
-              <a href="/" class="text-2xl font-bold ml-1">SIMARU</a>
+            <div class="flex items-center justify-center">
+              <a href="/">
+                <img class="h-10" src="{{ asset('undiksha.png') }}" alt="">
+              </a>
+              <a href="/" class="text-2xl font-bold ml-1 hidden md:block">SIMARU</a>
             </div>
             <div class="text-xl flex items-center justify-between text-center md:w-80">
                 <button class="hover:bg-gray-200 px-1 rounded-full transition-all ease-in-out duration-300 md:order-1" wire:click="prevWeek"><i class="bi bi-chevron-left text-md md:text-2xl"></i></button>
-                <h3 class="md:mx-5 mx-0 ml-2 md:ml-0 font-semibold text-2xl order-3 md:order-2">
+                <h3 class="md:mx-5 mx-0 ml-2 md:ml-0 hidden md:block font-semibold text-2xl order-2">
                     {{ $startDate->format('F Y') }}
                 </h3>
-                <button class="hover:bg-gray-200 px-1 rounded-full transition-all ease-in-out duration-300 order-2 md:order-3 ml-1 md:ml-0" wire:click="nextWeek"><i class="bi bi-chevron-right text-md md:text-2xl"></i></button>
+                <h3 class="md:mx-5 mx-0 ml-2 md:ml-0 block md:hidden font-semibold text-2xl order-2">
+                    {{ $startDate->format('M Y') }}
+                </h3>
+                <button class="hover:bg-gray-200 px-1 rounded-full transition-all ease-in-out duration-300 order-3 ml-1 md:ml-0" wire:click="nextWeek"><i class="bi bi-chevron-right text-md md:text-2xl"></i></button>
             </div>
             <div class="">
                 @auth
                 <div class="relative" data-te-dropdown-ref>
                     <button
-                      class="flex items-center whitespace-nowrap rounded   pr-3 first-letter:text-sm font-medium uppercase leading-normal"
+                      class="flex items-center whitespace-nowrap rounded first-letter:text-sm font-medium uppercase leading-normal"
                       type="button"
                       id="dropdownMenuButton1"
                       data-te-dropdown-toggle-ref
@@ -25,18 +30,6 @@
                       data-te-ripple-init
                       data-te-ripple-color="light">
                       <i class="bi bi-person-circle text-4xl mr-1"></i>
-                      {{-- <span class="w-2 text-blue-400 hidden md:block">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                          class="h-5 w-5">
-                          <path
-                            fill-rule="evenodd"
-                            d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                            clip-rule="evenodd" />
-                        </svg>
-                      </span> --}}
                     </button>
                     <ul
                       class="absolute z-[1000] float-left m-0 hidden min-w-max list-none overflow-hidden rounded-lg border-none bg-white bg-clip-padding text-left text-base shadow-lg dark:bg-neutral-700 [&[data-te-dropdown-show]]:block"
@@ -74,7 +67,8 @@
                     </ul>
                   </div>
                 @else
-                  <a href="{{ route('login') }}" class="text-lg mr-4 uppercase font-semibold">Masuk</a>
+                  <a href="{{ route('login') }}" class="text-lg uppercase font-semibold hidden md:block">Masuk</a>
+                  <a href="{{ route('login') }}" class="text-3xl uppercase font-semibold md:hidden"><i class="bi bi-box-arrow-in-right"></i></a>
                 @endauth
                 
             </div>
