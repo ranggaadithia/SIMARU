@@ -59,9 +59,9 @@ class ModalBooking extends Component
         $isLabAvailable = ClassSchedule::isLabAvailable($this->lab_id, $day, $this->start_time, $this->end_time)->count() == 0;
 
         if (!$isBookingConflict) {
-            session()->flash('conflict', 'Pada tanggal dan jam tersebut lab sedang digunakan');
+            session()->flash('conflict', 'Pada tanggal & jam tersebut ruangan sedang digunakan');
         } else if (!$isLabAvailable) {
-            session()->flash('conflict', 'Pada hari dan jam tersebut sedang ada perkuliahan di lab');
+            session()->flash('conflict', 'Pada hari & jam tersebut sedang ada perkuliahan di ruangan');
         } else {
 
             $data = [

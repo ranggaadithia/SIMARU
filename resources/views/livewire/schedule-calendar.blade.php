@@ -3,13 +3,13 @@
     <table class="mt-16 mx-auto">
         <thead class="sticky top-16 transition-shadow ease-in-out duration-300 bg-white" id="thead">
             <tr class="">
-                <th class="py-2 border-r h-10 bg-white text-white sticky top-16 left-0 md:static">
+                <th class="py-2 border-r h-10 bg-white text-white">
                     @auth
                         @include('components.modal-button')
                     @else 
-                    <a href="{{ route('login') }}" type="button" class="rounded-full bg-blue-400  text-blue-600 drop-shadow-md text-4xl border border-blue-100"
+                    <a href="{{ route('login') }}" type="button" class="rounded-full bg-white p-2 text-blue-600 drop-shadow-md text-4xl border border-blue-100"
                     data-te-toggle="tooltip"
-                    title="Booking Lab"><i class="bi bi-plus-lg"></i></a>
+                    title="Booking Ruangan"><i class="bi bi-plus-lg"></i></a>
                     @endauth
                 </th>
                 @foreach ($weekDates as $week)
@@ -38,7 +38,7 @@
         <tbody class="">
             @foreach ($labs as $lab)
                 <tr class="text-center h-20" wire:key="{{ $lab->id }} ">
-                    <td class="border px-3 lg:px-3 h-40 items-center bg-blue-400 lg:w-40" id="lab-name"
+                    <td class="border px-3 lg:px-3 h-40 items-center bg-blue-400 lg:w-40 sticky left-0" id="lab-name"
                     data-sticky="true">
                     <a href="{{ route('lab.view', $lab->slug) }}">
                         <div class="h-40 mx-auto flex justify-center items-center">
@@ -60,7 +60,7 @@
                                             @foreach ($lab->users as $user)
                                                 @if ($user->pivot->booking_date === $week['date'])
                                                     <div class="w-full rounded-md bg-blue-400/20 p-1 my-1 border-blue-700/10" wire:key="{{ $user->id }}">
-                                                        <p class="text-left text-blue-600">
+                                                        <p class="text-left text-blue-600 text-sm">
                                                             {{ Illuminate\Support\Str::limit($user->pivot->reason_to_booking, 13) }}
                                                         </p>
                                                     </div>
@@ -69,7 +69,7 @@
                                             @foreach ($lab->classSchedules as $classSchedule)
                                                 @if ($classSchedule->day == $week['day'])
                                                     <div class="w-full rounded-md bg-purple-400/20 p-1 my-1 border-purple-700/10" wire:key="{{ $classSchedule->id }}">
-                                                        <p class="text-left text-purple-600">
+                                                        <p class="text-left text-purple-600 text-sm">
                                                             {{ Illuminate\Support\Str::limit($classSchedule->subject, 13) }}
                                                         </p>
                                                     </div>

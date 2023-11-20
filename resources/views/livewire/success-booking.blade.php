@@ -53,7 +53,7 @@
     </div>
     <div
       class="break-words rounded-b-lg bg-success-100 px-4 py-4 text-success-700">
-      Sukses memesan lab.
+      Sukses memesan Ruangan.
     </div>
     </div>
   </div>
