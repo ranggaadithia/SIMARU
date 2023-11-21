@@ -6,7 +6,7 @@
   @csrf
   @method('PUT')
  <div class="mb-3">
-   <label for="name" class="form-label">Lab Name</label>
+   <label for="name" class="form-label">Nama Ruangan</label>
    <input
      type="text"
      class="form-control"
@@ -75,6 +75,6 @@
   </div>
   @enderror
  </div>
- <button type="submit" class="btn btn-primary">Save</button>
+ <button type="submit" class="btn btn-primary">Simpan</button>
 </form>
 @endsection

@@ -2,7 +2,7 @@
 
 @section('container')
 
-<h2>Add Class Schedule</h2>
+<h2>Tambah Jadwal Kuliah</h2>
 
 @if (session()->has('error'))
 <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -57,9 +57,9 @@
   @enderror
 </div>
 <div class="mb-3">
-  <label for="lab">Lab</label>
+  <label for="lab">Ruangan</label>
   <select class="form-select" name="lab_id">
-    <option selected>Pilih Lab</option>
+    <option selected>Pilih Ruangan</option>
     @foreach ($labs as $lab)
       <option value="{{ $lab->id }}">{{ $lab->name }}</option>
     @endforeach
