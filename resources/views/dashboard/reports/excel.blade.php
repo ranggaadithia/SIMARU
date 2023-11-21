@@ -2,7 +2,7 @@
      <thead>
        <tr>
          <th>NO</th>
-         <th>Lab</th>
+         <th>Ruangan</th>
          <th>Peminjam</th>
          <td>Email Peminjam</td>
          <td>No. Peminjam</td>

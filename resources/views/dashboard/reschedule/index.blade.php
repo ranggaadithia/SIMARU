@@ -2,10 +2,10 @@
 
 @section('container')
 
-<h1>Move Schedule</h1>
+<h1>Pindah Jadwal</h1>
 @if (session()->has('success'))
 <div class="alert alert-success alert-dismissible fade show" role="alert">
-  <strong>Success</strong> {{ session('success') }}
+  <strong>Sukses</strong> {{ session('success') }}
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 @endif
@@ -21,11 +21,11 @@
       <th scope="col">#</th>
       <th scope="col">Tujuan</th>
       <th scope="col">Peminjam</th>
-      <th scope="col">Lab</th>
+      <th scope="col">Ruangan</th>
       <th scope="col">Tanggal</th>
       <th scope="col">Jam Mulai</th>
       <th scope="col">Jam selesai</th>
-      <th scope="col">Action</th>
+      <th scope="col">Aksi</th>
     </tr>
   </thead>
   <tbody>

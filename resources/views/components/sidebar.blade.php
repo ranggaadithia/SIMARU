@@ -35,31 +35,31 @@ style="width: 300px"
   <li class="nav-item ">
     <a href="/" class="nav-link link-body-emphasis">
       <i class="bi bi-speedometer2 me-1"></i>
-      Dashboard
+      Halaman Utama
     </a>
   </li>
   <li>
     <a href="{{ route('labs.index') }}" class="nav-link {{ request()->routeIs('labs.*') ? 'active' : 'link-body-emphasis' }}">
       <i class="bi bi-building-gear me-1"></i>
-      Manage Room
+      Atur Ruangan
     </a>
   </li>
   <li>
     <a href="{{ route('class-schedule.index') }}" class="nav-link {{ request()->routeIs('class-schedule.*') ? 'active' : 'link-body-emphasis' }}">
       <i class="bi bi-calendar3"></i>
-      Class Schedule
+      Jadwal Kelas
     </a>
   </li>
   <li>
     <a href="{{ route('reschedule.index') }}" class="nav-link {{ request()->routeIs('reschedule.*') ? 'active' : 'link-body-emphasis' }}">
       <i class="bi bi-calendar2-range me-1"></i>
-      Move Schedule
+      Pindah Jadwal
     </a>
   </li>
   <li>
     <a href="{{ route('report') }}" class="nav-link {{ request()->routeIs('report') ? 'active' : 'link-body-emphasis' }}">
       <i class="bi bi-file-earmark-arrow-down"></i>
-      Report
+      Laporan
     </a>
   </li>
 </ul>

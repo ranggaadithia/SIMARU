@@ -3,7 +3,7 @@
         <thead>
           <tr>
             <th>#</th>
-            <th>Lab</th>
+            <th>Ruangan</th>
             <th>Peminjam</th>
             <th>Tujuan</th>
             <th>Tanggal</th>
