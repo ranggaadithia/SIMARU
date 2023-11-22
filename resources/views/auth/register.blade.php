@@ -41,19 +41,19 @@
       <h3 class="text-xs mt-1">Fakultas Teknik dan Kejuruan</h3>
   </div>
   <div class="bg-[#F2F1FA] w-80 mx-auto  rounded-lg p-5 lg:w-96 lg:mt-12 shadow-md lg:shadow-xl lg:p-7"> <!--Form-->
-      <h2 class="text-[#60A5FA] font-bold text-2xl">Daftar</h2>
+      <h2 class="text-blue-950 font-bold text-2xl">Daftar</h2>
       <p class="mt-1 text-[13px] mb-2">Silakan isi data dibawah ini dengan benar</p>
       <form action="{{ route('register') }}" method="POST">
         @csrf 
-          <label class="text-sm font-bold text-[#60A5FA]" for="nama">Nama</label><br>
-          <input class="p-2 text-[12px] mb-3 mt-1 w-full  rounded-md " placeholder="Jhon Doe" type="text" id="nama" name="name" value="{{ old('name') }}"><br>
+          <label class="text-sm font-bold text-blue-950" for="nama">Nama</label><br>
+          <input class="p-2 text-[12px] mb-3 mt-1 w-full  rounded-md " placeholder="Masukan nama" type="text" id="nama" name="name" value="{{ old('name') }}"><br>
           @error('name')
           <div class="text-sm text-red-400 -mt-2 mb-1">
             {{ $message }}
           </div>
           @enderror
 
-          <label class=" text-sm font-bold text-[#60A5FA]" for="email">Email</label><br>
+          <label class=" text-sm font-bold text-blue-950" for="email">Email</label><br>
           <input class="mb-3 mt-1 w-full  rounded-md p-2 text-[12px]" placeholder="email@example.com" type="email" id="email" name="email" value="{{ old('name') }}"><br>
           @error('email')
           <div class="text-sm text-red-400 -mt-2 mb-1">
@@ -61,7 +61,7 @@
           </div>
           @enderror
 
-          <label class="text-sm font-bold text-[#60A5FA]" for="telepon">Telepon (WhatsApp)</label><br>
+          <label class="text-sm font-bold text-blue-950" for="telepon">Telepon (WhatsApp)</label><br>
           <input class="p-2 text-[12px] mb-3 mt-1 w-full  rounded-md" type="text" placeholder="0812313451" id="telepon" name="phone_number" value="{{ old('phone_number') }}"><br>
           @error('phone_number')
           <div class="text-sm text-red-400 -mt-2 mb-1">
@@ -71,12 +71,12 @@
 
           <div class="grid grid-cols-2 gap-2 mb-1">
               <div>
-                  <label class="text-sm font-bold text-[#60A5FA]" for="password">Password</label><br>
+                  <label class="text-sm font-bold text-blue-950" for="password">Password</label><br>
                   <input class="p-2 text-[12px]  mt-1 w-full  rounded-md" placeholder="*********" type="password" id="password" name="password"><br>
                   
               </div>
               <div>
-                  <label class="text-sm font-bold text-[#60A5FA]" for="confirm_pass">Confirm Password</label><br>
+                  <label class="text-sm font-bold text-blue-950" for="confirm_pass">Confirm Password</label><br>
                   <input class="p-2 text-[12px]  mt-1 w-full rounded-md"  placeholder="*********" type="password" id="confirm_pass" name="confirm_pass"><br>
               </div>
           </div>
@@ -86,10 +86,10 @@
           </div>
           @enderror
 
-          <button class="bg-blue-400 hover:bg-blue-500 bg-b1 text-white text-[15px] font-bold py-2 px-4 rounded-md w-full mt-4 mb-2 " type="submit">Daftar</button>
+          <button class="bg-blue-950 hover:bg-blue-950 bg-b1 text-white text-[15px] font-bold py-2 px-4 rounded-md w-full mt-4 mb-2 " type="submit">Daftar</button>
       </form>
       <p class="text-[13px] mt-2">Sudah punya akun? Masuk dibawah ini</p>
-      <a class="text-[13px] text-b1 underline text-blue-500 " href="/login" wire:navigate><p>Masuk</p></a>
+      <a class="text-[13px] text-b1 underline text-blue-950 " href="/login" wire:navigate><p>Masuk</p></a>
   </div>
   
 </div>
