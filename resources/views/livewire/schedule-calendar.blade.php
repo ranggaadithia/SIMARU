@@ -43,7 +43,7 @@
                     <a href="{{ route('lab.view', $lab->slug) }}">
                         <div class="h-40 mx-auto flex justify-center items-center">
                             <div class="">
-                                <span class="font-bold text-white">{{ $lab->name }}</span>
+                                <span class="font-bold text-white">R. {{ str_replace('Ruang ', '', $lab->name) }}</span>
                             </div>
                         </div>
                     </a>
