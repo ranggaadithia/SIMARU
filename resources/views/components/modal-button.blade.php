@@ -1,6 +1,6 @@
  <button
  type="button"
- class="rounded-full bg-white p-2 text-blue-600 drop-shadow-md text-4xl border border-blue-100"
+ class="rounded-full bg-white p-2 text-primary drop-shadow-md text-4xl border border-blue-100"
  data-te-toggle="modal"
  data-te-target="#exampleModal"
  data-te-ripple-init

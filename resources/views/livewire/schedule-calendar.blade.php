@@ -7,13 +7,13 @@
                     @auth
                         @include('components.modal-button')
                     @else 
-                    <a href="{{ route('login') }}" type="button" class="rounded-full bg-white p-2 text-blue-600 drop-shadow-md text-4xl border border-blue-100"
+                    <a href="{{ route('login') }}" type="button" class="rounded-full bg-white p-2 text-primary drop-shadow-md text-4xl border border-blue-100"
                     data-te-toggle="tooltip"
                     title="Booking Ruangan"><i class="bi bi-plus-lg"></i></a>
                     @endauth
                 </th>
                 @foreach ($weekDates as $week)
-                    <th class="md:p-2 border-r h-24 lg:w-40 px-16 bg-blue-400 text-white box-border">
+                    <th class="md:p-2 border-r h-24 lg:w-40 px-16 bg-primary text-white box-border">
                         @if ($week['date'] == $today)
                         <span class="uppercase text-white">
                             {{ Illuminate\Support\Str::limit($week['day'], 3, '') }} 
@@ -38,7 +38,7 @@
         <tbody class="">
             @foreach ($labs as $lab)
                 <tr class="text-center h-20" wire:key="{{ $lab->id }} ">
-                    <td class="border px-3 lg:px-3 h-40 items-center bg-blue-400 lg:w-40 sticky left-0" id="lab-name"
+                    <td class="border px-3 lg:px-3 h-40 items-center bg-primary lg:w-40 sticky left-0" id="lab-name"
                     data-sticky="true">
                     <a href="{{ route('lab.view', $lab->slug) }}">
                         <div class="h-40 mx-auto flex justify-center items-center">
