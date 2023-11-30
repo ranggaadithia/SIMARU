@@ -20,6 +20,7 @@ use App\Http\Controllers\RescheduleController;
 use App\Http\Controllers\LabScheduleController;
 use App\Http\Controllers\ClassScheduleController;
 use App\Http\Controllers\HistoryController;
+use App\Http\Controllers\PasswordController;
 use Database\Seeders\ClassSchedulesSeeder;
 
 /*
@@ -42,7 +43,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/', [LabBookingController::class, 'store'])->name('booking');
     Route::get('accept/{request_reschedule}', [RescheduleController::class, 'acceptReschedule']);
     Route::delete('labs-booking/{labs_booking}', [LabBookingController::class, 'destroy'])->name('labs-booking.destroy');
+
+    Route::get('/change-password', [PasswordController::class, 'showChangePasswordForm']);
+    Route::post('/change-password', [PasswordController::class, 'changePassword'])->name('change.password');
 });
+
+
 
 
 Route::middleware('guest')->group(function () {

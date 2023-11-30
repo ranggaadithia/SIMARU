@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
@@ -24,7 +25,10 @@ class LoginController extends Controller
 
             $user = Auth::user();
 
-            if ($user->role === 'admin') {
+            $defaultPassword = env('DEFAULT_PASSWORD');
+            if (Hash::check($defaultPassword, $user->password)) {
+                return redirect()->intended('change-password');
+            } else if ($user->role === 'admin') {
                 return redirect()->intended('dashboard');
             } else {
                 return redirect()->intended('/');
