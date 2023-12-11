@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use Carbon\Carbon;
+use App\Models\Lab;
 use Livewire\Component;
 use Livewire\Attributes\On;
 
@@ -44,6 +45,7 @@ class Navbar extends Component
     }
     public function render()
     {
-        return view('livewire.navbar');
+        $labs = Lab::all();
+        return view('livewire.navbar', compact('labs'));
     }
 }

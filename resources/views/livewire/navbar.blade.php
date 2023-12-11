@@ -18,6 +18,14 @@
                 </h3>
                 <button class="hover:bg-gray-200 px-1 rounded-full transition-all ease-in-out duration-300 order-3 ml-1 md:ml-0" wire:click="nextWeek"><i class="bi bi-chevron-right text-md md:text-2xl"></i></button>
             </div>
+            {{-- <select id="dropdown" class="mt-1 p-2 border border-gray-300 rounded-md">
+              @foreach ($labs as $lab)
+                <option value="{{ $lab->slug }}">{{ $lab->name }}</option>
+              @endforeach
+            </select> --}}
+            @foreach ($labs as $lab)
+            <a href="{{ $lab->slug }}" wire:navigate>{{ $lab->name }}</a>
+            @endforeach
             <div class="">
                 @auth
                 <div class="relative" data-te-dropdown-ref>
@@ -75,3 +83,19 @@
         </div>
     </nav>
 </div>
+
+@push('scripts')
+<script>
+  // Add event listener for the 'change' event on the dropdown
+  document.getElementById('dropdown').addEventListener('change', function () {
+    // Get the selected value from the dropdown
+    const selectedValue = this.value;
+
+    // Construct the new URL with the selected value
+    const newURL = selectedValue;
+
+    // Redirect to the new URL
+    window.location.href = newURL;
+  });
+</script>
+@endpush
