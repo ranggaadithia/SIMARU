@@ -1,4 +1,7 @@
-<div> 
+@extends('layouts.index')
+
+@section('container')
+<div>
     <nav
     class="fixed top-0 z-20 flex-no-wrap flex w-full items-center justify-between bg-white/90 py-4 lg:flex-wrap border-b drop-shadow backdrop-blur-md">
         <div class="flex w-full flex-wrap items-center justify-between px-4 md:px-10">
@@ -6,26 +9,10 @@
               <a href="/">
                 <img class="h-10" src="{{ asset('undiksha.png') }}" alt="">
               </a>
-              <a href="/" class="text-2xl font-bold ml-1 hidden md:block">SIMARU</a>
+              <a href="/" class="text-2xl font-bold ml-1">SIMARU</a>
             </div>
             <div class="text-xl flex items-center justify-between text-center md:w-80">
-                <button class="hover:bg-gray-200 px-1 rounded-full transition-all ease-in-out duration-300 md:order-1" wire:click="prevWeek"><i class="bi bi-chevron-left text-md md:text-2xl"></i></button>
-                <h3 class="md:mx-5 mx-0 ml-2 md:ml-0 hidden md:block font-semibold text-2xl order-2">
-                    {{ $startDate->format('F Y') }}
-                </h3>
-                <h3 class="md:mx-5 mx-0 ml-2 md:ml-0 block md:hidden font-semibold text-2xl order-2">
-                    {{ $startDate->format('M Y') }}
-                </h3>
-                <button class="hover:bg-gray-200 px-1 rounded-full transition-all ease-in-out duration-300 order-3 ml-1 md:ml-0" wire:click="nextWeek"><i class="bi bi-chevron-right text-md md:text-2xl"></i></button>
             </div>
-            {{-- <select id="dropdown" class="mt-1 p-2 border border-gray-300 rounded-md">
-              @foreach ($labs as $lab)
-                <option value="{{ $lab->slug }}">{{ $lab->name }}</option>
-              @endforeach
-            </select> --}}
-            {{-- @foreach ($labs as $lab)
-            <a href="{{ $lab->slug }}" wire:navigate>{{ $lab->name }}</a>
-            @endforeach --}}
             <div class="">
                 @auth
                 <div class="relative" data-te-dropdown-ref>
@@ -70,7 +57,7 @@
                             ><i class="bi bi-box-arrow-right text-blue-400"></i><span class="ml-2">Keluar</span></button
                             >
                         </form>
-
+  
                       </li>
                     </ul>
                   </div>
@@ -82,20 +69,76 @@
             </div>
         </div>
     </nav>
+
+    <div class="mt-24 px-4 md:px-8">
+        <h1 class="text-center mx-auto text-xl font-bold">Riwayat Peminjaman Ruangan </h1>
+
+
+      
+        @if (count($upcomingHistories) == 0 && count($expiredHistories) == 0)
+          <div class="mt-20 text-center">
+            <h1 class="mt-5 font-semibold text-3xl">Anda belum memesan Ruangan</h1>
+          </div>
+        @endif
+
+
+
+    @if(count($upcomingHistories) > 0)
+    <h1 class=" text-lg font-semibold mt-5 text-neutral-600 dark:text-neutral-200 ">Mendatang</h1>
+
+    @foreach ($upcomingHistories as $history)
+    <div class="block rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700 mt-3 w-full">
+        <div class="border-b-2 border-neutral-100 px-6 py-3 dark:border-neutral-600 dark:text-neutral-50 text-xl font-semibold ">
+        {{ $history->reason_to_booking }} | <span class="font-medium text-lg">R. {{ str_replace('Ruang ', '', $history->lab->name) }}</span> 
+            </div>
+            <div class="p-6">
+                <h5 class="mb-2 text-lg font-medium leading-tight text-neutral-600 dark:text-neutral-200">
+                    {{ \Carbon\Carbon::parse($history->booking_date)->format('d F Y') }}
+                    <span class="text-base font-normal">({{ \Carbon\Carbon::parse("$history->booking_date $history->start_time")->diffForHumans()}})</span>
+                </h5>
+                <p class="mb-4 text-base text-neutral-600 dark:text-neutral-200">
+                    {{ $history->start_time }} - {{ $history->end_time }}
+                </p>
+                
+                <form action="{{ route('labs-booking.destroy', $history->id) }}" method="POST">
+                    @csrf
+                    @method('delete')
+                    <button type="submit" class="px-4 py-2 bg-red-500 font-semibold text-white text-sm rounded-md" 
+                    onclick="return confirm('Apakah anda yakin ingin membatalkan booking ini?')"
+                    >Batalkan Peminjam</button></form>
+                </form>
+            </div>
+        </div>
+    @endforeach
+@endif
+
+
+
+@if ($expiredHistories->count() > 0)
+
+    <h1 class="text-lg font-semibold mt-10 text-neutral-600 dark:text-neutral-200">Selesai</h1>
+    @foreach ($expiredHistories as $history)
+    <div class="block rounded-lg bg-gray-200 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700 mt-3" @if ($loop->last) id="last_record" @endif>
+        <div class="border-b-2 border-neutral-100 px-6 py-3 dark:border-neutral-600 dark:text-neutral-50 text-xl font-semibold ">
+            {{ $history->reason_to_booking }} | <span class="font-medium text-lg">R. {{ str_replace('Ruang ', '', $history->lab->name) }}</span> 
+        </div>
+        <div class="p-6">
+            <h5 class="mb-2 text-lg font-medium leading-tight text-neutral-600 dark:text-neutral-200">
+                {{ \Carbon\Carbon::parse($history->booking_date)->format('d F Y') }}
+            </h5>
+            <p class="mb-2 text-base text-neutral-600 dark:text-neutral-200">
+                {{ $history->start_time }} - {{ $history->end_time }}
+            </p>
+        </div>
+    </div>
+    @endforeach
+    @endif
+    <!-- Load More button -->
+    {{ $loadAmount }}
+    <button wire:click="loadMore">Load More</button>
+
 </div>
 
-@push('scripts')
-<script>
-  // Add event listener for the 'change' event on the dropdown
-  document.getElementById('dropdown').addEventListener('change', function () {
-    // Get the selected value from the dropdown
-    const selectedValue = this.value;
 
-    // Construct the new URL with the selected value
-    const newURL = selectedValue;
+@endsection
 
-    // Redirect to the new URL
-    window.location.href = newURL;
-  });
-</script>
-@endpush
