@@ -1,6 +1,4 @@
-@extends('layouts.index')
 
-@section('container')
 <div>
     <nav
     class="fixed top-0 z-20 flex-no-wrap flex w-full items-center justify-between bg-white/90 py-4 lg:flex-wrap border-b drop-shadow backdrop-blur-md">
@@ -72,8 +70,6 @@
 
     <div class="mt-24 px-4 md:px-8">
         <h1 class="text-center mx-auto text-xl font-bold">Riwayat Peminjaman Ruangan </h1>
-
-
       
         @if (count($upcomingHistories) == 0 && count($expiredHistories) == 0)
           <div class="mt-20 text-center">
@@ -112,8 +108,6 @@
     @endforeach
 @endif
 
-
-
 @if ($expiredHistories->count() > 0)
 
     <h1 class="text-lg font-semibold mt-10 text-neutral-600 dark:text-neutral-200">Selesai</h1>
@@ -139,6 +133,4 @@
 
 </div>
 
-
-@endsection
 

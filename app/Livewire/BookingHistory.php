@@ -14,7 +14,7 @@ class BookingHistory extends Component
 
     public function loadMore()
     {
-        $this->loadAmount++;
+        $this->loadAmount += 10;
     }
 
     public function mount()
@@ -50,8 +50,22 @@ class BookingHistory extends Component
     }
 
 
+
     public function render()
     {
-        return view('livewire.booking-history');
+        return view('livewire.booking-history', [
+            'expiredHistories' => LabsBooking::with('lab')
+                ->where('user_id', auth()->user()->id)
+                ->where(function ($query) {
+                    $query->where('booking_date', '<', $this->now->format('Y-m-d'))
+                        ->orWhere(function ($subquery) {
+                            $subquery->whereDate('booking_date', '=', $this->now->format('Y-m-d'))
+                                ->whereTime('start_time', '<', $this->now->format('H:i:s'));
+                        });
+                })
+                ->orderBy('booking_date', 'desc')
+                ->limit($this->loadAmount)
+                ->get()
+        ]);
     }
 }
