@@ -1,6 +1,6 @@
 <div> 
     <nav
-    class="fixed top-0 z-20 flex-no-wrap flex w-full items-center justify-between bg-white/90 py-4 lg:flex-wrap border-b drop-shadow backdrop-blur-md">
+    class="fixed top-0 z-20 flex-no-wrap flex w-full items-center justify-between bg-white py-4 lg:flex-wrap border-b drop-shadow backdrop-blur-md">
         <div class="flex w-full flex-wrap items-center justify-between px-4 md:px-10">
             <div class="flex items-center justify-center">
               <a href="/">

@@ -1,11 +1,11 @@
 
-<div class="wrapper overflow-x-scroll" id="scrollContainer">
+<div class="wrapper" id="scrollContainer">
     <table class="mt-16 mx-auto">
         <thead class="transition-shadow ease-in-out duration-300 bg-white" id="thead">
-            <tr class="sticky top-16">
-                <th class="py-2 border-r h-10 bg-white text-white">
+            <tr class="sticky top-16 shadow-lg z-40">
+                <th class="py-2 border-r h-10 bg-blue-950">
                     @auth
-                        @include('components.modal-button')
+                        {{-- @include('components.modal-button') --}}
                     @else 
                     <a href="{{ route('login') }}" type="button" class="rounded-full bg-white p-2 text-blue-950 drop-shadow-md text-4xl border border-blue-100"
                     data-te-toggle="tooltip"
@@ -38,8 +38,7 @@
         <tbody class="">
             @foreach ($labs as $lab)
                 <tr class="text-center h-20" wire:key="{{ $lab->id }} ">
-                    <td class="border px-3 lg:px-3 h-40 items-center bg-blue-950 lg:w-40" id="lab-name"
-                    data-sticky="true">
+                    <td class="border px-3 lg:px-3 h-40 items-center bg-blue-950 lg:w-40 sticky left-0 z-0" id="lab-name">
                     <a href="{{ route('lab.view', $lab->slug) }}">
                         <div class="h-40 mx-auto flex justify-center items-center">
                             <div class="">
@@ -84,7 +83,10 @@
                 </tr>
             @endforeach
         </tbody>
+        @include('components.modal-button')
     </table>
+
+    
     
 @teleport('body')
     <livewire:detail-schedule lazy />
