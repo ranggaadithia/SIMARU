@@ -1,19 +1,13 @@
 
 <div class="wrapper" id="scrollContainer">
-    <table class="mt-16 mx-auto">
+    <table class="mt-[73px] mx-auto w-full">
         <thead class="transition-shadow ease-in-out duration-300 bg-white" id="thead">
-            <tr class="sticky top-16 shadow-lg z-40">
-                <th class="py-2 border-r h-10 bg-blue-950">
-                    @auth
-                        {{-- @include('components.modal-button') --}}
-                    @else 
-                    <a href="{{ route('login') }}" type="button" class="rounded-full bg-white p-2 text-blue-950 drop-shadow-md text-4xl border border-blue-100"
-                    data-te-toggle="tooltip"
-                    title="Booking Ruangan"><i class="bi bi-plus-lg"></i></a>
-                    @endauth
+            <tr class="sticky top-[73px] shadow-lg z-40">
+                <th class="py-2 border-r h-10 bg-blue-950 text-white">
+                   Ruang
                 </th>
                 @foreach ($weekDates as $week)
-                    <th class="md:p-2 border-r h-24 lg:w-40 px-16 bg-blue-950 text-white box-border">
+                    <th class="md:p-2 border-r lg:h-24 h-20 lg:w-40 px-16 bg-blue-950 text-white box-border">
                         @if ($week['date'] == $today)
                         <span class="uppercase text-white">
                             {{ Illuminate\Support\Str::limit($week['day'], 3, '') }} 
@@ -42,7 +36,7 @@
                     <a href="{{ route('lab.view', $lab->slug) }}">
                         <div class="h-40 mx-auto flex justify-center items-center">
                             <div class="">
-                                <span class="font-bold text-white">R. {{ str_replace('Ruang ', '', $lab->name) }}</span>
+                                <span class="font-bold text-white">Ruang {{ str_replace('Ruang ', '', $lab->name) }}</span>
                             </div>
                         </div>
                     </a>
@@ -83,7 +77,17 @@
                 </tr>
             @endforeach
         </tbody>
-        @include('components.modal-button')
+        @auth
+            @include('components.modal-button')
+        @else
+        <a href="{{ route('login') }}" type="button"  style="background-color: #172554"
+        class="rounded-xl bg-blue-950 p-2 drop-shadow-md text-4xl border border-blue-100 fixed bottom-0 right-0 mb-6 mr-6"
+        data-te-toggle="tooltip"
+        title="Booking Ruangan">
+            <i class="bi bi-plus-lg text-white"></i>
+        </a>
+        @endauth
+        
     </table>
 
     
