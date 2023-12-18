@@ -43,7 +43,6 @@ class BookingHistory extends Component
                     });
             })
             ->orderBy('booking_date', 'desc')
-            ->limit($this->loadAmount)
             ->get();
 
         $this->totalRecords = LabsBooking::count();

@@ -68,7 +68,7 @@
         </div>
     </nav>
 
-    <div class="mt-24 px-4 md:px-8">
+    <div class="mt-24 px-4 md:px-8 pb-11">
         <h1 class="text-center mx-auto text-xl font-bold">Riwayat Peminjaman Ruangan </h1>
       
         @if (count($upcomingHistories) == 0 && count($expiredHistories) == 0)
@@ -127,9 +127,6 @@
     </div>
     @endforeach
     @endif
-    <!-- Load More button -->
-    {{ $loadAmount }}
-    <button wire:click="loadMore">Load More</button>
 
     @push('scripts')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
