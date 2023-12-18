@@ -1,5 +1,5 @@
 
-<div class="wrapper" id="contentScroll">
+<div class="lg:overflow-visible overflow-x-scroll" id="contentScroll">
     <table class="mt-[73px] mx-auto w-full">
         <thead class="transition-shadow ease-in-out duration-300 bg-white" id="thead">
             <tr class="sticky top-[73px] shadow-lg z-40">
@@ -96,34 +96,6 @@
     <livewire:detail-schedule lazy />
 @endteleport
 
-@push('scripts')
-    <script>
-  // Mendapatkan referensi ke elemen dengan ID myElement
-  var myElement = document.getElementById('contentScroll');
-
-  // Fungsi untuk menangani perubahan responsif
-  function handleResponsiveOverflow() {
-    // Mendapatkan lebar layar saat ini
-    var windowWidth = window.innerWidth;
-
-    // Menambah atau menghapus kelas sesuai dengan lebar layar
-    if (windowWidth <= 767) { // Sesuaikan dengan breakpoint yang diinginkan
-      myElement.classList.add('overflow-x-scroll');
-    } else {
-      myElement.classList.remove('overflow-x-scroll');
-    }
-  }
-
-  // Panggil fungsi saat halaman dimuat
-  handleResponsiveOverflow();
-
-  // Tambahkan event listener untuk menanggapi perubahan ukuran layar
-  window.addEventListener('resize', handleResponsiveOverflow);
-
-
-
-    </script>
-@endpush
 </div>
 
 
