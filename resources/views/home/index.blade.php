@@ -17,6 +17,7 @@
 <livewire:schedule-calendar :labs="$labs" />
 
 @push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 
 Livewire.on('close-modal', function () {
@@ -32,12 +33,22 @@ Livewire.on('showModalDetail', function () {
 });
 
 Livewire.on('success-booking', function () {
-  const toasty = document.getElementById('static-example');    
-    toasty.classList.replace('data-[te-toast-show]:hidden', 'data-[te-toast-show]:block')
+  // const toasty = document.getElementById('static-example');    
+  //   toasty.classList.replace('data-[te-toast-show]:hidden', 'data-[te-toast-show]:block')
     
-    setTimeout(() => {
-      toasty.classList.replace('data-[te-toast-show]:block', 'data-[te-toast-show]:hidden')
-    }, 5000);
+  //   setTimeout(() => {
+  //     toasty.classList.replace('data-[te-toast-show]:block', 'data-[te-toast-show]:hidden')
+  //   }, 5000);
+
+  Swal.fire({
+    position: "top-end",
+    title: 'Success!',
+    text: 'Booking anda berhasil didaftarkan!.',
+    showConfirmButton: false,
+    timerProgressBar: true,
+    timer: 1500,
+    icon:'success',
+  })
 });
 
 </script>

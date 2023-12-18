@@ -83,7 +83,8 @@
     <h1 class=" text-lg font-semibold mt-5 text-neutral-600 dark:text-neutral-200 ">Mendatang</h1>
 
     @foreach ($upcomingHistories as $history)
-    <div class="block rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700 mt-3 w-full">
+    <div class="block rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700 mt-3 w-full"
+    wire:key="{{ $history->id }}">
         <div class="border-b-2 border-neutral-100 px-6 py-3 dark:border-neutral-600 dark:text-neutral-50 text-xl font-semibold ">
         {{ $history->reason_to_booking }} | <span class="font-medium text-lg">R. {{ str_replace('Ruang ', '', $history->lab->name) }}</span> 
             </div>
@@ -96,11 +97,10 @@
                     {{ $history->start_time }} - {{ $history->end_time }}
                 </p>
                 
-                <form action="{{ route('labs-booking.destroy', $history->id) }}" method="POST">
+                <form action="{{ route('labs-booking.destroy', $history->id) }}" method="POST" id="deleteForm">
                     @csrf
                     @method('delete')
-                    <button type="submit" class="px-4 py-2 bg-red-500 font-semibold text-white text-sm rounded-md" 
-                    onclick="return confirm('Apakah anda yakin ingin membatalkan booking ini?')"
+                    <button type="submit" class="px-4 py-2 bg-red-500 font-semibold text-white text-sm rounded-md" id="cancelBtn"
                     >Batalkan Peminjam</button></form>
                 </form>
             </div>
@@ -131,6 +131,37 @@
     {{ $loadAmount }}
     <button wire:click="loadMore">Load More</button>
 
+    @push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+
+    document.getElementById('cancelBtn').addEventListener('click', function(e){
+        e.preventDefault()
+        Swal.fire({
+            title: 'Apakah anda yakin?',
+            text: "untuk membatalkan peminjaman ruangan ini.",
+            icon: 'warning',
+            iconColor: '#172554',
+            showCancelButton: true,
+            confirmButtonColor: '#EF4444',
+            cancelButtonColor: '#172554',
+            confirmButtonText: 'Ya, Batalkan!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+              document.getElementById('deleteForm').submit();
+                Swal.fire({
+                position: "top-end",
+                title: 'Cancelled!',
+                text: 'Booking anda berhasil dibatalkan.',
+                showConfirmButton: false,
+                timerProgressBar: true,
+                timer: 2000,
+                icon:'success',
+            })
+            }
+        })})
+    </script>
+    @endpush
 </div>
 
 
