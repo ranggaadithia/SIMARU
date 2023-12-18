@@ -1,7 +1,7 @@
 
-<div class="lg:overflow-visible overflow-x-scroll" id="contentScroll">
+<div class="overflow-x-scroll max-w-full" id="contentScroll">
     <table class="mt-[73px] mx-auto w-full">
-        <thead class="transition-shadow ease-in-out duration-300 bg-white" id="thead">
+        <thead class="transition-shadow ease-in-out duration-300 bg-white">
             <tr class="sticky top-[73px] shadow-lg z-40">
                 <th class="py-2 border-r h-10 bg-blue-950 text-white">
                    Ruang
