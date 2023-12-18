@@ -1,7 +1,7 @@
 <div>
   <div>
     <div
-    class="pointer-events-auto absolute z-50 top-4 right-2 lg:right-4 hidden w-96 max-w-full rounded-lg bg-success-100 bg-clip-padding text-sm text-success-700 shadow-lg shadow-black/5 data-[te-toast-show]:hidden"
+    class="pointer-events-auto absolute z-[100] top-4 right-2 lg:right-4 hidden w-96 max-w-full rounded-lg bg-success-100 bg-clip-padding text-sm text-success-700 shadow-lg shadow-black/5 data-[te-toast-show]:hidden"
     id="static-example"
     role="alert"
     aria-live="assertive"
