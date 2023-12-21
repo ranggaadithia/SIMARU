@@ -22,6 +22,16 @@ class ModalBooking extends Component
         $this->labs = $labs;
         $this->user = $user;
         $this->timeMappings = $timeMappings;
+
+        if (request()->routeIs('lab.view')) {
+            $currentSlug = request()->segment(2);
+
+            // Find the lab with the matching slug
+            $lab = Lab::where('slug', $currentSlug)->first();
+
+            // Set lab_id to the ID of the lab with the matching slug
+            $this->lab_id = optional($lab)->id;
+        }
     }
 
     public $lab_id;
