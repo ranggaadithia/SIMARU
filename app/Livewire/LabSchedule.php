@@ -44,6 +44,11 @@ class LabSchedule extends Component
         $this->mount();
     }
 
+    #[On('success-booking-lab')]
+    public function updateSchedule($schedule)
+    {
+    }
+
     public function mount()
     {
         $this->startDate = Carbon::now()->startOfWeek()->addWeeks($this->currentWeek - 1);

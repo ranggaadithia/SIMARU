@@ -33,13 +33,6 @@ Livewire.on('showModalDetail', function () {
 });
 
 Livewire.on('success-booking', function () {
-  // const toasty = document.getElementById('static-example');    
-  //   toasty.classList.replace('data-[te-toast-show]:hidden', 'data-[te-toast-show]:block')
-    
-  //   setTimeout(() => {
-  //     toasty.classList.replace('data-[te-toast-show]:block', 'data-[te-toast-show]:hidden')
-  //   }, 5000);
-
   Swal.fire({
     position: "top-end",
     title: 'Success!',
