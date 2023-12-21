@@ -94,12 +94,15 @@
             <div class="mb-3">
                 <label for="lab_id" class="font-semibold ">Pilih Ruangan<span class="text-red-500">*</span></label>
                 <select name="lab_id" id="lab_id" wire:model="lab_id" class="w-full py-2 px-1 rounded-md border @error('lab_id') border-red-600 @enderror">
-
-                <option selected ><span class="text-xs">Pilih Ruangan</span></option>
-                @foreach ($labs as $lab)
-                <option value="{{ $lab->id }}" class="py-4">{{ $lab->name }} ({{ $lab->capacity }})</option>
-                @endforeach
+                    <option value=""><span class="text-xs">Pilih Ruangan</span></option>
+                
+                    @foreach ($labs as $lab)
+                        <option value="{{ $lab->id }}">
+                            {{ $lab->name }} ({{ $lab->capacity }})
+                        </option>
+                    @endforeach
                 </select>
+                
                 <div class="text-red-600">
                     @error('lab_id'){{ $message }} @enderror
                 </div>
@@ -185,13 +188,6 @@
             class="ml-1 inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
             data-te-ripple-init
             data-te-ripple-color="light">
-            <div
-                wire:loading
-                wire:loading.attr="disabled"
-                class="inline-block h-4 w-4 mr-1 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] text-neutral-100 motion-reduce:animate-[spin_1.5s_linear_infinite]"
-                role="status">
-                
-                </div>
             Pinjam
             </button>
             

@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Carbon\Carbon;
 
+use App\Models\Lab;
 use Livewire\Component;
 use App\Models\LabsBooking;
 use App\Models\ClassSchedule;
@@ -81,6 +82,7 @@ class ModalBooking extends Component
 
             $this->dispatch('close-modal');
             $this->dispatch('success-booking', schedule: $data['user_id']);
+            $this->dispatch('success-booking-lab', schedule: $data['lab_id']);
             $this->resetForm();
         }
     }
