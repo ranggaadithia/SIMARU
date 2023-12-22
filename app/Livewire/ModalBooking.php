@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Carbon\Carbon;
 
+use App\Models\Lab;
 use Livewire\Component;
 use App\Models\LabsBooking;
 use App\Models\ClassSchedule;
@@ -21,6 +22,16 @@ class ModalBooking extends Component
         $this->labs = $labs;
         $this->user = $user;
         $this->timeMappings = $timeMappings;
+
+        if (request()->routeIs('lab.view')) {
+            $currentSlug = request()->segment(2);
+
+            // Find the lab with the matching slug
+            $lab = Lab::where('slug', $currentSlug)->first();
+
+            // Set lab_id to the ID of the lab with the matching slug
+            $this->lab_id = optional($lab)->id;
+        }
     }
 
     public $lab_id;
@@ -81,6 +92,7 @@ class ModalBooking extends Component
 
             $this->dispatch('close-modal');
             $this->dispatch('success-booking', schedule: $data['user_id']);
+            $this->dispatch('success-booking-lab', schedule: $data['lab_id']);
             $this->resetForm();
         }
     }

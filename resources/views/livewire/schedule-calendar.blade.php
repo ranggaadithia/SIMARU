@@ -32,8 +32,10 @@
         <tbody class="">
             @foreach ($labs as $lab)
                 <tr class="text-center h-20" wire:key="{{ $lab->id }} ">
-                    <td class="border px-3 lg:px-3 h-40 items-center bg-blue-950 lg:w-40 sticky left-0 z-0" id="lab-name">
-                    <a href="{{ route('lab.view', $lab->slug) }}">
+                    <td class="border px-3 lg:px-3 h-40 items-center bg-blue-950 hover:bg-blue-900 transition-colors duration-200 ease-in-out lg:w-40 sticky left-0 z-0" id="lab-name">
+                    <a href="{{ route('lab.view', $lab->slug) }}" data-te-toggle="tooltip"
+                    data-te-placement="right"
+                    title="Lihat jadwal {{ $lab->name }}">
                         <div class="h-40 mx-auto flex justify-center items-center">
                             <div class="">
                                 <span class="font-bold text-white">Ruang {{ str_replace('Ruang ', '', $lab->name) }}</span>

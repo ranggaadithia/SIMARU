@@ -40,7 +40,7 @@
                                                         <div class="flex justify-between">
                                                             <div class="">
                                                                 <h1 class="text-xl md:text-2xl font-semibold">{{ $booking->reason_to_booking }}</h1>
-                                                                <p class="text-sm font-light mt-1">{{ $booking->user->name }} ({{ $booking->user->role }})</p>
+                                                                <p class="text-sm font-light mt-1">{{ $booking->user->name }} </p>
                                                                 <p class="mt-3">{{ $booking->start_time }} - {{ $booking->end_time }}</p>
                                                             </div>
                                                             @auth
