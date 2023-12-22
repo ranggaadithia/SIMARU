@@ -77,7 +77,7 @@
         @endphp
         <div class="{{ $dayClass[$booking['day']] }} {{ $timeMappings[$booking['start_time']] }} row-span-{{ $totalRowspan }} bg-blue-400/20 dark:bg-sky-600/50 border border-blue-700/10 dark:border-sky-500 rounded-lg m-1 p-2 flex flex-col" wire:key="{{ $booking->id }}">
             <span class="font-medium text-blue-600 dark:text-sky-100">{{ $booking['reason_to_booking'] }}</span>
-            <span class="text-xs mt-1 text-blue-600">{{ $booking['user']['name'] }} ({{ $booking['user']['role'] }})</span>
+            <span class="text-xs mt-1 text-blue-600">{{ $booking['user']['name'] }} </span>
             <span class="text-xs mt-1 text-blue-600 dark:text-sky-100">{{ $booking['start_time'] }} - {{ $booking['end_time'] }}</span>
         </div>
         @endforeach
