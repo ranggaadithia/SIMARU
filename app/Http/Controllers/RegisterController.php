@@ -24,7 +24,7 @@ class RegisterController extends Controller
         ]);
 
         // Tambahkan peran pengguna
-        $validatedUser['role'] = 'umum';
+        $validatedUser['role'] = 'dosen';
 
         // Simpan data ke tabel users
         $user = User::create($validatedUser);
