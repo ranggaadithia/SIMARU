@@ -46,7 +46,7 @@ class RegisterController extends Controller
         ]);
 
         // Simpan data ke tabel dosen
-        DB::table('dosen')->insert([
+        DB::table('tb_dosen')->insert([
             'nip' => $validatedDosen['nip'],
             'nama_dosen' => $validatedDosen['nama_dosen'],
             'email_sso' => $validatedDosen['email_sso'],
