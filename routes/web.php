@@ -64,6 +64,8 @@ Route::get('/dashboard', function () {
     return redirect('/dashboard/labs');
 });
 Route::middleware(['auth', 'is.admin'])->prefix('dashboard')->group(function () {
+    Route::get('lecturer', [RegisterController::class, 'index']);
+    Route::post('lecturer', [RegisterController::class, 'register'])->name('register');
     Route::resource('labs', LabController::class);
     Route::resource('class-schedule', ClassScheduleController::class)->except(('show'));
     Route::get('class-schedule/list', [ClassScheduleController::class, 'list'])->name('class-schedule.list');

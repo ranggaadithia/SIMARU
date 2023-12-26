@@ -10,11 +10,12 @@ class RegisterController extends Controller
 {
     public function index()
     {
-        return view('auth.register');
+        return view('dashboard.lecturer.register');
     }
 
     public function register(Request $request)
     {
+        return $request;
         // Validasi data pengguna
         $validatedUser = $request->validate([
             'name' => 'required|string|max:255',
@@ -63,4 +64,7 @@ class RegisterController extends Controller
 
         return redirect('/login')->with('success', 'Akun anda berhasil dibuat, silahkan login untuk melanjutkan');
     }
+
+
+ 
 }
