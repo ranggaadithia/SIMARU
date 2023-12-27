@@ -5,7 +5,6 @@ namespace App\Livewire;
 use Carbon\Carbon;
 use Livewire\Component;
 use App\Models\LabsBooking;
-use Livewire\Attributes\On;
 
 class BookingHistory extends Component
 {
@@ -43,12 +42,16 @@ class BookingHistory extends Component
                     });
             })
             ->orderBy('booking_date', 'desc')
-            ->get();
+            ->paginate($this->loadAmount);
 
         $this->totalRecords = LabsBooking::count();
     }
 
-
+    public function cancelBooking($id)
+    {
+        $booking = LabsBooking::find($id);
+        $booking->delete();
+    }
 
     public function render()
     {
@@ -63,8 +66,7 @@ class BookingHistory extends Component
                         });
                 })
                 ->orderBy('booking_date', 'desc')
-                ->limit($this->loadAmount)
-                ->get()
+                ->paginate($this->loadAmount),
         ]);
     }
 }
