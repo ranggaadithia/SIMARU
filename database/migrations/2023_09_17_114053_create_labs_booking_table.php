@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('labs_booking', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('lab_id')->constrained();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('lab_id')->constrained()->cascadeOnDelete();
             $table->date('booking_date');
             $table->time('start_time');
             $table->time('end_time');

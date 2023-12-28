@@ -87,7 +87,7 @@
                     id="name"
                     placeholder="Disabled input"
                     aria-label="Disabled input example"
-                    value="{{ $user->name }} ({{ $user->role }})"
+                    value="{{ $user->name }}"
                     disabled />
                 </div>
             </div>
