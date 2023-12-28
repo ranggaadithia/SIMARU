@@ -10,7 +10,7 @@
             </div>
             <div class="text-xl flex items-center justify-between text-center md:w-80">
                 <button class="hover:bg-gray-200 px-1 rounded-full transition-all ease-in-out duration-300 md:order-1" wire:click="prevWeek"><i class="bi bi-chevron-left text-md md:text-2xl"></i></button>
-                <h3 class="md:mx-5 mx-0 ml-2 md:ml-0 hidden md:block font-semibold text-2xl order-2">
+                <h3 class="md:mx-0 mx-0 ml-2 md:ml-0 hidden md:block font-semibold text-2xl order-2 ">
                     {{ $startDate->format('F Y') }}
                 </h3>
                 <h3 class="md:mx-5 mx-0 ml-2 md:ml-0 block md:hidden font-semibold text-2xl order-2">
@@ -18,6 +18,21 @@
                 </h3>
                 <button class="hover:bg-gray-200 px-1 rounded-full transition-all ease-in-out duration-300 order-3 ml-1 md:ml-0" wire:click="nextWeek"><i class="bi bi-chevron-right text-md md:text-2xl"></i></button>
             </div>
+            <div class="relative hidden md:block">
+              <!-- Tombol dropdown -->
+              <button id="dropdownButton" class="border-2 text-black px-6 py-1 rounded-md">
+                {{ $lab->name }} <i class="bi bi-chevron-down"></i>
+              </button>
+      
+              <!-- Isi dropdown -->
+              <div id="dropdownMenu" class="hidden absolute z-10 mt-2 bg-white rounded-md shadow-md">
+                  <ul class="py-1">
+                    @foreach ($labs as $lab)
+                      <li><a href="{{ route('lab.view', $lab->slug) }}" class="block px-4 py-2 text-gray-800 hover:bg-blue-950 hover:text-white">{{ $lab->name }}</a></li>
+                    @endforeach
+                  </ul>
+              </div>
+          </div>
             <div class="">
                 @auth
                 <div class="relative" data-te-dropdown-ref>
@@ -75,3 +90,25 @@
         </div>
     </nav>
 </div>
+
+@push('scripts')
+<script>
+  // Fungsi untuk menampilkan/sembunyikan dropdown
+  function toggleDropdown() {
+      var dropdownMenu = document.getElementById('dropdownMenu');
+      dropdownMenu.classList.toggle('hidden');
+  }
+
+  // Tambahkan event listener untuk toggle dropdown saat tombol diklik
+  document.getElementById('dropdownButton').addEventListener('click', toggleDropdown);
+
+  // Tambahkan event listener untuk menyembunyikan dropdown saat dokumen diklik di luar dropdown
+  document.addEventListener('click', function(event) {
+      var dropdownMenu = document.getElementById('dropdownMenu');
+      if (!event.target.closest('#dropdownButton') && !event.target.closest('#dropdownMenu')) {
+          dropdownMenu.classList.add('hidden');
+      }
+  });
+
+</script>
+@endpush

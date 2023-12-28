@@ -2,7 +2,7 @@
 
 @section('container')
  
-<livewire:navbar />
+<livewire:navbar-lab :lab="$lab" />
 <div class="mb-16"></div>
 
 <livewire:lab-schedule :lab="$lab" />

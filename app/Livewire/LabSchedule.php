@@ -26,7 +26,7 @@ class LabSchedule extends Component
         return $weekDates;
     }
 
-    public $weekDates, $startDate, $lab, $timeMappings, $dayClass, $today;
+    public $weekDates, $startDate, $lab, $timeMappings, $dayClass, $today, $title;
 
     public $currentWeek = 1;
 
@@ -80,6 +80,7 @@ class LabSchedule extends Component
         ];
 
         $this->today = Carbon::now()->toDateString();
+        $this->title = $this->lab->name;
     }
     public function render()
     {
