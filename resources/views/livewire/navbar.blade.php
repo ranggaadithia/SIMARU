@@ -10,10 +10,10 @@
             </div>
             <div class="text-xl flex items-center justify-between text-center md:w-80">
                 <button class="hover:bg-gray-200 px-1 rounded-full transition-all ease-in-out duration-300 md:order-1" wire:click="prevWeek"><i class="bi bi-chevron-left text-md md:text-2xl"></i></button>
-                <h3 class="md:mx-5 mx-0 ml-2 md:ml-0 hidden md:block font-semibold text-2xl order-2">
+                <h3 class="mx-0 ml-2 md:ml-0 hidden md:block font-semibold text-2xl order-2">
                     {{ $startDate->format('F Y') }}
                 </h3>
-                <h3 class="md:mx-5 mx-0 ml-2 md:ml-0 block md:hidden font-semibold text-2xl order-2">
+                <h3 class="mx-0 ml-2 md:ml-0 block md:hidden font-semibold text-2xl order-2">
                     {{ $startDate->format('M Y') }}
                 </h3>
                 <button class="hover:bg-gray-200 px-1 rounded-full transition-all ease-in-out duration-300 order-3 ml-1 md:ml-0" wire:click="nextWeek"><i class="bi bi-chevron-right text-md md:text-2xl"></i></button>

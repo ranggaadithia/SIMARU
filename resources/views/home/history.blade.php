@@ -101,7 +101,7 @@
                 @csrf
                 @method('delete')
                 <button type="submit" class="px-4 py-2 bg-red-500 font-semibold text-white text-sm rounded-md" 
-               onclick="return confirm('Apakah anda yakin ingin membatalkan peminjaman ini?')"
+                onclick="confirm('Apakah anda yakin ingin membatalkan peminjaman ini?')"
                 >Batalkan Peminjam</button></form>
               </form>
             
@@ -136,8 +136,7 @@
   <script>
      // Get all elements with the id starting with 'cancelBtn'
 const cancelBtns = document.querySelectorAll('#cancelBtn');
-const deleteFormId = cancelBtns[0].getAttribute('form');
-console.log(deleteFormId);
+
 
 // Add a click event listener to each cancel button
 cancelBtns.forEach(function (cancelBtn) {
