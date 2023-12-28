@@ -34,7 +34,7 @@ class HistoryController extends Controller
                     });
             })
             ->orderBy('booking_date', 'desc')
-            ->paginate(5);
+            ->get();
 
         return view('home.history', compact('upcomingHistories', 'expiredHistories'));
     }

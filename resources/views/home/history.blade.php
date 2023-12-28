@@ -97,10 +97,13 @@
               <p class="mb-4 text-base text-neutral-600 dark:text-neutral-200">
                   {{ $history->start_time }} - {{ $history->end_time }}
               </p>
-              <form wire:submit.prevent="cancelBooking({{ $history->id }})">
+              <form action="{{ route('labs-booking.destroy', $history->id) }}" method="POST" id="deleteForm">
                 @csrf
-                <button wire:click="cancelBooking({{ $history->id }})" type="submit" class="px-4 py-2 bg-red-500 font-semibold text-white text-sm rounded-md" id="cancelBtn">Batalkan Peminjam</button>
-            </form>
+                @method('delete')
+                <button type="submit" class="px-4 py-2 bg-red-500 font-semibold text-white text-sm rounded-md" 
+               onclick="return confirm('Apakah anda yakin ingin membatalkan peminjaman ini?')"
+                >Batalkan Peminjam</button></form>
+              </form>
             
           </div>
       </div>
@@ -110,7 +113,6 @@
 @if ($expiredHistories->count() > 0)
 
   <h1 class="text-lg font-semibold mt-10 text-neutral-600 dark:text-neutral-200">Selesai</h1>
-  {{ $expiredHistories->links()  }}
 
   @foreach ($expiredHistories as $history)
   <div class="block rounded-lg bg-gray-200 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700 mt-3" @if ($loop->last) id="last_record" @endif>
@@ -134,47 +136,49 @@
   <script>
      // Get all elements with the id starting with 'cancelBtn'
 const cancelBtns = document.querySelectorAll('#cancelBtn');
+const deleteFormId = cancelBtns[0].getAttribute('form');
+console.log(deleteFormId);
 
 // Add a click event listener to each cancel button
-// cancelBtns.forEach(function (cancelBtn) {
-//     cancelBtn.addEventListener('click', function (e) {
-//         e.preventDefault();
+cancelBtns.forEach(function (cancelBtn) {
+     cancelBtn.addEventListener('click', function (e) {
+         e.preventDefault();
 
-//         Swal.fire({
-//             title: 'Apakah anda yakin?',
-//             text: 'Untuk membatalkan peminjaman ruangan ini.',
-//             icon: 'warning',
-//             iconColor: '#172554',
-//             showCancelButton: true,
-//             confirmButtonColor: '#EF4444',
-//             cancelButtonColor: '#172554',
-//             confirmButtonText: 'Ya, Batalkan!'
-//         }).then((result) => {
-//             if (result.isConfirmed) {
-//                 // Get the associated deleteForm based on the clicked cancel button
-//                 const deleteFormId = cancelBtn.getAttribute('data-form-id');
-//                 const deleteForm = document.getElementById(deleteFormId);
+        Swal.fire({
+            title: 'Apakah anda yakin?',
+            text: 'Untuk membatalkan peminjaman ruangan ini.',
+            icon: 'warning',
+            iconColor: '#172554',
+            showCancelButton: true,
+            confirmButtonColor: '#EF4444',
+            cancelButtonColor: '#172554',
+            confirmButtonText: 'Ya, Batalkan!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Get the associated deleteForm based on the clicked cancel button
+                const deleteFormId = cancelBtn.getAttribute('form');
+                const deleteForm = document.getElementById(deleteFormId);
 
-//                 if (deleteForm) {
-//                     // Submit the delete form
-//                     deleteForm.submit();
+                if (deleteForm) {
+                    // Submit the delete form
+                    deleteForm.submit();
 
-//                     Swal.fire({
-//                         position: 'top-end',
-//                         title: 'Cancelled!',
-//                         text: 'Booking anda berhasil dibatalkan.',
-//                         showConfirmButton: false,
-//                         timerProgressBar: true,
-//                         timer: 2000,
-//                         icon: 'success',
-//                     });
-//                 } else {
-//                     console.error('Delete form not found!');
-//                 }
-//             }
-//         });
-//     });
-// });
+                    Swal.fire({
+                        position: 'top-end',
+                        title: 'Cancelled!',
+                        text: 'Booking anda berhasil dibatalkan.',
+                        showConfirmButton: false,
+                        timerProgressBar: true,
+                        timer: 2000,
+                        icon: 'success',
+                    });
+                } else {
+                    console.error('Delete form not found!');
+                }
+            }
+        });
+    });
+});
   </script>
   @endpush
 </div>
