@@ -77,10 +77,10 @@ Route::middleware(['auth', 'is.admin'])->prefix('dashboard')->group(function () 
     Route::get('report', Report::class)->name('report');
 });
 
-Route::get('/test', function () {
-    return view('test', [
-        'labs' => Lab::all(),
-        'days' => ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-        'alphabet' => ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M']
-    ]);
-});
+// Route::get('/test', function () {
+//     return view('test', [
+//         'labs' => Lab::all(),
+//         'days' => ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+//         'alphabet' => ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M']
+//     ]);
+// });
