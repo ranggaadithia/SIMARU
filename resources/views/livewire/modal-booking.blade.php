@@ -203,9 +203,11 @@
 
 @push('scripts')
 <script>
-    const datepickerDisablePast = document.getElementById('datepicker-disable-past');
-    new te.Datepicker(datepickerDisablePast, {
-    disablePast: true
-    });
+    document.addEventListener('livewire:navigated', function () {
+        const datepickerDisablePast = document.getElementById('datepicker-disable-past');
+        new te.Datepicker(datepickerDisablePast, {
+        disablePast: true
+        });
+    })
 </script>
 @endpush

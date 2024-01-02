@@ -1,5 +1,5 @@
 
-<div class="overflow-x-scroll max-w-full" id="contentScroll">
+<div class="max-w-full" id="contentScroll">
     <table class="mt-[73px] mx-auto w-full">
         <thead class="transition-shadow ease-in-out duration-300 bg-white">
             <tr class="sticky top-[73px] shadow-lg z-40">
