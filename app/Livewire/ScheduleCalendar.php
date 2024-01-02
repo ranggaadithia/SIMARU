@@ -69,6 +69,20 @@ class ScheduleCalendar extends Component
         $this->dispatch('show-detail-schedule', $labId, $date, $day, $data);
     }
 
+    #[On('getRoom')]
+    public function getRoom($bulding)
+    {
+        $this->labs = Lab::where('description', $bulding)->get();
+        $this->mount();
+    }
+
+    #[On('getAllRoom')]
+    public function getAllRoom()
+    {
+        $this->labs = Lab::all();
+        $this->mount();
+    }
+
     public function render()
     {
         return view('livewire.schedule-calendar');

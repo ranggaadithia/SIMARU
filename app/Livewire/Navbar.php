@@ -3,9 +3,7 @@
 namespace App\Livewire;
 
 use Carbon\Carbon;
-use App\Models\Lab;
 use Livewire\Component;
-use Livewire\Attributes\On;
 
 class Navbar extends Component
 {
@@ -15,6 +13,16 @@ class Navbar extends Component
     public function mount()
     {
         $this->startDate = Carbon::now()->startOfWeek()->addWeeks($this->currentWeek - 1);
+    }
+
+    public function getAllRoom()
+    {
+        $this->dispatch('getAllRoom');
+    }
+
+    public function getRoom($bulding)
+    {
+        $this->dispatch('getRoom', ['bulding' => $bulding]);
     }
 
     public function prevWeek()
@@ -31,7 +39,6 @@ class Navbar extends Component
     }
     public function render()
     {
-        $labs = Lab::all();
-        return view('livewire.navbar', compact('labs'));
+        return view('livewire.navbar');
     }
 }

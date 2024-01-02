@@ -1,6 +1,6 @@
 
 <div class="max-w-full" id="contentScroll">
-    <table class="mt-[73px] mx-auto w-full">
+    <table class="mt-[73px] mx-auto w-full" wire:loading.class="animate-pulse">
         <thead class="transition-shadow ease-in-out duration-300 bg-white">
             <tr class="sticky top-[73px] shadow-lg z-40">
                 <th class="py-2 border-r h-10 bg-blue-950 text-white">
@@ -79,20 +79,20 @@
                 </tr>
             @endforeach
         </tbody>
-        @auth
-            @include('components.modal-button')
-        @else
-        <a href="{{ route('login') }}" type="button"  style="background-color: #172554"
-        class="rounded-xl bg-blue-950 p-2 drop-shadow-md text-4xl border border-blue-100 fixed bottom-0 right-0 mb-6 mr-6"
-        data-te-toggle="tooltip"
-        title="Booking Ruangan">
-            <i class="bi bi-plus-lg text-white"></i>
-        </a>
-        @endauth
+        
         
     </table>
 
-    
+    @auth
+        @include('components.modal-button')
+    @else
+    <a href="{{ route('login') }}" type="button"  style="background-color: #172554"
+    class="rounded-xl bg-blue-950 p-2 drop-shadow-md text-4xl border border-blue-100 fixed bottom-0 right-0 mb-6 mr-6"
+    data-te-toggle="tooltip"
+    title="Booking Ruangan">
+        <i class="bi bi-plus-lg text-white"></i>
+    </a>
+    @endauth
     
 @teleport('body')
     <livewire:detail-schedule lazy />
