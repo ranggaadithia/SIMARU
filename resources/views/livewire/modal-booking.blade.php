@@ -87,16 +87,16 @@
                     id="name"
                     placeholder="Disabled input"
                     aria-label="Disabled input example"
-                    value="{{ $user->name }} ({{ $user->role }})"
+                    value="{{ $user->name }}"
                     disabled />
                 </div>
             </div>
             <div class="mb-3">
                 <label for="lab_id" class="font-semibold ">Pilih Ruangan<span class="text-red-500">*</span></label>
                 <select name="lab_id" id="lab_id" wire:model="lab_id" class="w-full py-2 px-1 rounded-md border @error('lab_id') border-red-600 @enderror">
-                    @if (request()->routeIs('home'))
+                    {{-- @if (request()->routeIs('home'))
                     <option value=""><span class="text-xs">Pilih Ruangan</span></option>
-                    @endif
+                    @endif --}}
                 
                     @foreach ($labs as $lab)
                         <option value="{{ $lab->id }}">
