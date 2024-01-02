@@ -13,5 +13,3 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-
-Route::apiResource('bookings', App\Http\Controllers\Api\LabBookingController::class);

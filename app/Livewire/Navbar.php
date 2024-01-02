@@ -31,7 +31,6 @@ class Navbar extends Component
     }
     public function render()
     {
-        $labs = Lab::all();
-        return view('livewire.navbar', compact('labs'));
+        return view('livewire.navbar');
     }
 }
