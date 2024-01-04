@@ -18,6 +18,23 @@
                 </h3>
                 <button class="hover:bg-gray-200 px-1 rounded-full transition-all ease-in-out duration-300 order-3 ml-1 md:ml-0" wire:click="nextWeek"><i class="bi bi-chevron-right text-md md:text-2xl"></i></button>
             </div>
+            <div class="relative hidden md:block">
+                <!-- Tombol dropdown -->
+                <button id="dropdownButton" class="border-2 text-black px-6 py-1 rounded-md">
+                  Pilih Gedung <i class="bi bi-chevron-down"></i>
+                </button>
+        
+                <!-- Isi dropdown -->
+                <div id="dropdownMenu" class="hidden absolute z-10 mt-2 bg-white rounded-md shadow-md">
+                    <ul class="py-1">
+                      <li class="block w-full px-4 py-2 text-gray-800 hover:bg-blue-950 hover:text-white cursor-pointer"><button wire:click="getAllRoom()">Plih Semua</button></li>
+                      <li class="block w-full px-4 py-2 text-gray-800 hover:bg-blue-950 hover:text-white cursor-pointer"><button wire:click="getRoom('jd')">Jineng Dalem</button></li>
+                      <li class="block w-full px-4 py-2 text-gray-800 hover:bg-blue-950 hover:text-white cursor-pointer"><button wire:click="getRoom('b')" >FTK-B</button></li>
+                      <li class="block w-full px-4 py-2 text-gray-800 hover:bg-blue-950 hover:text-white cursor-pointer"><button wire:click="getRoom('c')">FTK-C</button></li>
+                      <li class="block w-full px-4 py-2 text-gray-800 hover:bg-blue-950 hover:text-white cursor-pointer" wire:click="getRoom('me')"><button>FTK-ME</button></li>
+                    </ul>
+                </div>
+            </div>
             <div class="">
                 @auth
                 <div class="relative" data-te-dropdown-ref>
@@ -74,4 +91,26 @@
             </div>
         </div>
     </nav>
+
+    @push('scripts')
+<script>
+  // Fungsi untuk menampilkan/sembunyikan dropdown
+  function toggleDropdown() {
+      var dropdownMenu = document.getElementById('dropdownMenu');
+      dropdownMenu.classList.toggle('hidden');
+  }
+
+  // Tambahkan event listener untuk toggle dropdown saat tombol diklik
+  document.getElementById('dropdownButton').addEventListener('click', toggleDropdown);
+
+  // Tambahkan event listener untuk menyembunyikan dropdown saat dokumen diklik di luar dropdown
+  document.addEventListener('click', function(event) {
+      var dropdownMenu = document.getElementById('dropdownMenu');
+      if (!event.target.closest('#dropdownButton') && !event.target.closest('#dropdownMenu')) {
+          dropdownMenu.classList.add('hidden');
+      }
+  });
+
+</script>
+@endpush
 </div>

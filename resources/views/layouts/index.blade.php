@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SIMARU</title>
+  <title>{{ isset($title) ? $title . ' | ' : '' }}  {{ config('app.name') }}</title>
 
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
@@ -17,7 +17,7 @@
 <body x-data="{ open: false }" class="font-poppins">
   @yield('container')
   
- <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/tw-elements.umd.min.js" ></script>
+ <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/tw-elements.umd.min.js" data-navigate-track></script>
 
  <script>
   localStorage.theme = 'light'

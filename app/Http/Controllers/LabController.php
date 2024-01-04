@@ -55,7 +55,8 @@ class LabController extends Controller
     {
         $labs = Lab::all();
         $timeMappings = TimeMappings::$timeMappings;
-        return view('home.lab', compact('lab', 'labs', 'timeMappings'));
+        $title = $lab->name;
+        return view('home.lab', compact('lab', 'labs', 'timeMappings', 'title'));
     }
 
     /**

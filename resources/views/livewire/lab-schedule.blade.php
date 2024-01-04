@@ -1,12 +1,12 @@
 <div class="xl:flex xl:justify-center">
-    <div class="overflow-x-scroll grid grid-cols-[70px,repeat(7,170px)] grid-rows-[repeat(14,50px)]" id="scrollContainer">
-        <div class="row-start-[1] col-start-[1] sticky top-0 z-10 bg-white dark:bg-gradient-to-b dark:from-slate-600 dark:to-slate-700 border-slate-100 dark:border-black/10 bg-clip-padding text-slate-900 dark:text-slate-200 border-b text-xs font-base py-2 flex items-center ml-1" id="sticky1"></div>
+    <div class="grid grid-cols-[70px,repeat(7,170px)] grid-rows-[repeat(14,50px)]" id="scrollContainer">
+        <div class="row-start-[1] col-start-[1] sticky top-16 z-10 bg-white dark:bg-gradient-to-b dark:from-slate-600 dark:to-slate-700 border-slate-100 dark:border-black/10 bg-clip-padding text-slate-900 dark:text-slate-200 border-b text-xs font-base py-2 flex items-center ml-1" id="sticky1"></div>
         @php
             $col = 2;
         @endphp
         @foreach ($weekDates as $week)
         @if ($week['date'] == $today)
-        <div class="row-start-[1] col-start-[{{ $col }}] sticky top-0 z-10 bg-white dark:bg-gradient-to-b dark:from-slate-600 dark:to-slate-700 border-slate-100 dark:border-black/10 bg-clip-padding text-slate-900 dark:text-slate-200 border-b text-sm font-medium py-2 text-center" id="sticky2">
+        <div class="row-start-[1] col-start-[{{ $col }}] sticky top-16 z-10 bg-white dark:bg-gradient-to-b dark:from-slate-600 dark:to-slate-700 border-slate-100 dark:border-black/10 bg-clip-padding text-slate-900 dark:text-slate-200 border-b text-sm font-medium py-2 text-center" id="sticky2">
             <span class="uppercase font-light text-blue-600">
                 {{ Illuminate\Support\Str::limit($week['day'], 3, '') }} 
             </span>
@@ -16,7 +16,7 @@
             </span>
         </div>
         @else
-        <div class="row-start-[1] col-start-[{{ $col }}] sticky top-0 z-10 bg-white dark:bg-gradient-to-b dark:from-slate-600 dark:to-slate-700 border-slate-100 dark:border-black/10 bg-clip-padding text-slate-900 dark:text-slate-200 border-b text-sm font-medium py-2 text-center" id="sticky3">
+        <div class="row-start-[1] col-start-[{{ $col }}] sticky top-16 z-10 bg-white dark:bg-gradient-to-b dark:from-slate-600 dark:to-slate-700 border-slate-100 dark:border-black/10 bg-clip-padding text-slate-900 dark:text-slate-200 border-b text-sm font-medium py-2 text-center" id="sticky3">
             <span class="uppercase font-light">
                 {{ Illuminate\Support\Str::limit($week['day'], 3, '') }} 
             </span>

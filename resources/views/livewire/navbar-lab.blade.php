@@ -1,6 +1,6 @@
 <div> 
     <nav
-    class="fixed top-0 z-50 flex-no-wrap flex w-full items-center justify-between bg-white py-4 lg:flex-wrap border-b drop-shadow backdrop-blur-md">
+    class="fixed top-0 z-50 flex-no-wrap flex w-full items-center justify-between bg-white py-4 lg:flex-wrap border-b">
         <div class="flex w-full flex-wrap items-center justify-between px-4 md:px-10">
             <div class="flex items-center justify-center">
               <a href="/">
@@ -28,7 +28,7 @@
               <div id="dropdownMenu" class="hidden absolute z-10 mt-2 bg-white rounded-md shadow-md">
                   <ul class="py-1">
                     @foreach ($labs as $lab)
-                      <li><a href="{{ route('lab.view', $lab->slug) }}" class="block px-4 py-2 text-gray-800 hover:bg-blue-950 hover:text-white">{{ $lab->name }}</a></li>
+                      <li><a href="{{ route('lab.view', $lab->slug) }}" wire:navigate class="block px-4 py-2 text-gray-800 hover:bg-blue-950 hover:text-white">{{ $lab->name }}</a></li>
                     @endforeach
                   </ul>
               </div>
