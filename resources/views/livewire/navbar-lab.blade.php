@@ -28,7 +28,7 @@
               <div id="dropdownMenu" class="hidden absolute z-10 mt-2 bg-white rounded-md shadow-md">
                   <ul class="py-1">
                     @foreach ($labs as $lab)
-                      <li><a href="{{ route('lab.view', $lab->slug) }}" wire:navigate class="block px-4 py-2 text-gray-800 hover:bg-blue-950 hover:text-white">{{ $lab->name }}</a></li>
+                      <li><a href="{{ route('lab.view', $lab->slug) }}" class="block px-4 py-2 text-gray-800 hover:bg-blue-950 hover:text-white">{{ $lab->name }}</a></li>
                     @endforeach
                   </ul>
               </div>
