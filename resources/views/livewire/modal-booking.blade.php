@@ -11,9 +11,9 @@
     <div
     wire:ignore.self
         data-te-modal-dialog-ref
-        class="pointer-events-none relative w-[600px] translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:max-w-[700px]">
+        class="pointer-events-none relative w-[600px] translate-y-[-50%] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:max-w-[700px] ">
         <div
-        class="min-[576px]:shadow-[0_0.5rem_1rem_rgba(#000, 0.15)] pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-lg outline-none dark:bg-neutral-600">
+        class="min-[576px]:shadow-[0_0.5rem_1rem_rgba(#000, 0.15)] pointer-events-auto relative flex w-screen md:w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-lg outline-none dark:bg-neutral-600">
         <div
             class="flex flex-shrink-0 items-center justify-between rounded-t-md border-b-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">
             <!--Modal title-->
@@ -49,11 +49,13 @@
         <div class="relative flex-auto p-4" data-te-modal-body-ref>
         @if (session('conflict'))
             <div
-                class="mb-3 hidden w-full items-center rounded-lg bg-warning-100 px-6 py-5 text-base text-warning-800 data-[te-alert-show]:inline-flex"
+                class="mb-3 hidden w-full items-center rounded-lg bg-danger-100 px-6 py-5 text-base text-danger-700 data-[te-alert-show]:inline-flex"
                 role="alert"
                 data-te-alert-init
                 data-te-alert-show>
-                {{ session('conflict') }}
+                <p class="font-semibold">
+                    {{ session('conflict') }}
+                </p>
                 <button
                     type="button"
                     class="ml-auto box-content rounded-none border-none p-1 text-warning-900 opacity-50 hover:text-warning-900 hover:no-underline hover:opacity-75 focus:opacity-100 focus:shadow-none focus:outline-none"
@@ -85,19 +87,24 @@
                     id="name"
                     placeholder="Disabled input"
                     aria-label="Disabled input example"
-                    value="{{ $user->name }} ({{ $user->role }})"
+                    value="{{ $user->name }}"
                     disabled />
                 </div>
             </div>
             <div class="mb-3">
                 <label for="lab_id" class="font-semibold ">Pilih Ruangan<span class="text-red-500">*</span></label>
                 <select name="lab_id" id="lab_id" wire:model="lab_id" class="w-full py-2 px-1 rounded-md border @error('lab_id') border-red-600 @enderror">
-
-                <option selected ><span class="text-xs">Pilih Ruangan</span></option>
-                @foreach ($labs as $lab)
-                <option value="{{ $lab->id }}" class="py-4">{{ $lab->name }} ({{ $lab->capacity }})</option>
-                @endforeach
+                    @if (request()->routeIs('home'))
+                    <option value=""><span class="text-xs">Pilih Ruangan</span></option>
+                    @endif
+                
+                    @foreach ($labs as $lab)
+                        <option value="{{ $lab->id }}">
+                            {{ $lab->name }} ({{ $lab->capacity }})
+                        </option>
+                    @endforeach
                 </select>
+                
                 <div class="text-red-600">
                     @error('lab_id'){{ $message }} @enderror
                 </div>
@@ -140,8 +147,8 @@
                 </div>
             </div>
             <div class="mb-3">
-                <div class="flex gap-x-5 ">
-                    <div class=" w-1/2">
+                <div class="flex gap-x-5 flex-row">
+                    <div class="w-1/2">
                         <label for="jam_mulai" class="font-semibold">Jam Mulai<span class="text-red-500">*</span></label>
                         <select id="jam_mulai" class=" w-full py-2 border @error('end_time') border-red-600 @enderror rounded-md px-1" wire:model="start_time">
                             <option selected ><p class="text-sm">Pilih Jam</p></option>
@@ -180,12 +187,12 @@
             class="flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md border-t-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">
             <button
             type="submit"
-            class="ml-1 inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] font-semibold"
+            class="ml-1 inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
             data-te-ripple-init
             data-te-ripple-color="light">
             Pinjam
             </button>
-           
+            
         </form>
         </div>
         </div>

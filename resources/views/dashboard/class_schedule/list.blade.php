@@ -3,7 +3,7 @@
 @section('container')
 @if (session()->has('success'))
 <div class="alert alert-success alert-dismissible fade show" role="alert">
-  <strong>Success</strong> {{ session('success') }}
+  <strong>Berhasil</strong> {{ session('success') }}
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 @endif
@@ -13,10 +13,10 @@
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 @endif
-<a href="{{ route('class-schedule.create') }}" class="btn btn-primary">Add Class Schedule</a>
+<a href="{{ route('class-schedule.create') }}" class="btn btn-primary">Tambah Jadwal Kelas</a>
 <ul class="nav nav-tabs mt-5">
  <li class="nav-item">
-   <a class="nav-link" href="{{ route('class-schedule.index') }}">Calendar</a>
+   <a class="nav-link" href="{{ route('class-schedule.index') }}">Kalender</a>
  </li>
  <li class="nav-item">
    <a class="nav-link active" aria-current="page" href="{{ route('class-schedule.list') }}">List</a>
@@ -27,13 +27,13 @@
    <tr>
      <th scope="col">#</th>
      <th scope="col">Mata Kuliah</th>
-     <th scope="col">Lab</th>
+     <th scope="col">Ruangan</th>
      <th scope="col">Hari</th>
      <th scope="col">Dosen</th>
      <th scope="col">Kelas</th>
      <th scope="col">Jam Mulai</th>
      <th scope="col">Jam Selesai</th>
-     <th scope="col">Action</th>
+     <th scope="col">Aksi</th>
    </tr>
  </thead>
  <tbody>
@@ -54,7 +54,7 @@
          @csrf
          @method('delete')
          <button type="submit" value="Delete" class="btn btn-danger">
-          Delete
+          Hapus
          </button>
        </form>
       </td>

@@ -125,64 +125,27 @@
 @section('container')
 @if (session()->has('success'))
 <div class="alert alert-success alert-dismissible fade show" role="alert">
-  <strong>Success</strong> {{ session('success') }}
+  <strong>Berhasil</strong> {{ session('success') }}
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 @endif
 @if (session()->has('error'))
 <div class="alert alert-danger alert-dismissible fade show" role="alert">
-  <strong>Failed</strong> {{ session('error') }}
+  <strong>Gagal</strong> {{ session('error') }}
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 @endif
-<a href="{{ route('class-schedule.create') }}" class="btn btn-primary">Add Class Schedule</a>
+<a href="{{ route('class-schedule.create') }}" class="btn btn-primary">Tambah Jadwal Kelas</a>
   <ul class="nav nav-tabs mt-5">
     <li class="nav-item">
-      <a class="nav-link active" aria-current="page" href="{{ route('class-schedule.index') }}">Calendar</a>
+      <a class="nav-link active" aria-current="page" href="{{ route('class-schedule.index') }}">Kalender</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="{{ route('class-schedule.list') }}" wire:navigate>List</a>
     </li>
   </ul>
-  <div class="table-responsive">
-      <table class="table table-bordered w-screen">
-          <thead>
-              <tr class="bg-light-gray text-center">
-                  <th class="text-uppercase">Lab/Day<br /></th>
-                  @foreach ($days as $day)
-                    <th class="text-uppercase">{{ $day }}<br /></th>
-                  @endforeach
-              </tr>
-          </thead>
-          <tbody>
-            @foreach ($labs as $lab)
-              <tr>
-                  <td class="align-middle" >{{ $lab->name }}</td>
-                  @foreach ($days as $day)
-                    <td class="position-relative">
-                      @foreach ($classSchedules as $schedule)
-                      @if ($schedule->lab_id == $lab->id && $schedule->day == strtolower($day))
-                        <div class="margin-10px-top font-size14">
-                          <a href="{{ route('class-schedule.edit', $schedule->id) }}">
-                            <span class="text-light-gray">| </span>
-                              ({{ App\Utilities\TimeMappings::convertToLetter($schedule->start_time) }} - {{ App\Utilities\TimeMappings::convertToLetter($schedule->end_time) }})
-                              <strong>
-                                {{ $schedule->subject }}
-                              </strong>
-                             ({{ $schedule->lecturer }})
-                          </a>
-                            
-                        </div>
-                        
-                        @endif
-                      @endforeach
-                    </td>
-                  @endforeach
-              </tr>
-            @endforeach
-          </tbody>
-      </table>
-  </div>
+
+<livewire:class-schedule :days="$days" :classSchedules="$classSchedules" />
 
   
 @endsection

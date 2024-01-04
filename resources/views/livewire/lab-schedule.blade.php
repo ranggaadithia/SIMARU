@@ -1,6 +1,6 @@
 <div class="xl:flex xl:justify-center">
     <div class="overflow-x-scroll grid grid-cols-[70px,repeat(7,170px)] grid-rows-[repeat(14,50px)]" id="scrollContainer">
-        <div class="row-start-[1] col-start-[1] sticky top-0 z-10 bg-white dark:bg-gradient-to-b dark:from-slate-600 dark:to-slate-700 border-slate-100 dark:border-black/10 bg-clip-padding text-slate-900 dark:text-slate-200 border-b text-sm font-medium py-2" id="sticky1"></div>
+        <div class="row-start-[1] col-start-[1] sticky top-0 z-10 bg-white dark:bg-gradient-to-b dark:from-slate-600 dark:to-slate-700 border-slate-100 dark:border-black/10 bg-clip-padding text-slate-900 dark:text-slate-200 border-b text-xs font-base py-2 flex items-center ml-1" id="sticky1"></div>
         @php
             $col = 2;
         @endphp
@@ -75,14 +75,25 @@
         @php
             $totalRowspan = ceil((strtotime($booking['end_time']) - strtotime($booking['start_time'])) / 3600);
         @endphp
-        <div class="{{ $dayClass[$booking['day']] }} {{ $timeMappings[$booking['start_time']] }} row-span-{{ $totalRowspan }} bg-blue-400/20 dark:bg-sky-600/50 border border-blue-700/10 dark:border-sky-500 rounded-lg m-1 p-2 flex flex-col">
+        <div class="{{ $dayClass[$booking['day']] }} {{ $timeMappings[$booking['start_time']] }} row-span-{{ $totalRowspan }} bg-blue-400/20 dark:bg-sky-600/50 border border-blue-700/10 dark:border-sky-500 rounded-lg m-1 p-2 flex flex-col" wire:key="{{ $booking->id }}">
             <span class="font-medium text-blue-600 dark:text-sky-100">{{ $booking['reason_to_booking'] }}</span>
-            <span class="text-xs mt-1 text-blue-600">{{ $booking['user']['name'] }} ({{ $booking['user']['role'] }})</span>
+            <span class="text-xs mt-1 text-blue-600">{{ $booking['user']['name'] }} </span>
             <span class="text-xs mt-1 text-blue-600 dark:text-sky-100">{{ $booking['start_time'] }} - {{ $booking['end_time'] }}</span>
         </div>
         @endforeach
 
         
       </div>
+      @auth
+            @include('components.modal-button')
+        @else
+        <a href="{{ route('login') }}" type="button"  style="background-color: #172554"
+        class="rounded-xl bg-blue-950 p-2 drop-shadow-md text-4xl border border-blue-100 fixed bottom-0 right-0 mb-6 mr-6"
+        data-te-toggle="tooltip"
+        title="Booking Ruangan">
+            <i class="bi bi-plus-lg text-white"></i>
+        </a>
+        @endauth
     </div>
+    
 </div>

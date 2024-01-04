@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Carbon\Carbon;
 
+use App\Models\Lab;
 use Livewire\Component;
 use App\Models\LabsBooking;
 use App\Models\ClassSchedule;
@@ -21,6 +22,16 @@ class ModalBooking extends Component
         $this->labs = $labs;
         $this->user = $user;
         $this->timeMappings = $timeMappings;
+
+        if (request()->routeIs('lab.view')) {
+            $currentSlug = request()->segment(2);
+
+            // Find the lab with the matching slug
+            $lab = Lab::where('slug', $currentSlug)->first();
+
+            // Set lab_id to the ID of the lab with the matching slug
+            $this->lab_id = optional($lab)->id;
+        }
     }
 
     public $lab_id;
@@ -38,11 +49,11 @@ class ModalBooking extends Component
     ];
 
     protected $messages = [
-        'lab_id.required' => 'Please select a lab.',
-        'reason_to_booking.required' => 'Please provide a reason for booking.',
-        'booking_date.required' => 'Please select a booking date.',
-        'start_time.required' => 'Please select a start time.',
-        'end_time.required' => 'Please select an end time.',
+        'lab_id.required' => 'Silahkan pilih ruangan.',
+        'reason_to_booking.required' => 'Silahkan mengisi keperluan pesan.',
+        'booking_date.required' => 'Silahkan pilih tanggal pesan.',
+        'start_time.required' => 'Silahkan pilih waktu mulai.',
+        'end_time.required' => 'Silahkan pilih waktu selesai.',
     ];
 
     public function bookingLab()
@@ -59,9 +70,11 @@ class ModalBooking extends Component
         $isLabAvailable = ClassSchedule::isLabAvailable($this->lab_id, $day, $this->start_time, $this->end_time)->count() == 0;
 
         if (!$isBookingConflict) {
-            session()->flash('conflict', 'Pada tanggal dan jam tersebut lab sedang digunakan');
+            session()->flash('conflict', 'Pada tanggal & jam tersebut ruangan sedang digunakan');
         } else if (!$isLabAvailable) {
-            session()->flash('conflict', 'Pada hari dan jam tersebut sedang ada perkuliahan di lab');
+            session()->flash('conflict', 'Pada hari & jam tersebut sedang ada perkuliahan di ruangan');
+        } else if ($this->start_time == $this->end_time) {
+            session()->flash('conflict', 'Waktu mulai dan selesai tidak boleh sama');
         } else {
 
             $data = [
@@ -79,6 +92,7 @@ class ModalBooking extends Component
 
             $this->dispatch('close-modal');
             $this->dispatch('success-booking', schedule: $data['user_id']);
+            $this->dispatch('success-booking-lab', schedule: $data['lab_id']);
             $this->resetForm();
         }
     }

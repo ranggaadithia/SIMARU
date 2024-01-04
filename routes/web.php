@@ -20,6 +20,7 @@ use App\Http\Controllers\RescheduleController;
 use App\Http\Controllers\LabScheduleController;
 use App\Http\Controllers\ClassScheduleController;
 use App\Http\Controllers\HistoryController;
+use App\Http\Controllers\PasswordController;
 use Database\Seeders\ClassSchedulesSeeder;
 
 /*
@@ -42,7 +43,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/', [LabBookingController::class, 'store'])->name('booking');
     Route::get('accept/{request_reschedule}', [RescheduleController::class, 'acceptReschedule']);
     Route::delete('labs-booking/{labs_booking}', [LabBookingController::class, 'destroy'])->name('labs-booking.destroy');
+
+    Route::get('/change-password', [PasswordController::class, 'showChangePasswordForm']);
+    Route::post('/change-password', [PasswordController::class, 'changePassword'])->name('change.password');
 });
+
+
 
 
 Route::middleware('guest')->group(function () {
@@ -58,6 +64,10 @@ Route::get('/dashboard', function () {
     return redirect('/dashboard/labs');
 });
 Route::middleware(['auth', 'is.admin'])->prefix('dashboard')->group(function () {
+    Route::get('lecturer', [RegisterController::class, 'index'])->name('lecturer.create');
+    Route::get('lecturer/list', [RegisterController::class, 'list'])->name('lecturer.list');
+    Route::post('lecturer', [RegisterController::class, 'register'])->name('register');
+    Route::delete('lecturer/{nip}', [RegisterController::class, 'destroy'])->name('lecturer.delete');
     Route::resource('labs', LabController::class);
     Route::resource('class-schedule', ClassScheduleController::class)->except(('show'));
     Route::get('class-schedule/list', [ClassScheduleController::class, 'list'])->name('class-schedule.list');
@@ -67,10 +77,10 @@ Route::middleware(['auth', 'is.admin'])->prefix('dashboard')->group(function () 
     Route::get('report', Report::class)->name('report');
 });
 
-Route::get('/test', function () {
-    return view('test', [
-        'labs' => Lab::all(),
-        'days' => ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-        'alphabet' => ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M']
-    ]);
-});
+// Route::get('/test', function () {
+//     return view('test', [
+//         'labs' => Lab::all(),
+//         'days' => ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+//         'alphabet' => ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M']
+//     ]);
+// });

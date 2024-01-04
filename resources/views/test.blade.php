@@ -2,7 +2,7 @@
 
 @section('container')
 
-<livewire-navbar />
+{{-- <livewire-navbar /> --}}
 
 <div class="overflow-scroll grid grid-cols-[70px,repeat(7,150px)] grid-rows-[auto,repeat(16,50px)] md:max-h-[350px] h-screen">
     <!-- Calendar frame -->
@@ -143,7 +143,12 @@
     <div class="row-start-[17] col-start-[7] border-slate-100 dark:border-slate-200/5 border-r"></div>
     <div class="row-start-[17] col-start-[8]"></div>
     <!-- Calendar contents -->
-    <div class="row-start-[2] col-start-3 row-span-4 bg-blue-400/20 dark:bg-sky-600/50 border border-blue-700/10 dark:border-sky-500 rounded-lg m-1 p-1 flex flex-col">
+    <div class="row-start-[2] col-start-3 row-span-6 bg-blue-400/20 dark:bg-sky-600/50 border border-blue-700/10 dark:border-sky-500 rounded-lg m-1 p-1 flex flex-col">
+      <span class="text-xs text-blue-600 dark:text-sky-100">5 AM</span>
+      <span class="text-xs font-medium text-blue-600 dark:text-sky-100">Flight to vancouver</span>
+      <span class="text-xs text-blue-600 dark:text-sky-100">Toronto YYZ</span>
+    </div>
+    <div class="row-start-[2] col-start-2 row-span-4 bg-blue-400/20 dark:bg-sky-600/50 border border-blue-700/10 dark:border-sky-500 rounded-lg m-1 p-1 flex flex-col">
       <span class="text-xs text-blue-600 dark:text-sky-100">5 AM</span>
       <span class="text-xs font-medium text-blue-600 dark:text-sky-100">Flight to vancouver</span>
       <span class="text-xs text-blue-600 dark:text-sky-100">Toronto YYZ</span>

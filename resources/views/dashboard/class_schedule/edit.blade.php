@@ -3,17 +3,17 @@
 @section('container')
 
 <div class="d-flex item-center justify-content-between">
-  <h2>Add Class Schedule</h2>
+  <h2>Tambah Jadwal Kelas</h2>
   <form action="{{ route('class-schedule.destroy', $classSchedule->id) }}" method="POST">
     @csrf
     @method('delete')
-    <button type="submit" class="btn btn-danger">Delete Jadwal Kuliah</button>
+    <button type="submit" class="btn btn-danger">Hapus Jadwal Kuliah</button>
   </form>
 </div>
 
 @if (session()->has('error'))
 <div class="alert alert-danger alert-dismissible fade show" role="alert">
-  <strong>Failed</strong> {{ session('error') }}
+  <strong>Gagal</strong> {{ session('error') }}
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 @endif

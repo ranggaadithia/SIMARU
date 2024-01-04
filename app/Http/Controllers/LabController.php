@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Mpdf\Tag\Time;
 use App\Models\Lab;
-use App\Utilities\TimeMappings;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Utilities\TimeMappings;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Database\QueryException;
-use Mpdf\Tag\Time;
 
 class LabController extends Controller
 {
@@ -52,7 +53,9 @@ class LabController extends Controller
      */
     public function show(Lab $lab)
     {
-        return view('home.lab', compact('lab'));
+        $labs = Lab::all();
+        $timeMappings = TimeMappings::$timeMappings;
+        return view('home.lab', compact('lab', 'labs', 'timeMappings'));
     }
 
     /**

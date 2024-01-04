@@ -12,7 +12,7 @@ class HistoryController extends Controller
     {
         $now = Carbon::now();
 
-        $upcomingHistories = LabsBooking::with('lab', 'user')
+        $upcomingHistories = LabsBooking::with('lab')
             ->where('user_id', auth()->user()->id)
             ->where(function ($query) use ($now) {
                 $query->where('booking_date', '>=', $now->format('Y-m-d'))
@@ -21,16 +21,16 @@ class HistoryController extends Controller
                             ->where('start_time', '>', $now->format('H:i:s'));
                     });
             })
-            ->orderBy('booking_date', 'desc')
+            ->orderBy('booking_date', 'asc')
             ->get();
 
         $expiredHistories = LabsBooking::with('lab')
             ->where('user_id', auth()->user()->id)
             ->where(function ($query) use ($now) {
-                $query->where('booking_date', '<', $now)
-                    ->orWhere(function ($query) use ($now) {
-                        $query->whereDate('booking_date', '=', $now->format('Y-m-d'))
-                            ->whereTime('start_time', '<=', $now->format('H:i:s'));
+                $query->where('booking_date', '<', $now->format('Y-m-d'))
+                    ->orWhere(function ($subquery) use ($now) {
+                        $subquery->whereDate('booking_date', '=', $now->format('Y-m-d'))
+                            ->whereTime('start_time', '<', $now->format('H:i:s'));
                     });
             })
             ->orderBy('booking_date', 'desc')

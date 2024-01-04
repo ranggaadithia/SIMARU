@@ -2,20 +2,20 @@
 
 @section('container')
 <div class="d-flex justify-content-between">
- <h1>Lab</h1>
+ <h1>Ruangan</h1>
  
- <a href="{{ route('labs.create') }}" class="btn btn-primary" style="height: 40px">Add Lab</a>
+ <a href="{{ route('labs.create') }}" class="btn btn-primary" style="height: 40px">Tambah Ruangan</a>
 </div>
 
 @if (session()->has('status'))
 <div class="alert alert-success alert-dismissible fade show" role="alert">
-  <strong>Success</strong> {{ session('status') }}
+  <strong>Sukses</strong> {{ session('status') }}
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 @endif
 @if (session()->has('error'))
 <div class="alert alert-danger alert-dismissible fade show" role="alert">
-  <strong>Failed</strong> {{ session('error') }}
+  <strong>Gagal</strong> {{ session('error') }}
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 @endif
@@ -24,10 +24,10 @@
  <thead>
    <tr>
      <th scope="col">#</th>
-     <th scope="col">Lab</th>
+     <th scope="col">Ruangan</th>
      <th scope="col">Kapasitas</th>
      <th scope="col">Ukuran</th>
-     <th scope="col">Action</th>
+     <th scope="col">Aksi</th>
    </tr>
  </thead>
  <tbody>
@@ -46,7 +46,7 @@
        <form action="{{ route('labs.destroy', $lab->slug) }}" method="post">
         @csrf
         @method('delete')
-        <button type="submit" class="btn btn-danger" onclick="return confirm('Anda yakin ingin menghapus lab ini?')">Delete</button>
+        <button type="submit" class="btn btn-danger" onclick="return confirm('Anda yakin ingin menghapus lab ini?')">Hapus</button>
       </form>
      </td>
    </tr>
