@@ -5,7 +5,6 @@
          <th>Ruangan</th>
          <th>Peminjam</th>
          <td>Email Peminjam</td>
-         <td>No. Peminjam</td>
          <th>Tujuan</th>
          <th>Tanggal</th>
          <th>Jam Mulai</th>
@@ -19,7 +18,6 @@
          <td>{{ $booking->lab->name }}</td>
          <td>{{ $booking->user->name }}</td>
          <td>{{ $booking->user->email }}</td>
-         <td>{{ $booking->user->phone_number }}</td>
          <td>{{ $booking->reason_to_booking }}</td>
          <td>{{ $booking->booking_date }}</td>
          <td>{{ App\Utilities\TimeMappings::convertToLetter($booking->start_time) }}</td>

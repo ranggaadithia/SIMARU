@@ -66,8 +66,8 @@
 
             <button class="hover:bg-blue-950 bg-blue-950 text-white text-md font-bold py-2 px-4 rounded-md w-full mt-4 mb-2" type="submit">Masuk </button>
         </form>
-        <p class="text-[13px] max-w-[250px] my-2">Untuk pengguna dari luar Undiksha, silakan membuat akun di  bawah ini</p>
-        <a href="/register" class="text-[13px] text-b1 underline text-primary" wire:navigate><p class="mt-1">Daftar</p></a>
+        <!-- <p class="text-[13px] max-w-[250px] my-2">Untuk pengguna dari luar Undiksha, silakan membuat akun di  bawah ini</p>
+        <a href="/register" class="text-[13px] text-b1 underline text-primary" wire:navigate><p class="mt-1">Daftar</p></a> -->
     </div>
   </div>
 </div>

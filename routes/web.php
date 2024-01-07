@@ -35,7 +35,7 @@ use Database\Seeders\ClassSchedulesSeeder;
 */
 
 Route::get('/', [LabBookingController::class, 'index'])->name('home');
-Route::get('/history', [HistoryController::class, 'history'])->name('history');
+// Route::get('/history', [HistoryController::class, 'history'])->name('history');
 Route::get('/labs', LabScheduleController::class);
 Route::get('/labs/{lab:slug}', [LabController::class, 'show'])->name('lab.view');
 
@@ -46,6 +46,11 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/change-password', [PasswordController::class, 'showChangePasswordForm']);
     Route::post('/change-password', [PasswordController::class, 'changePassword'])->name('change.password');
+});
+
+Route::get('/history', function () {
+    $title = 'Riwayat Peminjaman';
+    return view('home.counter', compact('title'));
 });
 
 
