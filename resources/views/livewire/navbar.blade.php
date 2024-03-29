@@ -18,7 +18,7 @@
                 </h3>
                 <button class="hover:bg-gray-200 px-1 rounded-full transition-all ease-in-out duration-300 order-3 ml-1 md:ml-0" wire:click="nextWeek"><i class="bi bi-chevron-right text-md md:text-2xl"></i></button>
             </div>
-            <div class="relative hidden md:block">
+            {{-- <div class="relative hidden md:block">
                 <!-- Tombol dropdown -->
                 <button id="dropdownButton" class="border-2 text-black px-6 py-1 rounded-md">
                   Pilih Gedung <i class="bi bi-chevron-down"></i>
@@ -34,7 +34,7 @@
                       <li class="block w-full px-4 py-2 text-gray-800 hover:bg-blue-950 hover:text-white cursor-pointer" wire:click="getRoom('me')"><button>FTK-ME</button></li>
                     </ul>
                 </div>
-            </div>
+            </div> --}}
             <div class="">
                 @auth
                 <div class="relative" data-te-dropdown-ref>

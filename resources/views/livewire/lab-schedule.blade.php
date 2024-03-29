@@ -1,5 +1,5 @@
 <div class="xl:flex xl:justify-center">
-    <div class="grid grid-cols-[70px,repeat(7,170px)] grid-rows-[repeat(14,50px)] @mobile overflow-x-scroll @endmobile" id="scrollContainer">
+    <div class="grid grid-cols-[70px,repeat(7,170px)] grid-rows-[repeat(14,50px)] @mobile overflow-x-scroll @endmobile transition-opacity duration-100" id="scrollContainer" wire:loading.class="opacity-50">
         <div class="row-start-[1] col-start-[1] sticky @desktop top-16 @enddesktop z-10 bg-white dark:bg-gradient-to-b dark:from-slate-600 dark:to-slate-700 border-slate-100 dark:border-black/10 bg-clip-padding text-slate-900 dark:text-slate-200 border-b text-xs font-base py-2 flex items-center ml-1" id="sticky1"></div>
         @php
             $col = 2;

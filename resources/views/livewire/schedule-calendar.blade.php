@@ -1,6 +1,6 @@
 
-<div class="max-w-full @mobile overflow-x-scroll @endmobile" id="contentScroll">
-    <table class="mt-[73px] mx-auto w-full">
+<div class="max-w-full @mobile overflow-x-scroll @endmobile" id="contentScroll" >
+    <table class="mt-[73px] mx-auto w-full transition-opacity duration-100" wire:loading.class="opacity-75">
         <thead class="transition-shadow ease-in-out duration-300 bg-white">
             <tr class="sticky top-[73px] shadow-lg z-40">
                 <th class="py-2 border-r h-10 bg-blue-950 text-white">
