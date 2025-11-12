@@ -4,9 +4,10 @@
         <div class="flex w-full flex-wrap items-center justify-between px-4 md:px-10">
             <div class="flex items-center justify-center">
               <a href="/">
-                <img class="h-10" src="{{ asset('undiksha.png') }}" alt="">
+                {{-- <img class="h-10" src="{{ asset('undiksha.png') }}" alt=""> --}}
+                <i class="bi bi-building-add text-3xl"></i>
               </a>
-              <a href="/" class="text-2xl font-bold ml-1 hidden md:block">SIMARU</a>
+              <a href="/" class="text-2xl font-bold ml-1 hidden md:block">SiBiru</a>
             </div>
             <div class="text-xl flex items-center justify-between text-center md:w-80">
                 <button class="hover:bg-gray-200 px-1 rounded-full transition-all ease-in-out duration-300 md:order-1" wire:click="prevWeek"><i class="bi bi-chevron-left text-md md:text-2xl"></i></button>
